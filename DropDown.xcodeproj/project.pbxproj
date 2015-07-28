@@ -11,7 +11,6 @@
 		0A7644171B676C2300BF1A2D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7644161B676C2300BF1A2D /* ViewController.swift */; };
 		0A76441A1B676C2300BF1A2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A7644181B676C2300BF1A2D /* Main.storyboard */; };
 		0A76441C1B676C2300BF1A2D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A76441B1B676C2300BF1A2D /* Images.xcassets */; };
-		0A76441F1B676C2300BF1A2D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A76441D1B676C2300BF1A2D /* LaunchScreen.xib */; };
 		0A76442B1B676C2300BF1A2D /* DropDownTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A76442A1B676C2300BF1A2D /* DropDownTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +31,6 @@
 		0A7644161B676C2300BF1A2D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0A7644191B676C2300BF1A2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A76441B1B676C2300BF1A2D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0A76441E1B676C2300BF1A2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0A7644241B676C2300BF1A2D /* DropDownTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DropDownTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7644291B676C2300BF1A2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A76442A1B676C2300BF1A2D /* DropDownTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTests.swift; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A76441A1B676C2300BF1A2D /* Main.storyboard in Resources */,
-				0A76441F1B676C2300BF1A2D /* LaunchScreen.xib in Resources */,
 				0A76441C1B676C2300BF1A2D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,14 +254,6 @@
 				0A7644191B676C2300BF1A2D /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		0A76441D1B676C2300BF1A2D /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0A76441E1B676C2300BF1A2D /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
