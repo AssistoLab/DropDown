@@ -24,6 +24,15 @@ struct Constant {
 		static let CornerRadius: CGFloat = 2
 		static let RowHeight: CGFloat = 44
 		
+		struct Shadow {
+			
+			static let Color = UIColor.darkGrayColor().CGColor
+			static let Offset = CGSizeZero
+			static let Opacity: Float = 0.4
+			static let Radius: CGFloat = 8
+			
+		}
+		
 	}
 	
 	struct Animation {
@@ -31,7 +40,7 @@ struct Constant {
 		static let Duration = 0.15
 		static let EntranceOptions = UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.CurveEaseOut
 		static let ExitOptions = UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.CurveEaseIn
-		static let DownScale = CGAffineTransformMakeScale(0.9, 0.9)
+		static let DownScaleTransform = CGAffineTransformMakeScale(0.9, 0.9)
 		
 	}
 	

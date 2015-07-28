@@ -194,7 +194,7 @@ extension DropDown {
 	
 	private func setHiddentState() {
 		alpha = 0
-		transform = Constant.Animation.DownScale
+		transform = Constant.Animation.DownScaleTransform
 	}
 	
 	private func setShowedState() {
