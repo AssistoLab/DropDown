@@ -17,16 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="SLc-ai-xpr" customClass="DropDown" customModule="DropDown" customModuleProvider="target">
-                                <rect key="frame" x="140" y="28" width="320" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vku-BY-Uzo">
+                                <rect key="frame" x="140" y="70" width="320" height="40"/>
+                                <color key="backgroundColor" red="0.83930421270718236" green="0.83930421270718236" blue="0.83930421270718236" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="320" id="Q4k-u9-IlU"/>
+                                    <constraint firstAttribute="height" constant="40" id="ZQR-BF-ukN"/>
+                                    <constraint firstAttribute="width" constant="320" id="vOn-wC-OQM"/>
                                 </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vku-BY-Uzo">
-                                <rect key="frame" x="248" y="418" width="105" height="30"/>
-                                <state key="normal" title="Show / dismiss">
+                                <inset key="contentEdgeInsets" minX="8" minY="5" maxX="8" maxY="5"/>
+                                <state key="normal" title="Click to show drop down">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -36,14 +36,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="SLc-ai-xpr" secondAttribute="centerX" id="CI6-qw-86E"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Vku-BY-Uzo" secondAttribute="bottom" constant="152" id="HBU-cg-uTm"/>
                             <constraint firstAttribute="centerX" secondItem="Vku-BY-Uzo" secondAttribute="centerX" id="Kl6-6o-jZJ"/>
-                            <constraint firstItem="SLc-ai-xpr" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="8" id="z8j-Vo-SzF"/>
+                            <constraint firstItem="Vku-BY-Uzo" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="qw9-Yg-852"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="dropDown" destination="SLc-ai-xpr" id="rVy-du-OlQ"/>
+                        <outlet property="actionButton" destination="Vku-BY-Uzo" id="lne-cw-Km8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

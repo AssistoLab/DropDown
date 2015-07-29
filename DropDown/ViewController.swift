@@ -10,9 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
 
-	@IBOutlet weak var dropDown: DropDown!
-	
-	private var hidden = true
+	@IBOutlet weak var actionButton: UIButton!
+	let dropDown = DropDown()
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -25,19 +24,20 @@ class ViewController: UIViewController {
 			"Bus"
 		]
 		
-		dropDown.selectionAction = { (string, index) in
-			println("item \(string) at index \(index) selected")
+		dropDown.selectionAction = { [unowned self] (string, index) in
+			self.actionButton.setTitle(string, forState: .Normal)
 		}
+		
+		dropDown.anchorView = actionButton
+		dropDown.offset = CGPoint(x: 0, y:actionButton.bounds.height)
 	}
 	
 	@IBAction func showOrDismiss(sender: AnyObject) {
-		if hidden {
+		if dropDown.hidden {
 			dropDown.show()
 		} else {
 			dropDown.hide()
 		}
-		
-		hidden = !hidden
 	}
 }
 
