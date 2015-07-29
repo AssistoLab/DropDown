@@ -32,10 +32,18 @@
                                     <action selector="showOrDismiss:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="lRV-UO-H01"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7rm-SA-osO">
+                                <rect key="frame" x="133" y="470" width="334" height="30"/>
+                                <state key="normal" title="Unclickable button when drop down is displayed">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Vku-BY-Uzo" secondAttribute="trailing" constant="30" id="0cr-gv-ysw"/>
+                            <constraint firstAttribute="centerX" secondItem="7rm-SA-osO" secondAttribute="centerX" id="8aN-Yo-DPa"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="7rm-SA-osO" secondAttribute="bottom" constant="100" id="CXZ-VQ-xmQ"/>
                             <constraint firstAttribute="centerX" secondItem="Vku-BY-Uzo" secondAttribute="centerX" id="Kl6-6o-jZJ"/>
                             <constraint firstItem="Vku-BY-Uzo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="30" id="X5G-2N-oTW"/>
                             <constraint firstItem="Vku-BY-Uzo" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="qw9-Yg-852"/>

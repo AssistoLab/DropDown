@@ -14,6 +14,22 @@ public typealias ConfigurationClosure = (String) -> String
 
 public class DropDown: UIView {
 	
+	/*
+	did cancel
+	max height (keyboard)
+	handle bounds changes
+	handle orientation changes
+	handle iOS 7 landscape mode
+	*/
+	
+	public enum DismissMode {
+		
+		case OnTap // a tap outside the drop down from the user is needed to dismiss
+		case Automatic // automatic dismiss when user interacts with anything else than the drop down
+		case Manual // not dismissable by the user
+		
+	}
+	
 	//MARK: - Properties
 	
 	// There can be only one visible drop down at a time
@@ -89,6 +105,17 @@ public class DropDown: UIView {
 	public var cellConfiguration: ConfigurationClosure?
 	public var selectionAction: SelectionClosure!
 	
+	public var dismissMode = DismissMode.OnTap {
+		willSet {
+			if newValue == .OnTap {
+				let gestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissableViewTapped")
+				dismissableView.addGestureRecognizer(gestureRecognizer)
+			} else if let gestureRecognizer = dismissableView.gestureRecognizers?.first as? UIGestureRecognizer {
+				dismissableView.removeGestureRecognizer(gestureRecognizer)
+			}
+		}
+	}
+	
 	private var didSetupConstraints = false
 	
 	//MARK: - Init's
@@ -119,13 +146,15 @@ public class DropDown: UIView {
 private extension DropDown {
 	
 	func setup() {
+		updateConstraintsIfNeeded()
+		setupUI()
+		
+		dismissMode = .OnTap
+		
 		tableView.delegate = self
 		tableView.dataSource = self
 		
 		tableView.registerNib(DropDownCell.Nib, forCellReuseIdentifier: Constant.ReusableIdentifier.DropDownCell)
-		
-		updateConstraintsIfNeeded()
-		setupUI()
 	}
 	
 	func setupUI() {
@@ -364,6 +393,28 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 	public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		let index = indexPath.row
 		selectionAction(datasource[index], index)
+		hide()
+	}
+	
+}
+
+//MARK: - Auto dismiss
+
+extension DropDown {
+	
+	public override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+		let view = super.hitTest(point, withEvent: event)
+		
+		if dismissMode == .Automatic && view === dismissableView {
+			hide()
+			return nil
+		} else {
+			return view
+		}
+	}
+	
+	@objc
+	func dismissableViewTapped() {
 		hide()
 	}
 	
