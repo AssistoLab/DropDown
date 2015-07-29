@@ -102,6 +102,8 @@ public class DropDown: UIView {
 		}
 	}
 	
+	private var selectedRowIndex: Index = -1
+	
 	public var cellConfiguration: ConfigurationClosure?
 	public var selectionAction: SelectionClosure!
 	public var cancelAction: Closure?
@@ -348,6 +350,8 @@ extension DropDown {
 	}
 	
 	public func selectRowAtIndex(index: Index) {
+		selectedRowIndex = index
+		
 		tableView.selectRowAtIndexPath(
 			NSIndexPath(forRow: index, inSection: 0),
 			animated: false,
@@ -394,6 +398,10 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		}
 		
 		return cell
+	}
+	
+	public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+		cell.selected = indexPath.row == selectedRowIndex
 	}
 	
 	public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
