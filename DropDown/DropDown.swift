@@ -20,8 +20,36 @@ public class DropDown: UIView {
 	public static weak var VisibleDropDown: DropDown?
 	
 	//MARK: UI
+	private let dismissableView = UIView()
+	private let tableViewContainer = UIView()
 	private let tableView = UITableView()
+	
+	// View to which the drop down is binded
+	public var anchorView: UIView! {
+		didSet {
+			setNeedsUpdateConstraints()
+		}
+	}
+	
+	// Anchor or origin point relative to anchorView. Default to CGPointZero
+	public var offset: CGPoint? {
+		didSet {
+			setNeedsUpdateConstraints()
+		}
+	}
+	
+	// Desired width. Defaults to anchorView width - offset.x
+	public var width: CGFloat? {
+		didSet {
+			setNeedsUpdateConstraints()
+		}
+	}
+	
+	//MARK: Constraints
 	private var heightConstraint: NSLayoutConstraint!
+	private var widthConstraint: NSLayoutConstraint!
+	private var xConstraint: NSLayoutConstraint!
+	private var yConstraint: NSLayoutConstraint!
 	
 	//MARK: Appearance
 	public override var backgroundColor: UIColor? {
@@ -61,15 +89,6 @@ public class DropDown: UIView {
 	public var cellConfiguration: ConfigurationClosure?
 	public var selectionAction: SelectionClosure!
 	
-	private var bounces: Bool {
-		get {
-			return tableView.bounces
-		}
-		set {
-			tableView.bounces = newValue
-		}
-	}
-	
 	private var didSetupConstraints = false
 	
 	//MARK: - Init's
@@ -102,8 +121,6 @@ private extension DropDown {
 	func setup() {
 		tableView.delegate = self
 		tableView.dataSource = self
-		tableView.rowHeight = Constant.UI.RowHeight
-		tableView.separatorColor = Constant.UI.SeparatorColor
 		
 		tableView.registerNib(DropDownCell.Nib, forCellReuseIdentifier: Constant.ReusableIdentifier.DropDownCell)
 		
@@ -112,15 +129,24 @@ private extension DropDown {
 	}
 	
 	func setupUI() {
-		layer.cornerRadius = Constant.UI.CornerRadius
 		super.backgroundColor = UIColor.clearColor()
 		
+		tableViewContainer.layer.cornerRadius = Constant.UI.CornerRadius
+		tableViewContainer.layer.masksToBounds = false
+		tableViewContainer.layer.shadowColor = UIColor.darkGrayColor().CGColor
+		tableViewContainer.layer.shadowOffset = CGSizeZero
+		tableViewContainer.layer.shadowOpacity = 0.3
+		tableViewContainer.layer.shadowRadius = 5
+		
 		backgroundColor = Constant.UI.BackgroundColor
+		tableView.rowHeight = Constant.UI.RowHeight
+		tableView.separatorColor = Constant.UI.SeparatorColor
 		tableView.layer.cornerRadius = Constant.UI.CornerRadius
 		tableView.layer.masksToBounds = true
-		bounces = false
+		tableView.scrollEnabled = false
 		
 		setHiddentState()
+		hidden = true
 	}
 	
 }
@@ -135,35 +161,80 @@ extension DropDown {
 		}
 		
 		didSetupConstraints = true
+		
+		xConstraint.constant = (anchorView?.windowFrame?.minX ?? 0) + (offset?.x ?? 0)
+		yConstraint.constant = (anchorView?.windowFrame?.minY ?? 0) + (offset?.y ?? 0)
+		widthConstraint.constant = width ?? (anchorView?.bounds.width ?? 0) - (offset?.x ?? 0)
+		heightConstraint.constant = tableHeight()
+		
 		super.updateConstraints()
 	}
 	
 	private func setupConstraints() {
 		setTranslatesAutoresizingMaskIntoConstraints(false)
 		
-		addSubview(tableView)
-		tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+		// Dismissable view
+		addSubview(dismissableView)
+		dismissableView.setTranslatesAutoresizingMaskIntoConstraints(false)
 		
-		addUniversalConstraints(format: "|[tableView]|", views: ["tableView": tableView])
+		addUniversalConstraints(format: "|[dismissableView]|", views: ["dismissableView": dismissableView])
+		
+		
+		// Table view container
+		addSubview(tableViewContainer)
+		tableViewContainer.setTranslatesAutoresizingMaskIntoConstraints(false)
+		
+		xConstraint = NSLayoutConstraint(
+			item: tableViewContainer,
+			attribute: .Leading,
+			relatedBy: .Equal,
+			toItem: self,
+			attribute: .Leading,
+			multiplier: 1,
+			constant: 0)
+		addConstraint(xConstraint)
+		
+		yConstraint = NSLayoutConstraint(
+			item: tableViewContainer,
+			attribute: .Top,
+			relatedBy: .Equal,
+			toItem: self,
+			attribute: .Top,
+			multiplier: 1,
+			constant: 0)
+		addConstraint(yConstraint)
+		
+		widthConstraint = NSLayoutConstraint(
+			item: tableViewContainer,
+			attribute: .Width,
+			relatedBy: .Equal,
+			toItem: nil,
+			attribute: .NotAnAttribute,
+			multiplier: 1,
+			constant: 0)
+		tableViewContainer.addConstraint(widthConstraint)
+		
 		heightConstraint = NSLayoutConstraint(
-			item: tableView,
+			item: tableViewContainer,
 			attribute: .Height,
 			relatedBy: .Equal,
 			toItem: nil,
 			attribute: .NotAnAttribute,
 			multiplier: 1,
-			constant: tableHeight())
-		tableView.addConstraint(heightConstraint)
+			constant: 0)
+		tableViewContainer.addConstraint(heightConstraint)
+		
+		// Table view
+		tableViewContainer.addSubview(tableView)
+		tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+		
+		tableViewContainer.addUniversalConstraints(format: "|[tableView]|", views: ["tableView": tableView])
 	}
 	
 	public override func layoutSubviews() {
-		let shadowPath = UIBezierPath(rect: bounds)
-		layer.masksToBounds = false
-		layer.shadowColor = UIColor.darkGrayColor().CGColor
-		layer.shadowOffset = CGSizeZero
-		layer.shadowOpacity = 0.4
-		layer.shadowPath = shadowPath.CGPath
-		layer.shadowRadius = 8
+		let shadowPath = UIBezierPath(rect: tableViewContainer.bounds)
+		tableViewContainer.layer.shadowPath = shadowPath.CGPath
+		
 	}
 	
 }
@@ -179,17 +250,43 @@ extension DropDown {
 		
 		DropDown.VisibleDropDown = self
 		
-		UIView.animateWithDuration(Constant.Animation.Duration, delay: 0, options: Constant.Animation.EntranceOptions, animations: { [unowned self] in
-			self.setShowedState()
-			}, completion: nil)
+		setNeedsUpdateConstraints()
+		
+		let visibleWindow = UIWindow().visibleWindow
+		visibleWindow?.addSubview(self)
+		visibleWindow?.bringSubviewToFront(self)
+		
+		self.setTranslatesAutoresizingMaskIntoConstraints(false)
+		visibleWindow?.addUniversalConstraints(format: "|[dropDown]|", views: ["dropDown": self])
+		layoutIfNeeded()
+		layoutSubviews()
+		
+		hidden = false
+		
+		UIView.animateWithDuration(
+			Constant.Animation.Duration,
+			delay: 0,
+			options: Constant.Animation.EntranceOptions,
+			animations: { [unowned self] in
+				self.setShowedState()
+			},
+			completion: nil)
 	}
 	
 	public func hide() {
 		DropDown.VisibleDropDown = nil
 		
-		UIView.animateWithDuration(Constant.Animation.Duration, delay: 0, options: Constant.Animation.ExitOptions, animations: { [unowned self] in
-			self.setHiddentState()
-			}, completion: nil)
+		UIView.animateWithDuration(
+			Constant.Animation.Duration,
+			delay: 0,
+			options: Constant.Animation.ExitOptions,
+			animations: { [unowned self] in
+				self.setHiddentState()
+			},
+			completion: { [unowned self] finished in
+				self.hidden = true
+				self.removeFromSuperview()
+			})
 	}
 	
 	private func setHiddentState() {
@@ -210,8 +307,7 @@ extension DropDown {
 	
 	public func reloadAllComponents() {
 		tableView.reloadData()
-		heightConstraint.constant = tableHeight()
-		layoutIfNeeded()
+		setNeedsUpdateConstraints()
 	}
 	
 	public func selectRowAtIndex(index: Index) {
@@ -266,6 +362,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 	public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		let index = indexPath.row
 		selectionAction(datasource[index], index)
+		hide()
 	}
 	
 }

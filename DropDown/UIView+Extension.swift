@@ -8,6 +8,8 @@
 
 import UIKit
 
+//MARK: - Constraints
+
 internal extension UIView {
 	
 	func addConstraints(#format: String, options: NSLayoutFormatOptions = nil, metrics: [NSObject: AnyObject]? = nil, views: [String: UIView]) {
@@ -17,6 +19,39 @@ internal extension UIView {
 	func addUniversalConstraints(#format: String, options: NSLayoutFormatOptions = nil, metrics: [NSObject: AnyObject]? = nil, views: [String: UIView]) {
 		addConstraints(format: "H:\(format)", options: options, metrics: metrics, views: views)
 		addConstraints(format: "V:\(format)", options: options, metrics: metrics, views: views)
+	}
+	
+}
+
+
+
+//MARK: - Bounds
+
+internal extension UIView {
+	
+	var windowFrame: CGRect? {
+		return superview?.convertRect(frame, toView: nil)
+	}
+	
+}
+
+internal extension UIWindow {
+	
+	var visibleWindow: UIWindow? {
+		var currentWindow = UIApplication.sharedApplication().keyWindow
+		
+		if currentWindow == nil {
+			let frontToBackWindows = UIApplication.sharedApplication().windows.reverse() as! [UIWindow]
+			
+			for window in frontToBackWindows {
+				if window.windowLevel == UIWindowLevelNormal {
+					currentWindow = window
+					break
+				}
+			}
+		}
+		
+		return currentWindow
 	}
 	
 }
