@@ -9,13 +9,13 @@
 import UIKit
 
 public typealias Index = Int
+public typealias Closure = () -> Void
 public typealias SelectionClosure = (String, Index) -> Void
 public typealias ConfigurationClosure = (String) -> String
 
 public class DropDown: UIView {
 	
 	/*
-	did cancel
 	max height (keyboard)
 	handle bounds changes
 	handle orientation changes
@@ -104,6 +104,7 @@ public class DropDown: UIView {
 	
 	public var cellConfiguration: ConfigurationClosure?
 	public var selectionAction: SelectionClosure!
+	public var cancelAction: Closure?
 	
 	public var dismissMode = DismissMode.OnTap {
 		willSet {
@@ -275,7 +276,7 @@ extension DropDown {
 	
 	public func show() {
 		if let visibleDropDown = DropDown.VisibleDropDown {
-			visibleDropDown.hide()
+			visibleDropDown.cancel()
 		}
 		
 		DropDown.VisibleDropDown = self
@@ -319,6 +320,11 @@ extension DropDown {
 				self.hidden = true
 				self.removeFromSuperview()
 			})
+	}
+	
+	private func cancel() {
+		hide()
+		cancelAction?()
 	}
 	
 	private func setHiddentState() {
@@ -406,7 +412,7 @@ extension DropDown {
 		let view = super.hitTest(point, withEvent: event)
 		
 		if dismissMode == .Automatic && view === dismissableView {
-			hide()
+			cancel()
 			return nil
 		} else {
 			return view
@@ -415,7 +421,7 @@ extension DropDown {
 	
 	@objc
 	func dismissableViewTapped() {
-		hide()
+		cancel()
 	}
 	
 }

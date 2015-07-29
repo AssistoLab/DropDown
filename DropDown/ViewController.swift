@@ -28,8 +28,15 @@ class ViewController: UIViewController {
 			self.actionButton.setTitle(string, forState: .Normal)
 		}
 		
+//		dropDown.cancelAction = { [unowned self] in
+//			self.dropDown.selectRowAtIndex(-1)
+//			self.actionButton.setTitle("Canceled", forState: .Normal)
+//		}
+		
 		dropDown.anchorView = actionButton
 		dropDown.offset = CGPoint(x: 0, y:actionButton.bounds.height)
+		
+//		dropDown.selectRowAtIndex(1)
 	}
 	
 	@IBAction func showOrDismiss(sender: AnyObject) {
