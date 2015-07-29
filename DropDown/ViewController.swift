@@ -16,7 +16,7 @@ class ViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		dropDown.datasource = [
+		dropDown.dataSource = [
 			"Car",
 			"Motorcycle",
 			"Van",
@@ -35,6 +35,7 @@ class ViewController: UIViewController {
 		
 		dropDown.anchorView = actionButton
 		dropDown.offset = CGPoint(x: 0, y:actionButton.bounds.height)
+//		dropDown.dismissMode = .Automatic
 		
 //		dropDown.selectRowAtIndex(1)
 	}

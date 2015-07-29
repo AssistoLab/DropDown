@@ -96,7 +96,7 @@ public class DropDown: UIView {
 	}
 	
 	//MARK: Content
-	public var datasource = [String]() {
+	public var dataSource = [String]() {
 		didSet {
 			reloadAllComponents()
 		}
@@ -364,14 +364,14 @@ extension DropDown {
 	
 	public func selectedItem() -> String? {
 		if let row = tableView.indexPathForSelectedRow()?.row {
-			return datasource[row]
+			return dataSource[row]
 		} else {
 			return nil
 		}
 	}
 	
 	public func tableHeight() -> CGFloat {
-		return tableView.rowHeight * CGFloat(datasource.count)
+		return tableView.rowHeight * CGFloat(dataSource.count)
 	}
 	
 }
@@ -381,7 +381,7 @@ extension DropDown {
 extension DropDown: UITableViewDataSource, UITableViewDelegate {
 	
 	public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return datasource.count
+		return dataSource.count
 	}
 	
 	public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -392,9 +392,9 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		cell.selectedBackgroundColor = selectionBackgroundColor
 		
 		if let cellConfiguration = cellConfiguration {
-			cell.optionLabel.text = cellConfiguration(datasource[indexPath.row])
+			cell.optionLabel.text = cellConfiguration(dataSource[indexPath.row])
 		} else {
-			cell.optionLabel.text = datasource[indexPath.row]
+			cell.optionLabel.text = dataSource[indexPath.row]
 		}
 		
 		return cell
@@ -406,7 +406,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 	
 	public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		let index = indexPath.row
-		selectionAction(datasource[index], index)
+		selectionAction(dataSource[index], index)
 		hide()
 	}
 	
