@@ -18,11 +18,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vku-BY-Uzo">
-                                <rect key="frame" x="140" y="70" width="320" height="40"/>
+                                <rect key="frame" x="30" y="70" width="540" height="40"/>
                                 <color key="backgroundColor" red="0.83930421270718236" green="0.83930421270718236" blue="0.83930421270718236" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ZQR-BF-ukN"/>
-                                    <constraint firstAttribute="width" constant="320" id="vOn-wC-OQM"/>
                                 </constraints>
                                 <inset key="contentEdgeInsets" minX="8" minY="5" maxX="8" maxY="5"/>
                                 <state key="normal" title="Click to show drop down">
@@ -36,7 +35,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Vku-BY-Uzo" secondAttribute="trailing" constant="30" id="0cr-gv-ysw"/>
                             <constraint firstAttribute="centerX" secondItem="Vku-BY-Uzo" secondAttribute="centerX" id="Kl6-6o-jZJ"/>
+                            <constraint firstItem="Vku-BY-Uzo" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="30" id="X5G-2N-oTW"/>
                             <constraint firstItem="Vku-BY-Uzo" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="50" id="qw9-Yg-852"/>
                         </constraints>
                     </view>

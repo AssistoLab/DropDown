@@ -232,9 +232,10 @@ extension DropDown {
 	}
 	
 	public override func layoutSubviews() {
+		super.layoutSubviews()
+		
 		let shadowPath = UIBezierPath(rect: tableViewContainer.bounds)
 		tableViewContainer.layer.shadowPath = shadowPath.CGPath
-		
 	}
 	
 }
@@ -262,6 +263,8 @@ extension DropDown {
 		layoutSubviews()
 		
 		hidden = false
+		
+		tableViewContainer.transform = Constant.Animation.DownScaleTransform
 		
 		UIView.animateWithDuration(
 			Constant.Animation.Duration,
@@ -291,12 +294,11 @@ extension DropDown {
 	
 	private func setHiddentState() {
 		alpha = 0
-		transform = Constant.Animation.DownScaleTransform
 	}
 	
 	private func setShowedState() {
 		alpha = 1
-		transform = CGAffineTransformIdentity
+		tableViewContainer.transform = CGAffineTransformIdentity
 	}
 	
 }
