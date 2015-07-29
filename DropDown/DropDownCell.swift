@@ -17,12 +17,18 @@ internal class DropDownCell: UITableViewCell {
 	@IBOutlet weak var optionLabel: UILabel!
 	
 	var selectedBackgroundColor: UIColor?
+
+}
+
+//MARK: - UI
+
+internal extension DropDownCell {
 	
-    override func awakeFromNib() {
-        super.awakeFromNib()
+	override func awakeFromNib() {
+		super.awakeFromNib()
 		
 		backgroundColor = UIColor.clearColor()
-    }
+	}
 	
 	override var selected: Bool {
 		willSet {
@@ -40,7 +46,7 @@ internal class DropDownCell: UITableViewCell {
 		setSelected(highlighted, animated: animated)
 	}
 	
-    override func setSelected(selected: Bool, animated: Bool) {
+	override func setSelected(selected: Bool, animated: Bool) {
 		let executeSelection: () -> Void = { [unowned self] in
 			if let selectedBackgroundColor = self.selectedBackgroundColor {
 				if selected {
@@ -58,6 +64,6 @@ internal class DropDownCell: UITableViewCell {
 		} else {
 			executeSelection()
 		}
-    }
-
+	}
+	
 }
