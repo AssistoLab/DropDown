@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Constant {
+internal struct Constant {
 	
 	struct ReusableIdentifier {
 		
