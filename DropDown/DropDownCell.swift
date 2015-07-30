@@ -8,7 +8,7 @@
 
 import UIKit
 
-internal class DropDownCell: UITableViewCell {
+internal final class DropDownCell: UITableViewCell {
 	
 	//MARK: - Properties
 	static let Nib = UINib(nibName: "DropDownCell", bundle: NSBundle(forClass: DropDownCell.self))

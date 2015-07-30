@@ -21,10 +21,12 @@ class ViewController: UIViewController {
 			"Motorcycle",
 			"Van",
 			"Truck",
-			"Bus"
+			"Bus",
+			"Bicycle",
+			"Feet"
 		]
 		
-		dropDown.selectionAction = { [unowned self] (string, index) in
+		dropDown.selectionAction = { [unowned self] (index, string) in
 			self.actionButton.setTitle(string, forState: .Normal)
 		}
 		
@@ -37,7 +39,7 @@ class ViewController: UIViewController {
 		dropDown.offset = CGPoint(x: 0, y:actionButton.bounds.height)
 //		dropDown.dismissMode = .Automatic
 		
-//		dropDown.selectRowAtIndex(1)
+//		dropDown.selectRowAtIndex(3)
 	}
 	
 	@IBAction func showOrDismiss(sender: AnyObject) {
@@ -46,6 +48,10 @@ class ViewController: UIViewController {
 		} else {
 			dropDown.hide()
 		}
+	}
+	
+	@IBAction func viewTapped() {
+		view.endEditing(false)
 	}
 }
 

@@ -23,6 +23,7 @@ internal struct Constant {
 		static let SeparatorColor = UIColor.clearColor()
 		static let CornerRadius: CGFloat = 2
 		static let RowHeight: CGFloat = 44
+		static let HeightPadding: CGFloat = 20
 		
 		struct Shadow {
 			

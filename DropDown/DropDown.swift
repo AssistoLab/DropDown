@@ -10,13 +10,12 @@ import UIKit
 
 public typealias Index = Int
 public typealias Closure = () -> Void
-public typealias SelectionClosure = (String, Index) -> Void
+public typealias SelectionClosure = (Index, String) -> Void
 public typealias ConfigurationClosure = (String) -> String
 
-public class DropDown: UIView {
+public final class DropDown: UIView {
 	
 	/*
-	max height (keyboard)
 	handle bounds changes
 	handle orientation changes
 	handle iOS 7 landscape mode
@@ -123,6 +122,10 @@ public class DropDown: UIView {
 	
 	//MARK: - Init's
 	
+	deinit {
+		stopListeningToKeyboard()
+	}
+	
 	convenience init() {
 		self.init(frame: CGRectZero)
 	}
@@ -135,11 +138,6 @@ public class DropDown: UIView {
 	required public init(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		setup()
-	}
-	
-	public override func awakeFromNib() {
-		super.awakeFromNib()
-		setupUI()
 	}
 	
 }
@@ -158,24 +156,25 @@ private extension DropDown {
 		tableView.dataSource = self
 		
 		tableView.registerNib(DropDownCell.Nib, forCellReuseIdentifier: Constant.ReusableIdentifier.DropDownCell)
+		
+		startListeningToKeyboard()
 	}
 	
 	func setupUI() {
 		super.backgroundColor = UIColor.clearColor()
 		
-		tableViewContainer.layer.cornerRadius = Constant.UI.CornerRadius
 		tableViewContainer.layer.masksToBounds = false
-		tableViewContainer.layer.shadowColor = UIColor.darkGrayColor().CGColor
-		tableViewContainer.layer.shadowOffset = CGSizeZero
-		tableViewContainer.layer.shadowOpacity = 0.3
-		tableViewContainer.layer.shadowRadius = 5
+		tableViewContainer.layer.cornerRadius = Constant.UI.CornerRadius
+		tableViewContainer.layer.shadowColor = Constant.UI.Shadow.Color
+		tableViewContainer.layer.shadowOffset = Constant.UI.Shadow.Offset
+		tableViewContainer.layer.shadowOpacity = Constant.UI.Shadow.Opacity
+		tableViewContainer.layer.shadowRadius = Constant.UI.Shadow.Radius
 		
 		backgroundColor = Constant.UI.BackgroundColor
 		tableView.rowHeight = Constant.UI.RowHeight
 		tableView.separatorColor = Constant.UI.SeparatorColor
 		tableView.layer.cornerRadius = Constant.UI.CornerRadius
 		tableView.layer.masksToBounds = true
-		tableView.scrollEnabled = false
 		
 		setHiddentState()
 		hidden = true
@@ -197,7 +196,29 @@ extension DropDown {
 		xConstraint.constant = (anchorView?.windowFrame?.minX ?? 0) + (offset?.x ?? 0)
 		yConstraint.constant = (anchorView?.windowFrame?.minY ?? 0) + (offset?.y ?? 0)
 		widthConstraint.constant = width ?? (anchorView?.bounds.width ?? 0) - (offset?.x ?? 0)
-		heightConstraint.constant = tableHeight()
+		
+		let height = tableHeight()
+		var offScreenHeight: CGFloat = 0
+		
+		if let window = UIWindow.visibleWindow() {
+			let maxY = height + yConstraint.constant
+			let windowMaxY = window.bounds.maxY - Constant.UI.HeightPadding
+			let keyboardListener = KeyboardListener.sharedInstance
+			let keyboardMinY = keyboardListener.keyboardFrame.minY - Constant.UI.HeightPadding
+			
+			if keyboardListener.isVisible && maxY > keyboardMinY {
+				offScreenHeight = abs(maxY - keyboardMinY)
+			} else if maxY > windowMaxY {
+				offScreenHeight = abs(maxY - windowMaxY)
+			}
+		}
+		
+		heightConstraint.constant = height - offScreenHeight
+		tableView.scrollEnabled = offScreenHeight > 0
+		
+		dispatch_async(dispatch_get_main_queue(), { [unowned self] in
+			self.tableView.flashScrollIndicators()
+			})
 		
 		super.updateConstraints()
 	}
@@ -285,7 +306,7 @@ extension DropDown {
 		
 		setNeedsUpdateConstraints()
 		
-		let visibleWindow = UIWindow().visibleWindow
+		let visibleWindow = UIWindow.visibleWindow()
 		visibleWindow?.addSubview(self)
 		visibleWindow?.bringSubviewToFront(self)
 		
@@ -296,6 +317,7 @@ extension DropDown {
 		
 		hidden = false
 		
+		selectRowAtIndex(selectedRowIndex)
 		tableViewContainer.transform = Constant.Animation.DownScaleTransform
 		
 		UIView.animateWithDuration(
@@ -405,8 +427,8 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		let index = indexPath.row
-		selectionAction(dataSource[index], index)
+		selectedRowIndex = indexPath.row
+		selectionAction(selectedRowIndex, dataSource[selectedRowIndex])
 		hide()
 	}
 	
@@ -430,6 +452,34 @@ extension DropDown {
 	@objc
 	func dismissableViewTapped() {
 		cancel()
+	}
+	
+}
+
+//MARK: - Keyboard Notifications
+
+private extension DropDown {
+	
+	func startListeningToKeyboard() {
+		NSNotificationCenter.defaultCenter().addObserver(
+			self,
+			selector: "keyboardUpdate",
+			name: UIKeyboardDidShowNotification,
+			object: nil)
+		NSNotificationCenter.defaultCenter().addObserver(
+			self,
+			selector: "keyboardUpdate",
+			name: UIKeyboardDidHideNotification,
+			object: nil)
+	}
+	
+	func stopListeningToKeyboard() {
+		NSNotificationCenter.defaultCenter().removeObserver(self)
+	}
+	
+	@objc
+	func keyboardUpdate() {
+		setNeedsUpdateConstraints()
 	}
 	
 }

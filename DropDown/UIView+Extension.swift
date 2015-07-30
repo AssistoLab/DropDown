@@ -37,7 +37,7 @@ internal extension UIView {
 
 internal extension UIWindow {
 	
-	var visibleWindow: UIWindow? {
+	static func visibleWindow() -> UIWindow? {
 		var currentWindow = UIApplication.sharedApplication().keyWindow
 		
 		if currentWindow == nil {
