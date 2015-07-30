@@ -16,7 +16,6 @@ public typealias ConfigurationClosure = (String) -> String
 public final class DropDown: UIView {
 	
 	/*
-	handle bounds changes
 	handle orientation changes
 	handle iOS 7 landscape mode
 	*/
@@ -76,7 +75,7 @@ public final class DropDown: UIView {
 		}
 	}
 	
-	public dynamic var selectionBackgroundColor = Constant.UI.SelectionBackgroundColor {
+	public dynamic var selectionBackgroundColor = UI.SelectionBackgroundColor {
 		didSet {
 			reloadAllComponents()
 		}
@@ -155,7 +154,7 @@ private extension DropDown {
 		tableView.delegate = self
 		tableView.dataSource = self
 		
-		tableView.registerNib(DropDownCell.Nib, forCellReuseIdentifier: Constant.ReusableIdentifier.DropDownCell)
+		tableView.registerNib(DropDownCell.Nib, forCellReuseIdentifier: ReusableIdentifier.DropDownCell)
 		
 		startListeningToKeyboard()
 	}
@@ -164,16 +163,16 @@ private extension DropDown {
 		super.backgroundColor = UIColor.clearColor()
 		
 		tableViewContainer.layer.masksToBounds = false
-		tableViewContainer.layer.cornerRadius = Constant.UI.CornerRadius
-		tableViewContainer.layer.shadowColor = Constant.UI.Shadow.Color
-		tableViewContainer.layer.shadowOffset = Constant.UI.Shadow.Offset
-		tableViewContainer.layer.shadowOpacity = Constant.UI.Shadow.Opacity
-		tableViewContainer.layer.shadowRadius = Constant.UI.Shadow.Radius
+		tableViewContainer.layer.cornerRadius = UI.CornerRadius
+		tableViewContainer.layer.shadowColor = UI.Shadow.Color
+		tableViewContainer.layer.shadowOffset = UI.Shadow.Offset
+		tableViewContainer.layer.shadowOpacity = UI.Shadow.Opacity
+		tableViewContainer.layer.shadowRadius = UI.Shadow.Radius
 		
-		backgroundColor = Constant.UI.BackgroundColor
-		tableView.rowHeight = Constant.UI.RowHeight
-		tableView.separatorColor = Constant.UI.SeparatorColor
-		tableView.layer.cornerRadius = Constant.UI.CornerRadius
+		backgroundColor = UI.BackgroundColor
+		tableView.rowHeight = UI.RowHeight
+		tableView.separatorColor = UI.SeparatorColor
+		tableView.layer.cornerRadius = UI.CornerRadius
 		tableView.layer.masksToBounds = true
 		
 		setHiddentState()
@@ -202,9 +201,9 @@ extension DropDown {
 		
 		if let window = UIWindow.visibleWindow() {
 			let maxY = height + yConstraint.constant
-			let windowMaxY = window.bounds.maxY - Constant.UI.HeightPadding
+			let windowMaxY = window.bounds.maxY - UI.HeightPadding
 			let keyboardListener = KeyboardListener.sharedInstance
-			let keyboardMinY = keyboardListener.keyboardFrame.minY - Constant.UI.HeightPadding
+			let keyboardMinY = keyboardListener.keyboardFrame.minY - UI.HeightPadding
 			
 			if keyboardListener.isVisible && maxY > keyboardMinY {
 				offScreenHeight = abs(maxY - keyboardMinY)
@@ -316,27 +315,27 @@ extension DropDown {
 		layoutSubviews()
 		
 		hidden = false
-		
-		selectRowAtIndex(selectedRowIndex)
-		tableViewContainer.transform = Constant.Animation.DownScaleTransform
+		tableViewContainer.transform = Animation.DownScaleTransform
 		
 		UIView.animateWithDuration(
-			Constant.Animation.Duration,
+			Animation.Duration,
 			delay: 0,
-			options: Constant.Animation.EntranceOptions,
+			options: Animation.EntranceOptions,
 			animations: { [unowned self] in
 				self.setShowedState()
 			},
 			completion: nil)
+		
+		selectRowAtIndex(selectedRowIndex)
 	}
 	
 	public func hide() {
 		DropDown.VisibleDropDown = nil
 		
 		UIView.animateWithDuration(
-			Constant.Animation.Duration,
+			Animation.Duration,
 			delay: 0,
-			options: Constant.Animation.ExitOptions,
+			options: Animation.ExitOptions,
 			animations: { [unowned self] in
 				self.setHiddentState()
 			},
@@ -407,7 +406,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier(Constant.ReusableIdentifier.DropDownCell, forIndexPath: indexPath) as! DropDownCell
+		let cell = tableView.dequeueReusableCellWithIdentifier(ReusableIdentifier.DropDownCell, forIndexPath: indexPath) as! DropDownCell
 		
 		cell.optionLabel.textColor = textColor
 		cell.optionLabel.font = textFont
