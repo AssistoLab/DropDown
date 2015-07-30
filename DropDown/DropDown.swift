@@ -16,7 +16,6 @@ public typealias ConfigurationClosure = (String) -> String
 public final class DropDown: UIView {
 	
 	/*
-	handle orientation changes
 	handle iOS 7 landscape mode
 	*/
 	
@@ -122,7 +121,7 @@ public final class DropDown: UIView {
 	//MARK: - Init's
 	
 	deinit {
-		stopListeningToKeyboard()
+		stopListeningToNotifications()
 	}
 	
 	convenience init() {
@@ -157,6 +156,7 @@ private extension DropDown {
 		tableView.registerNib(DropDownCell.Nib, forCellReuseIdentifier: ReusableIdentifier.DropDownCell)
 		
 		startListeningToKeyboard()
+		startListeningToOrientationChanges()
 	}
 	
 	func setupUI() {
@@ -455,7 +455,7 @@ extension DropDown {
 	
 }
 
-//MARK: - Keyboard Notifications
+//MARK: - Keyboard events
 
 private extension DropDown {
 	
@@ -472,13 +472,32 @@ private extension DropDown {
 			object: nil)
 	}
 	
-	func stopListeningToKeyboard() {
+	func stopListeningToNotifications() {
 		NSNotificationCenter.defaultCenter().removeObserver(self)
 	}
 	
 	@objc
 	func keyboardUpdate() {
 		setNeedsUpdateConstraints()
+	}
+	
+}
+
+//MARK: - Orientation change
+
+private extension DropDown {
+	
+	func startListeningToOrientationChanges() {
+		NSNotificationCenter.defaultCenter().addObserver(
+			self,
+			selector: "orientationChanged",
+			name: UIDeviceOrientationDidChangeNotification,
+			object: nil)
+	}
+	
+	@objc
+	func orientationChanged() {
+		hide()
 	}
 	
 }
