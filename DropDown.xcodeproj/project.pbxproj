@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A7644151B676C2300BF1A2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7644141B676C2300BF1A2D /* AppDelegate.swift */; };
-		0A7644171B676C2300BF1A2D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A7644161B676C2300BF1A2D /* ViewController.swift */; };
-		0A76441A1B676C2300BF1A2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A7644181B676C2300BF1A2D /* Main.storyboard */; };
-		0A76441C1B676C2300BF1A2D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A76441B1B676C2300BF1A2D /* Images.xcassets */; };
-		0A76441F1B676C2300BF1A2D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A76441D1B676C2300BF1A2D /* LaunchScreen.xib */; };
 		0A76442B1B676C2300BF1A2D /* DropDownTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A76442A1B676C2300BF1A2D /* DropDownTests.swift */; };
+		0AC1C3301B6B85A600A8DC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3241B6B85A600A8DC0D /* AppDelegate.swift */; };
+		0AC1C3321B6B85A600A8DC0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3261B6B85A600A8DC0D /* ViewController.swift */; };
+		0AC1C3331B6B85A600A8DC0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3281B6B85A600A8DC0D /* Constants.swift */; };
+		0AC1C3341B6B85A600A8DC0D /* KeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3291B6B85A600A8DC0D /* KeyboardListener.swift */; };
+		0AC1C3351B6B85A600A8DC0D /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32A1B6B85A600A8DC0D /* UIView+Extension.swift */; };
+		0AC1C3361B6B85A600A8DC0D /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AC1C32C1B6B85A600A8DC0D /* DropDownCell.xib */; };
+		0AC1C3371B6B85A600A8DC0D /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32E1B6B85A600A8DC0D /* DropDown.swift */; };
+		0AC1C3381B6B85A600A8DC0D /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32F1B6B85A600A8DC0D /* DropDownCell.swift */; };
+		0AC1C33A1B6B884100A8DC0D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AC1C3391B6B884100A8DC0D /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,14 +32,18 @@
 /* Begin PBXFileReference section */
 		0A76440F1B676C2300BF1A2D /* DropDown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DropDown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7644131B676C2300BF1A2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A7644141B676C2300BF1A2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0A7644161B676C2300BF1A2D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0A7644191B676C2300BF1A2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		0A76441B1B676C2300BF1A2D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		0A76441E1B676C2300BF1A2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		0A7644241B676C2300BF1A2D /* DropDownTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DropDownTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7644291B676C2300BF1A2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A76442A1B676C2300BF1A2D /* DropDownTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTests.swift; sourceTree = "<group>"; };
+		0AC1C3241B6B85A600A8DC0D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0AC1C3261B6B85A600A8DC0D /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0AC1C3281B6B85A600A8DC0D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0AC1C3291B6B85A600A8DC0D /* KeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardListener.swift; sourceTree = "<group>"; };
+		0AC1C32A1B6B85A600A8DC0D /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		0AC1C32C1B6B85A600A8DC0D /* DropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownCell.xib; sourceTree = "<group>"; };
+		0AC1C32E1B6B85A600A8DC0D /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
+		0AC1C32F1B6B85A600A8DC0D /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
+		0AC1C3391B6B884100A8DC0D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DropDown/Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +68,7 @@
 			isa = PBXGroup;
 			children = (
 				0A7644111B676C2300BF1A2D /* DropDown */,
+				0AC1C3391B6B884100A8DC0D /* Images.xcassets */,
 				0A7644271B676C2300BF1A2D /* DropDownTests */,
 				0A7644101B676C2300BF1A2D /* Products */,
 			);
@@ -77,11 +86,10 @@
 		0A7644111B676C2300BF1A2D /* DropDown */ = {
 			isa = PBXGroup;
 			children = (
-				0A7644141B676C2300BF1A2D /* AppDelegate.swift */,
-				0A7644161B676C2300BF1A2D /* ViewController.swift */,
-				0A7644181B676C2300BF1A2D /* Main.storyboard */,
-				0A76441B1B676C2300BF1A2D /* Images.xcassets */,
-				0A76441D1B676C2300BF1A2D /* LaunchScreen.xib */,
+				0AC1C3231B6B85A600A8DC0D /* demo */,
+				0AC1C3271B6B85A600A8DC0D /* helpers */,
+				0AC1C32B1B6B85A600A8DC0D /* resources */,
+				0AC1C32D1B6B85A600A8DC0D /* src */,
 				0A7644121B676C2300BF1A2D /* Supporting Files */,
 			);
 			path = DropDown;
@@ -110,6 +118,42 @@
 				0A7644291B676C2300BF1A2D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0AC1C3231B6B85A600A8DC0D /* demo */ = {
+			isa = PBXGroup;
+			children = (
+				0AC1C3241B6B85A600A8DC0D /* AppDelegate.swift */,
+				0AC1C3261B6B85A600A8DC0D /* ViewController.swift */,
+			);
+			path = demo;
+			sourceTree = "<group>";
+		};
+		0AC1C3271B6B85A600A8DC0D /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0AC1C3281B6B85A600A8DC0D /* Constants.swift */,
+				0AC1C3291B6B85A600A8DC0D /* KeyboardListener.swift */,
+				0AC1C32A1B6B85A600A8DC0D /* UIView+Extension.swift */,
+			);
+			path = helpers;
+			sourceTree = "<group>";
+		};
+		0AC1C32B1B6B85A600A8DC0D /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				0AC1C32C1B6B85A600A8DC0D /* DropDownCell.xib */,
+			);
+			path = resources;
+			sourceTree = "<group>";
+		};
+		0AC1C32D1B6B85A600A8DC0D /* src */ = {
+			isa = PBXGroup;
+			children = (
+				0AC1C32E1B6B85A600A8DC0D /* DropDown.swift */,
+				0AC1C32F1B6B85A600A8DC0D /* DropDownCell.swift */,
+			);
+			path = src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,9 +236,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A76441A1B676C2300BF1A2D /* Main.storyboard in Resources */,
-				0A76441F1B676C2300BF1A2D /* LaunchScreen.xib in Resources */,
-				0A76441C1B676C2300BF1A2D /* Images.xcassets in Resources */,
+				0AC1C3361B6B85A600A8DC0D /* DropDownCell.xib in Resources */,
+				0AC1C33A1B6B884100A8DC0D /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,8 +255,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A7644171B676C2300BF1A2D /* ViewController.swift in Sources */,
-				0A7644151B676C2300BF1A2D /* AppDelegate.swift in Sources */,
+				0AC1C3341B6B85A600A8DC0D /* KeyboardListener.swift in Sources */,
+				0AC1C3321B6B85A600A8DC0D /* ViewController.swift in Sources */,
+				0AC1C3371B6B85A600A8DC0D /* DropDown.swift in Sources */,
+				0AC1C3381B6B85A600A8DC0D /* DropDownCell.swift in Sources */,
+				0AC1C3301B6B85A600A8DC0D /* AppDelegate.swift in Sources */,
+				0AC1C3351B6B85A600A8DC0D /* UIView+Extension.swift in Sources */,
+				0AC1C3331B6B85A600A8DC0D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,25 +282,6 @@
 			targetProxy = 0A7644251B676C2300BF1A2D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		0A7644181B676C2300BF1A2D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0A7644191B676C2300BF1A2D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		0A76441D1B676C2300BF1A2D /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0A76441E1B676C2300BF1A2D /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		0A76442C1B676C2300BF1A2D /* Debug */ = {
@@ -291,7 +320,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -329,7 +358,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -340,6 +369,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = DropDown/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -350,6 +380,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = DropDown/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -409,6 +440,7 @@
 				0A7644301B676C2300BF1A2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0A7644311B676C2300BF1A2D /* Build configuration list for PBXNativeTarget "DropDownTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +449,7 @@
 				0A7644331B676C2300BF1A2D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
