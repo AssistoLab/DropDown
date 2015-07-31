@@ -15,9 +15,7 @@ public typealias ConfigurationClosure = (String) -> String
 
 public final class DropDown: UIView {
 	
-	/*
-	handle iOS 7 landscape mode
-	*/
+	//TODO: handle iOS 7 landscape mode
 	
 	public enum DismissMode {
 		
@@ -130,6 +128,20 @@ public final class DropDown: UIView {
 	
 	convenience init() {
 		self.init(frame: CGRectZero)
+	}
+	
+	convenience init(dataSource: [String], anchorView: UIView? = nil, offset: CGPoint? = nil, cellConfiguration: ConfigurationClosure? = nil, selectionAction: SelectionClosure, cancelAction: Closure? = nil) {
+		self.init()
+		
+		if let anchorView = anchorView {
+			self.anchorView = anchorView
+		}
+		
+		self.dataSource = dataSource
+		self.offset = offset
+		self.selectionAction = selectionAction
+		self.cellConfiguration = cellConfiguration
+		self.cancelAction = cancelAction
 	}
 	
 	override init(frame: CGRect) {
