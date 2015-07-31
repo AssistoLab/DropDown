@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
 
   s.name = "DropDown"
-  s.version = "0.1"
-  s.summary = "Android like drop down"
+  s.version = "0.1.1"
+  s.summary = "A Material Design drop down"
 
   s.description = <<-DESC
-                   This drop down is to overcome the loss of usability and user experience due to the UIPickerView. Android did a good job there so this drop down is very inspired by it. It appears at the right location instead of the bottom of the screen as default with UIPickerView and if possible, all options are displayed at once.
+                   This drop down is to overcome the loss of usability and user experience due to the UIPickerView. Material Design did a good job there so this drop down is very inspired by it. It appears at the right location instead of the bottom of the screen as default with UIPickerView and if possible, all options are displayed at once.
                    DESC
 
   s.homepage = "https://github.com/kevin-hirsch/DropDown"
