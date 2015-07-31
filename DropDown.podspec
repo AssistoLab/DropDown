@@ -9,14 +9,14 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage = "https://github.com/kevin-hirsch/DropDown"
-  s.screenshots = "https://github.com/kevin-hirsch/DropDown/tree/master/Screenshots/1.png", "https://github.com/kevin-hirsch/DropDown/tree/master/Screenshots/2.png"
+  s.screenshots = "https://github.com/kevin-hirsch/DropDown/blob/master/Screenshots/1.png?raw=true", "https://github.com/kevin-hirsch/DropDown/blob/master/Screenshots/2.png?raw=true"
 
   s.license = { :type => "MIT", :file => "LICENSE" }
 
   s.author = { "kevin-hirsch" => "kevin.hirsch.be@gmail.com" }
   s.social_media_url = "http://twitter.com/kevinh6113"
 
-  s.platform = :ios, '7.0'
+  s.platform = :ios, '8.0'
   s.source = { 
     :git => "https://github.com/kevin-hirsch/DropDown.git", 
     :tag => s.version.to_s
