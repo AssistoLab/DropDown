@@ -116,6 +116,10 @@ public final class DropDown: UIView {
 		}
 	}
 	
+	private var minHeight: CGFloat {
+		return tableView.rowHeight
+	}
+	
 	private var didSetupConstraints = false
 	
 	//MARK: - Init's
@@ -180,7 +184,7 @@ private extension DropDown {
 	
 }
 
-//MARK - UI
+//MARK: - UI
 
 extension DropDown {
 	
@@ -195,28 +199,21 @@ extension DropDown {
 		yConstraint.constant = (anchorView?.windowFrame?.minY ?? 0) + (offset?.y ?? 0)
 		widthConstraint.constant = width ?? (anchorView?.bounds.width ?? 0) - (offset?.x ?? 0)
 		
-		let height = tableHeight()
-		var offScreenHeight: CGFloat = 0
+		let (visibleHeight, offScreenHeight, canBeDisplayed) = computeHeightForDisplay()
 		
-		if let window = UIWindow.visibleWindow() {
-			let maxY = height + yConstraint.constant
-			let windowMaxY = window.bounds.maxY - UI.HeightPadding
-			let keyboardListener = KeyboardListener.sharedInstance
-			let keyboardMinY = keyboardListener.keyboardFrame.minY - UI.HeightPadding
+		if !canBeDisplayed {
+			super.updateConstraints()
+			hide()
 			
-			if keyboardListener.isVisible && maxY > keyboardMinY {
-				offScreenHeight = abs(maxY - keyboardMinY)
-			} else if maxY > windowMaxY {
-				offScreenHeight = abs(maxY - windowMaxY)
-			}
+			return
 		}
 		
-		heightConstraint.constant = height - offScreenHeight
+		heightConstraint.constant = visibleHeight
 		tableView.scrollEnabled = offScreenHeight > 0
 		
-		dispatch_async(dispatch_get_main_queue(), { [unowned self] in
+		dispatch_async(dispatch_get_main_queue()) { [unowned self] in
 			self.tableView.flashScrollIndicators()
-			})
+		}
 		
 		super.updateConstraints()
 	}
@@ -293,13 +290,39 @@ extension DropDown {
 		tableViewContainer.layer.shadowPath = shadowPath.CGPath
 	}
 	
+	private func computeHeightForDisplay() -> (visibleHeight: CGFloat, offScreenHeight: CGFloat?, canBeDisplayed: Bool) {
+		let height = tableHeight()
+		var offscreenHeight: CGFloat = 0
+		
+		if let window = UIWindow.visibleWindow() {
+			let maxY = height + yConstraint.constant
+			let windowMaxY = window.bounds.maxY - UI.HeightPadding
+			let keyboardListener = KeyboardListener.sharedInstance
+			let keyboardMinY = keyboardListener.keyboardFrame.minY - UI.HeightPadding
+			
+			if keyboardListener.isVisible && maxY > keyboardMinY {
+				offscreenHeight = abs(maxY - keyboardMinY)
+			} else if maxY > windowMaxY {
+				offscreenHeight = abs(maxY - windowMaxY)
+			}
+		}
+		
+		let visibleHeight = height - offscreenHeight
+		let canBeDisplayed = visibleHeight >= minHeight
+		let optionalOffscreenHeight: CGFloat? = offscreenHeight == 0 ? nil : offscreenHeight
+		
+		return (visibleHeight, optionalOffscreenHeight, canBeDisplayed)
+	}
+	
 }
 
 //MARK: - Actions
 
 extension DropDown {
 	
-	public func show() {
+	// Show the drop down if enough height. 
+	// Return wether it succeed and how much height is needed to display it entirely
+	public func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
 		if let visibleDropDown = DropDown.VisibleDropDown {
 			visibleDropDown.cancel()
 		}
@@ -314,8 +337,13 @@ extension DropDown {
 		
 		self.setTranslatesAutoresizingMaskIntoConstraints(false)
 		visibleWindow?.addUniversalConstraints(format: "|[dropDown]|", views: ["dropDown": self])
-		layoutIfNeeded()
-		layoutSubviews()
+		
+		let (_, offScreenHeight, canBeDisplayed) = computeHeightForDisplay()
+		
+		if !canBeDisplayed {
+			hide()
+			return (canBeDisplayed, offScreenHeight)
+		}
 		
 		hidden = false
 		tableViewContainer.transform = Animation.DownScaleTransform
@@ -330,6 +358,8 @@ extension DropDown {
 			completion: nil)
 		
 		selectRowAtIndex(selectedRowIndex)
+		
+		return (canBeDisplayed, offScreenHeight)
 	}
 	
 	public func hide() {
@@ -481,7 +511,7 @@ private extension DropDown {
 	
 	@objc
 	func keyboardUpdate() {
-		setNeedsUpdateConstraints()
+		self.setNeedsUpdateConstraints()
 	}
 	
 }
