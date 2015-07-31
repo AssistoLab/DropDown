@@ -58,7 +58,7 @@ Set the data source:
 dropDown.dataSource = ["Car", "Motorcycle", "Van"]
 ```
 
-When the user select something, your `selectionAction` is called:
+When the user selects something, your `selectionAction` is called:
 
 ```swift
 dropDown.selectionAction = { [unowned self] (index, string) in
@@ -109,7 +109,7 @@ You can get info about the selected item this way:
 
 ```swift
 dropDown.selectedItem() // returns a String?
-dropDown.indexForSelectedRow() // returns a Index?
+dropDown.indexForSelectedRow() // returns an Index?
 ```
 
 ### Advanced usage
@@ -141,13 +141,13 @@ This project is under MIT license. For more information, see `LICENSE` file.
 
 DropDown was inspired by the Material Design version of the [Spinner](http://developer.android.com/guide/topics/ui/controls/spinner.html).
 
-DropDown was done to integrate in a project I work on: 
-[![Assisto](https://assis.to/images/logouser_dark.png)](https://assis.to).
+DropDown was done to integrate in a project I work on:<br/>
+[![Assisto](https://assis.to/images/logouser_dark.png)](https://assis.to)<br/>
 It will be updated when necessary and fixes will be done as soon as discovered to keep it up to date.
 
 I work at 
-[![Pinch](http://pinchproject.com/img/pinch-logo.png)(http://pinchproject.com).
+[![Pinch](http://pinchproject.com/img/pinch-logo.png)](http://pinchproject.com)
 
 You can find me on Twitter [@kevinh6113](https://twitter.com/kevinh6113).
 
-Enjoy! :)
+Enjoy!
