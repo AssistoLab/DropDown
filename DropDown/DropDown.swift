@@ -156,7 +156,6 @@ private extension DropDown {
 		tableView.registerNib(DropDownCell.Nib, forCellReuseIdentifier: ReusableIdentifier.DropDownCell)
 		
 		startListeningToKeyboard()
-		startListeningToOrientationChanges()
 	}
 	
 	func setupUI() {
@@ -285,6 +284,10 @@ extension DropDown {
 	
 	public override func layoutSubviews() {
 		super.layoutSubviews()
+		
+		// When orientation changes, layoutSubviews is called
+		// We update the constraint to update the position
+		setNeedsUpdateConstraints()
 		
 		let shadowPath = UIBezierPath(rect: tableViewContainer.bounds)
 		tableViewContainer.layer.shadowPath = shadowPath.CGPath
@@ -479,25 +482,6 @@ private extension DropDown {
 	@objc
 	func keyboardUpdate() {
 		setNeedsUpdateConstraints()
-	}
-	
-}
-
-//MARK: - Orientation change
-
-private extension DropDown {
-	
-	func startListeningToOrientationChanges() {
-		NSNotificationCenter.defaultCenter().addObserver(
-			self,
-			selector: "orientationChanged",
-			name: UIDeviceOrientationDidChangeNotification,
-			object: nil)
-	}
-	
-	@objc
-	func orientationChanged() {
-		hide()
 	}
 	
 }
