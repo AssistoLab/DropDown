@@ -142,10 +142,11 @@ This project is under MIT license. For more information, see `LICENSE` file.
 DropDown was inspired by the Material Design version of the [Spinner](http://developer.android.com/guide/topics/ui/controls/spinner.html).
 
 DropDown was done to integrate in a project I work on:<br/>
-[![Assisto](https://assis.to/images/logouser_dark.png)](https://assis.to)<br/>
+[![Assisto](https://assis.to/images/logouser_dark.png)](https://assis.to)
+
 It will be updated when necessary and fixes will be done as soon as discovered to keep it up to date.
 
-I work at 
+I work at<br/>
 [![Pinch](http://pinchproject.com/img/pinch-logo.png)](http://pinchproject.com)
 
 You can find me on Twitter [@kevinh6113](https://twitter.com/kevinh6113).
