@@ -14,10 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-		KeyboardListener.sharedInstance.startListeningToKeyboard()
+		DropDown.startListeningToKeyboard()
 		
 		return true
 	}
 
 }
-

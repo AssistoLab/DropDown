@@ -502,9 +502,15 @@ extension DropDown {
 
 //MARK: - Keyboard events
 
-private extension DropDown {
+extension DropDown {
 	
-	func startListeningToKeyboard() {
+	public static func startListeningToKeyboard() {
+		KeyboardListener.sharedInstance.startListeningToKeyboard()
+	}
+	
+	private func startListeningToKeyboard() {
+		KeyboardListener.sharedInstance.startListeningToKeyboard()
+		
 		NSNotificationCenter.defaultCenter().addObserver(
 			self,
 			selector: "keyboardUpdate",
@@ -517,12 +523,12 @@ private extension DropDown {
 			object: nil)
 	}
 	
-	func stopListeningToNotifications() {
+	private func stopListeningToNotifications() {
 		NSNotificationCenter.defaultCenter().removeObserver(self)
 	}
 	
 	@objc
-	func keyboardUpdate() {
+	private func keyboardUpdate() {
 		self.setNeedsUpdateConstraints()
 	}
 	
