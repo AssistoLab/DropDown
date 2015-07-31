@@ -11,6 +11,11 @@ A drop down for iOS in Swift (1.2).
 [![](Screenshots/1.png)](Screenshots/1.png)
 [![](Screenshots/2.png)](Screenshots/2.png)
 
+## Demo
+
+Do `pod try` in your console and run the project to try a demo.
+To install [CocoaPods](http://www.cocoapods.org), run `sudo gem install cocoapods` in your console.
+
 ## Installation
 
 ### Cocoapods
@@ -122,6 +127,16 @@ when calling the `show` method, it returns a tuple like this:
 
 - `canBeDisplayed` tells if there is enough height to display the drop down. If its value is `false`, the drop down is not showed.
 - `offscreenHeight`: if the drop down was not able to show all options from the data source at once, `offscreenHeight` will contain the height needed to display all options at once (without having to scroll through them). This can be used in a scroll view or table view to scroll enough before showing the drop down.
+
+### Important
+
+Don't forget to put:
+
+```swift
+DropDown.startListeningToKeyboard()
+```
+
+in your `AppDelegate`'s `didFinishLaunching` method so that the drop down will handle its display with the keyboard displayed even the first time a drop down is showed.
 
 ## Remains to do
 

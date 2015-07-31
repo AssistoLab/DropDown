@@ -14,6 +14,7 @@ public final class KeyboardListener {
 	
 	private(set) var isVisible = false
 	private(set) var keyboardFrame = CGRectZero
+	private var isListening = false
 	
 	deinit {
 		stopListeningToKeyboard()
@@ -26,6 +27,12 @@ public final class KeyboardListener {
 extension KeyboardListener {
 	
 	public func startListeningToKeyboard() {
+		if isListening {
+			return
+		}
+		
+		isListening = true
+		
 		NSNotificationCenter.defaultCenter().addObserver(
 			self,
 			selector: "keyboardDidShow:",
