@@ -147,7 +147,7 @@ DropDown was done to integrate in a project I work on:<br/>
 It will be updated when necessary and fixes will be done as soon as discovered to keep it up to date.
 
 I work at<br/>
-[![Pinch](http://pinchproject.com/img/pinch-logo.png)](http://pinchproject.com)
+[![Pinch](http://pinchproject.com/img/pinch-logo.png)](http://pinch.eu)
 
 You can find me on Twitter [@kevinh6113](https://twitter.com/kevinh6113).
 
