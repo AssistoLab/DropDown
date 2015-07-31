@@ -13,7 +13,7 @@ A drop down for iOS in Swift (1.2).
 
 ## Demo
 
-Do `pod try` in your console and run the project to try a demo.
+Do `pod try DropDown` in your console and run the project to try a demo.
 To install [CocoaPods](http://www.cocoapods.org), run `sudo gem install cocoapods` in your console.
 
 ## Installation
@@ -24,6 +24,7 @@ Use [CocoaPods](http://www.cocoapods.org).
 
 1. Add `pod 'DropDown'` to your *Podfile*.
 2. Install the pod(s) by running `pod install`.
+3. Add `import DropDown` in the .swift files where you want to use it
 
 ### Source files
 
@@ -154,7 +155,7 @@ This project is under MIT license. For more information, see `LICENSE` file.
 
 ## Credits
 
-DropDown was inspired by the Material Design version of the [Spinner](http://developer.android.com/guide/topics/ui/controls/spinner.html).
+DropDown was inspired by the Material Design version of the [Simple Menu](http://www.google.com/design/spec/components/menus.html#menus-simple-menus).
 
 DropDown was done to integrate in a project I work on:<br/>
 [![Assisto](https://assis.to/images/logouser_dark.png)](https://assis.to)
