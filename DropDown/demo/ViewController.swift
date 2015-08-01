@@ -26,8 +26,8 @@ class ViewController: UIViewController {
 			"Feet"
 		]
 		
-		dropDown.selectionAction = { [unowned self] (index, string) in
-			self.actionButton.setTitle(string, forState: .Normal)
+		dropDown.selectionAction = { [unowned self] (index, item) in
+			self.actionButton.setTitle(item, forState: .Normal)
 		}
 		
 //		dropDown.cancelAction = { [unowned self] in
