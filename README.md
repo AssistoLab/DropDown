@@ -64,11 +64,20 @@ Set the data source:
 dropDown.dataSource = ["Car", "Motorcycle", "Van"]
 ```
 
+By default, the cells in the drop down have the `dataSource` values as text.
+If you want a custom format for the cells, you can set `cellConfiguration` like this for example:
+
+```swift
+dropDown.cellConfiguration = { [unowned self] (index, item) in
+  return "- \(item) (option \(index))"
+}
+```
+
 When the user selects something, your `selectionAction` is called:
 
 ```swift
-dropDown.selectionAction = { [unowned self] (index, string) in
-  println("item \(string) at index \(index) selected.")
+dropDown.selectionAction = { [unowned self] (index, item) in
+  println("item \(item) at index \(index) selected.")
 }
 ```
 
@@ -118,6 +127,24 @@ dropDown.selectedItem() // returns a String?
 dropDown.indexForSelectedRow() // returns an Index?
 ```
 
+### Customize UI
+
+You can customize these properties of the drop down:
+
+- `textFont`: the font of the text for each cells of the drop down.
+- `textColor`: the color of the text for each cells of the drop down.
+- `backgroundColor`: the background color of the drop down.
+- `selectionBackgroundColor`: the background color of the selected cell in the drop down.
+
+You can change them through each instance of `DropDown` or via `UIAppearance` like this for example:
+
+```swift
+DropDown.appearance().textColor = UIColor.blackColor()
+DropDown.appearance().textFont = UIFont.systemFontOfSize(15)
+DropDown.appearance().backgroundColor = UIColor.whiteColor()
+DropDown.appearance().selectionBackgroundColor = UIColor.lightGrayColor()
+```
+
 ### Advanced usage
 
 when calling the `show` method, it returns a tuple like this:
@@ -127,7 +154,7 @@ when calling the `show` method, it returns a tuple like this:
 ```
 
 - `canBeDisplayed` tells if there is enough height to display the drop down. If its value is `false`, the drop down is not showed.
-- `offscreenHeight`: if the drop down was not able to show all options from the data source at once, `offscreenHeight` will contain the height needed to display all options at once (without having to scroll through them). This can be used in a scroll view or table view to scroll enough before showing the drop down.
+- `offscreenHeight`: if the drop down was not able to show all cells from the data source at once, `offscreenHeight` will contain the height needed to display all cells at once (without having to scroll through them). This can be used in a scroll view or table view to scroll enough before showing the drop down.
 
 ### Important
 
