@@ -11,7 +11,7 @@ import UIKit
 public typealias Index = Int
 public typealias Closure = () -> Void
 public typealias SelectionClosure = (Index, String) -> Void
-public typealias ConfigurationClosure = (String) -> String
+public typealias ConfigurationClosure = (Index, String) -> String
 
 public final class DropDown: UIView {
 	
@@ -99,7 +99,12 @@ public final class DropDown: UIView {
 	
 	private var selectedRowIndex: Index = -1
 	
-	public var cellConfiguration: ConfigurationClosure?
+	public var cellConfiguration: ConfigurationClosure? {
+		didSet {
+			reloadAllComponents()
+		}
+	}
+	
 	public var selectionAction: SelectionClosure!
 	public var cancelAction: Closure?
 	
@@ -303,11 +308,10 @@ extension DropDown {
 	}
 	
 	private func computeHeightForDisplay() -> (visibleHeight: CGFloat, offScreenHeight: CGFloat?, canBeDisplayed: Bool) {
-		let height = tableHeight()
 		var offscreenHeight: CGFloat = 0
 		
 		if let window = UIWindow.visibleWindow() {
-			let maxY = height + yConstraint.constant
+			let maxY = tableHeight + yConstraint.constant
 			let windowMaxY = window.bounds.maxY - UI.HeightPadding
 			let keyboardListener = KeyboardListener.sharedInstance
 			let keyboardMinY = keyboardListener.keyboardFrame.minY - UI.HeightPadding
@@ -319,7 +323,7 @@ extension DropDown {
 			}
 		}
 		
-		let visibleHeight = height - offscreenHeight
+		let visibleHeight = tableHeight - offscreenHeight
 		let canBeDisplayed = visibleHeight >= minHeight
 		let optionalOffscreenHeight: CGFloat? = offscreenHeight == 0 ? nil : offscreenHeight
 		
@@ -436,7 +440,7 @@ extension DropDown {
 		}
 	}
 	
-	public func tableHeight() -> CGFloat {
+	private var tableHeight: CGFloat {
 		return tableView.rowHeight * CGFloat(dataSource.count)
 	}
 	
@@ -458,7 +462,8 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		cell.selectedBackgroundColor = selectionBackgroundColor
 		
 		if let cellConfiguration = cellConfiguration {
-			cell.optionLabel.text = cellConfiguration(dataSource[indexPath.row])
+			let index = indexPath.row
+			cell.optionLabel.text = cellConfiguration(index, dataSource[index])
 		} else {
 			cell.optionLabel.text = dataSource[indexPath.row]
 		}
@@ -494,7 +499,7 @@ extension DropDown {
 	}
 	
 	@objc
-	func dismissableViewTapped() {
+	private func dismissableViewTapped() {
 		cancel()
 	}
 	

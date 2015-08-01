@@ -8,7 +8,7 @@
 
 import UIKit
 
-public final class KeyboardListener {
+internal final class KeyboardListener {
 	
 	static let sharedInstance = KeyboardListener()
 	
@@ -26,7 +26,7 @@ public final class KeyboardListener {
 
 extension KeyboardListener {
 	
-	public func startListeningToKeyboard() {
+	func startListeningToKeyboard() {
 		if isListening {
 			return
 		}
@@ -45,7 +45,7 @@ extension KeyboardListener {
 			object: nil)
 	}
 	
-	public func stopListeningToKeyboard() {
+	func stopListeningToKeyboard() {
 		NSNotificationCenter.defaultCenter().removeObserver(self)
 	}
 	
