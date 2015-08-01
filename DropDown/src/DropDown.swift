@@ -13,21 +13,28 @@ public typealias Closure = () -> Void
 public typealias SelectionClosure = (Index, String) -> Void
 public typealias ConfigurationClosure = (Index, String) -> String
 
+/// A Material Design drop down in replacement for `UIPickerView`.
 public final class DropDown: UIView {
 	
 	//TODO: handle iOS 7 landscape mode
 	
+	/// The dismiss mode for a drop down.
 	public enum DismissMode {
 		
-		case OnTap // a tap outside the drop down from the user is needed to dismiss
-		case Automatic // automatic dismiss when user interacts with anything else than the drop down
-		case Manual // not dismissable by the user
+		/// A tap outside the drop down is required to dismiss.
+		case OnTap
+		
+		/// No tap is required to dismiss, it will dimiss when interacting with anything else.
+		case Automatic
+		
+		/// Not dismissable by the user.
+		case Manual
 		
 	}
 	
 	//MARK: - Properties
 	
-	// There can be only one visible drop down at a time
+	/// The current visible drop down. There can be only one visible drop down at a time.
 	public static weak var VisibleDropDown: DropDown?
 	
 	//MARK: UI
@@ -35,21 +42,31 @@ public final class DropDown: UIView {
 	private let tableViewContainer = UIView()
 	private let tableView = UITableView()
 	
-	// View to which the drop down is binded
+	/// The view to which the drop down will displayed onto.
 	public var anchorView: UIView! {
 		didSet {
 			setNeedsUpdateConstraints()
 		}
 	}
 	
-	// Anchor or origin point relative to anchorView. Default to CGPointZero
+	/**
+	The offset point relative to `anchorView`.
+	
+	By default, the drop down is showed onto the `anchorView` with the top
+	left corner for its origin, so an offset equal to (0, 0).
+	You can change here the default drop down origin.
+	*/
 	public var offset: CGPoint? {
 		didSet {
 			setNeedsUpdateConstraints()
 		}
 	}
 	
-	// Desired width. Defaults to anchorView width - offset.x
+	/**
+	The width of the drop down.
+	
+	Defaults to `anchorView.bounds.width - offset.x`.
+	*/
 	public var width: CGFloat? {
 		didSet {
 			setNeedsUpdateConstraints()
@@ -72,18 +89,33 @@ public final class DropDown: UIView {
 		}
 	}
 	
+	/**
+	The background color of the selected cell in the drop down.
+	
+	Changing the background color automatically reloads the drop down.
+	*/
 	public dynamic var selectionBackgroundColor = UI.SelectionBackgroundColor {
 		didSet {
 			reloadAllComponents()
 		}
 	}
 	
+	/**
+	The color of the text for each cells of the drop down.
+	
+	Changing the text color automatically reloads the drop down.
+	*/
 	public dynamic var textColor = UIColor.blackColor() {
 		didSet {
 			reloadAllComponents()
 		}
 	}
 	
+	/**
+	The font of the text for each cells of the drop down.
+	
+	Changing the text font automatically reloads the drop down.
+	*/
 	public dynamic var textFont = UIFont.systemFontOfSize(15) {
 		didSet {
 			reloadAllComponents()
@@ -91,6 +123,12 @@ public final class DropDown: UIView {
 	}
 	
 	//MARK: Content
+	
+	/**
+	The data source for the drop down.
+	
+	Changing the data source automatically reloads the drop down.
+	*/
 	public var dataSource = [String]() {
 		didSet {
 			reloadAllComponents()
@@ -99,15 +137,25 @@ public final class DropDown: UIView {
 	
 	private var selectedRowIndex: Index = -1
 	
+	/**
+	The format for the cells' text.
+	
+	By default, the cell's text takes the plain `dataSource` value.
+	Changing `cellConfiguration` automatically reloads the drop down.
+	*/
 	public var cellConfiguration: ConfigurationClosure? {
 		didSet {
 			reloadAllComponents()
 		}
 	}
 	
+	/// The action to execute when the user selects a cell.
 	public var selectionAction: SelectionClosure!
+	
+	/// The action to execute when the user cancels/hides the drop down.
 	public var cancelAction: Closure?
 	
+	/// The dismiss mode of the drop down. Default is `OnTap`.
 	public var dismissMode = DismissMode.OnTap {
 		willSet {
 			if newValue == .OnTap {
@@ -131,10 +179,28 @@ public final class DropDown: UIView {
 		stopListeningToNotifications()
 	}
 	
+	/**
+	Creates a new instance of a drop down.
+	Don't forget to setup the `dataSource`, 
+	the `anchorView` and the `selectionAction` 
+	at least before calling `show()`.
+	*/
 	convenience init() {
 		self.init(frame: CGRectZero)
 	}
 	
+	/**
+	Creates a new instance of a drop down.
+	
+	:param: dataSource        The data source for the drop down.
+	:param: anchorView        The view to which the drop down will displayed onto.
+	:param: offset            The offset point relative to `anchorView`.
+	:param: cellConfiguration The format for the cells' text.
+	:param: selectionAction   The action to execute when the user selects a cell.
+	:param: cancelAction      The action to execute when the user cancels/hides the drop down.
+	
+	:returns: A new instance of a drop down customized with the above parameters.
+	*/
 	convenience init(dataSource: [String], anchorView: UIView? = nil, offset: CGPoint? = nil, cellConfiguration: ConfigurationClosure? = nil, selectionAction: SelectionClosure, cancelAction: Closure? = nil) {
 		self.init()
 		
@@ -336,8 +402,11 @@ extension DropDown {
 
 extension DropDown {
 	
-	// Show the drop down if enough height. 
-	// Return wether it succeed and how much height is needed to display it entirely
+	/**
+	Shows the drop down if enough height.
+	
+	:returns: Wether it succeed and how much height is needed to display all cells at once.
+	*/
 	public func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
 		if let visibleDropDown = DropDown.VisibleDropDown {
 			visibleDropDown.cancel()
@@ -378,6 +447,7 @@ extension DropDown {
 		return (canBeDisplayed, offScreenHeight)
 	}
 	
+	/// Hides the drop down.
 	public func hide() {
 		DropDown.VisibleDropDown = nil
 		
@@ -414,11 +484,19 @@ extension DropDown {
 
 extension DropDown {
 	
+	/**
+	Reloads all the cells.
+	
+	It should not be necessary in most cases because each change to
+	`dataSource`, `textColor`, `textFont`, `selectionBackgroundColor`
+	and `cellConfiguration` implicitly calls `reloadAllComponents()`.
+	*/
 	public func reloadAllComponents() {
 		tableView.reloadData()
 		setNeedsUpdateConstraints()
 	}
 	
+	/// (Pre)selects a row at a certain index.
 	public func selectRowAtIndex(index: Index) {
 		selectedRowIndex = index
 		
@@ -428,10 +506,12 @@ extension DropDown {
 			scrollPosition: .Middle)
 	}
 	
+	/// Returns the index of the selected row.
 	public func indexForSelectedRow() -> Index? {
 		return tableView.indexPathForSelectedRow()?.row
 	}
 	
+	/// Returns the selected item.
 	public func selectedItem() -> String? {
 		if let row = tableView.indexPathForSelectedRow()?.row {
 			return dataSource[row]
@@ -440,6 +520,7 @@ extension DropDown {
 		}
 	}
 	
+	/// Returns the height needed to display all cells.
 	private var tableHeight: CGFloat {
 		return tableView.rowHeight * CGFloat(dataSource.count)
 	}
@@ -509,6 +590,10 @@ extension DropDown {
 
 extension DropDown {
 	
+	/**
+	Starts listening to keyboard events.
+	Allows the drop down to display correctly when keyboard is showed.
+	*/
 	public static func startListeningToKeyboard() {
 		KeyboardListener.sharedInstance.startListeningToKeyboard()
 	}
