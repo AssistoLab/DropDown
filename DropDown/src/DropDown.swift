@@ -181,8 +181,8 @@ public final class DropDown: UIView {
 	
 	/**
 	Creates a new instance of a drop down.
-	Don't forget to setup the `dataSource`, 
-	the `anchorView` and the `selectionAction` 
+	Don't forget to setup the `dataSource`,
+	the `anchorView` and the `selectionAction`
 	at least before calling `show()`.
 	*/
 	convenience init() {
@@ -408,6 +408,10 @@ extension DropDown {
 	:returns: Wether it succeed and how much height is needed to display all cells at once.
 	*/
 	public func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
+		if self == DropDown.VisibleDropDown {
+			return (true, 0)
+		}
+		
 		if let visibleDropDown = DropDown.VisibleDropDown {
 			visibleDropDown.cancel()
 		}
@@ -450,6 +454,10 @@ extension DropDown {
 	/// Hides the drop down.
 	public func hide() {
 		DropDown.VisibleDropDown = nil
+		
+		if hidden {
+			return
+		}
 		
 		UIView.animateWithDuration(
 			Animation.Duration,
