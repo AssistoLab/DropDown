@@ -36,13 +36,13 @@ public final class DropDown: UIView {
 	/// The direction where the drop down will show from the `anchorView`.
 	public enum Direction {
 		
-		/// The drop down will show at bottom when possible, otherwise at top if there is more place than at bottom.
+		/// The drop down will show below the anchor view when possible, otherwise above if there is more place than below.
 		case Any
 		
-		/// The drop down will show at top or will not be showed if not enough space at top.
+		/// The drop down will show above the anchor view or will not be showed if not enough space.
 		case Top
 		
-		/// The drop down will show at bottom or will not be showed if not enough space at bottom.
+		/// The drop down will show below or will not be showed if not enough space.
 		case Bottom
 		
 	}

@@ -5,7 +5,7 @@
 [![Version](http://img.shields.io/badge/version-0.1.3-green.svg?style=flat)](https://github.com/kevin-hirsch/DropDown)
 [![Cocoapods](http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat)](http://cocoadocs.org/docsets/DropDown/)
 
-A drop down for iOS in Swift (1.2).
+A Material Design drop down for iOS written in Swift.
 ***
 
 [![](Screenshots/1.png)](Screenshots/1.png)
@@ -46,11 +46,42 @@ let view = UIView()
 dropDown.anchorView = view
 ```
 
-By default, the dropdown will be shown from the point (0, 0). If you want the dropdown to be just below your anchor view, you can precise an offset like this:
+Set the direction to use to show the drop down:
 
 ```swift
-dropDown.offset = CGPoint(x: 0, y:view.bounds.height)
+dropDown.direction = .Any
 ```
+
+The default value is `.Any`. Here is the *Protocol* code:
+
+```swift
+enum Direction {
+	
+	/// The drop down will show below the anchor view when possible, otherwise above if there is more place than below.
+	case Any
+	
+	/// The drop down will show above the anchor view or will not be showed if not enough space.
+	case Top
+	
+	/// The drop down will show below or will not be showed if not enough space.
+	case Bottom
+	
+}
+```
+
+By default, the drop down will be shown onto to anchor view. It will hide it. If you want the drop down to be just below your anchor view when the direction of the drop down is `.Bottom`, you can precise an offset like this:
+
+```swift
+dropDown.bottomOffset = CGPoint(x: 0, y:dropDown.anchorView.bounds.height) // top of drop down will be at bottom of anchorView
+```
+
+If you set the drop down direction to `.Any` or `.Top` you can also precise the offset when the drop down will showed above like this:
+
+```swift
+dropDown.topOffset = CGPoint(x: 0, y:-dropDown.anchorView.bounds.height) // bottom of drop down will be at top of anchorView
+```
+
+Note the minus sign used here to offset to the top.
 
 The default width of the drop down will be the same as the anchor view minus the offset. If you want a custom width, just set:
 
