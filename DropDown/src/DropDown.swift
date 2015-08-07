@@ -545,7 +545,14 @@ extension DropDown {
 	
 	/// Hides the drop down.
 	public func hide() {
-		DropDown.VisibleDropDown = nil
+		if self == DropDown.VisibleDropDown {
+			/*
+			If one drop down is showed and another one is not
+			but we call `hide()` on the hidden one:
+			we don't want it to set the `VisibleDropDown` to nil.
+			*/
+			DropDown.VisibleDropDown = nil
+		}
 		
 		if hidden {
 			return
