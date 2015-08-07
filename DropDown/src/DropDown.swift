@@ -12,6 +12,7 @@ public typealias Index = Int
 public typealias Closure = () -> Void
 public typealias SelectionClosure = (Index, String) -> Void
 public typealias ConfigurationClosure = (Index, String) -> String
+private typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
 /// A Material Design drop down in replacement for `UIPickerView`.
 public final class DropDown: UIView {
@@ -29,6 +30,20 @@ public final class DropDown: UIView {
 		
 		/// Not dismissable by the user.
 		case Manual
+		
+	}
+	
+	/// The direction where the drop down will show from the `anchorView`.
+	public enum Direction {
+		
+		/// The drop down will show below the anchor view when possible, otherwise above if there is more place than below.
+		case Any
+		
+		/// The drop down will show above the anchor view or will not be showed if not enough space.
+		case Top
+		
+		/// The drop down will show below or will not be showed if not enough space.
+		case Bottom
 		
 	}
 	
@@ -50,13 +65,33 @@ public final class DropDown: UIView {
 	}
 	
 	/**
-	The offset point relative to `anchorView`.
+	The possible directions where the drop down will be showed.
+	
+	See `Direction` enum for more info.
+	*/
+	public var direction = Direction.Any
+	
+	/**
+	The offset point relative to `anchorView` when the drop down is shown above the anchor view.
 	
 	By default, the drop down is showed onto the `anchorView` with the top
 	left corner for its origin, so an offset equal to (0, 0).
 	You can change here the default drop down origin.
 	*/
-	public var offset: CGPoint? {
+	public var topOffset: CGPoint = CGPointZero {
+		didSet {
+			setNeedsUpdateConstraints()
+		}
+	}
+	
+	/**
+	The offset point relative to `anchorView` when the drop down is shown below the anchor view.
+	
+	By default, the drop down is showed onto the `anchorView` with the top
+	left corner for its origin, so an offset equal to (0, 0).
+	You can change here the default drop down origin.
+	*/
+	public var bottomOffset: CGPoint = CGPointZero {
 		didSet {
 			setNeedsUpdateConstraints()
 		}
@@ -181,8 +216,8 @@ public final class DropDown: UIView {
 	
 	/**
 	Creates a new instance of a drop down.
-	Don't forget to setup the `dataSource`, 
-	the `anchorView` and the `selectionAction` 
+	Don't forget to setup the `dataSource`,
+	the `anchorView` and the `selectionAction`
 	at least before calling `show()`.
 	*/
 	convenience init() {
@@ -201,7 +236,7 @@ public final class DropDown: UIView {
 	
 	:returns: A new instance of a drop down customized with the above parameters.
 	*/
-	convenience init(dataSource: [String], anchorView: UIView? = nil, offset: CGPoint? = nil, cellConfiguration: ConfigurationClosure? = nil, selectionAction: SelectionClosure, cancelAction: Closure? = nil) {
+	convenience init(dataSource: [String], anchorView: UIView? = nil, topOffset: CGPoint? = nil, bottomOffset: CGPoint? = nil, cellConfiguration: ConfigurationClosure? = nil, selectionAction: SelectionClosure, cancelAction: Closure? = nil) {
 		self.init()
 		
 		if let anchorView = anchorView {
@@ -209,7 +244,8 @@ public final class DropDown: UIView {
 		}
 		
 		self.dataSource = dataSource
-		self.offset = offset
+		self.topOffset = topOffset ?? CGPointZero
+		self.bottomOffset = bottomOffset ?? CGPointZero
 		self.selectionAction = selectionAction
 		self.cellConfiguration = cellConfiguration
 		self.cancelAction = cancelAction
@@ -278,21 +314,21 @@ extension DropDown {
 		
 		didSetupConstraints = true
 		
-		xConstraint.constant = (anchorView?.windowFrame?.minX ?? 0) + (offset?.x ?? 0)
-		yConstraint.constant = (anchorView?.windowFrame?.minY ?? 0) + (offset?.y ?? 0)
-		widthConstraint.constant = width ?? (anchorView?.bounds.width ?? 0) - (offset?.x ?? 0)
+		let layout = computeLayout()
 		
-		let (visibleHeight, offScreenHeight, canBeDisplayed) = computeHeightForDisplay()
-		
-		if !canBeDisplayed {
+		if !layout.canBeDisplayed {
 			super.updateConstraints()
 			hide()
 			
 			return
 		}
 		
-		heightConstraint.constant = visibleHeight
-		tableView.scrollEnabled = offScreenHeight > 0
+		xConstraint.constant = layout.x
+		yConstraint.constant = layout.y
+		widthConstraint.constant = layout.width
+		heightConstraint.constant = layout.visibleHeight
+		
+		tableView.scrollEnabled = layout.offscreenHeight > 0
 		
 		dispatch_async(dispatch_get_main_queue()) { [unowned self] in
 			self.tableView.flashScrollIndicators()
@@ -373,27 +409,83 @@ extension DropDown {
 		tableViewContainer.layer.shadowPath = shadowPath.CGPath
 	}
 	
-	private func computeHeightForDisplay() -> (visibleHeight: CGFloat, offScreenHeight: CGFloat?, canBeDisplayed: Bool) {
-		var offscreenHeight: CGFloat = 0
+	private func computeLayout() -> (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat, visibleHeight: CGFloat, canBeDisplayed: Bool, Direction: Direction) {
+		var layout: ComputeLayoutTuple = (0, 0, 0, 0)
+		var direction = self.direction
 		
 		if let window = UIWindow.visibleWindow() {
-			let maxY = tableHeight + yConstraint.constant
-			let windowMaxY = window.bounds.maxY - UI.HeightPadding
-			let keyboardListener = KeyboardListener.sharedInstance
-			let keyboardMinY = keyboardListener.keyboardFrame.minY - UI.HeightPadding
-			
-			if keyboardListener.isVisible && maxY > keyboardMinY {
-				offscreenHeight = abs(maxY - keyboardMinY)
-			} else if maxY > windowMaxY {
-				offscreenHeight = abs(maxY - windowMaxY)
+			switch direction {
+			case .Any:
+				layout = computeLayoutBottomDisplay(window: window)
+				direction = .Bottom
+				
+				if layout.offscreenHeight > 0 {
+					let topLayout = computeLayoutForTopDisplay(window: window)
+					
+					if topLayout.offscreenHeight < layout.offscreenHeight {
+						layout = topLayout
+						direction = .Top
+					}
+				}
+			case .Bottom:
+				layout = computeLayoutBottomDisplay(window: window)
+				direction = .Bottom
+			case .Top:
+				layout = computeLayoutForTopDisplay(window: window)
+				direction = .Top
 			}
 		}
 		
-		let visibleHeight = tableHeight - offscreenHeight
+		let visibleHeight = tableHeight - layout.offscreenHeight
 		let canBeDisplayed = visibleHeight >= minHeight
-		let optionalOffscreenHeight: CGFloat? = offscreenHeight == 0 ? nil : offscreenHeight
 		
-		return (visibleHeight, optionalOffscreenHeight, canBeDisplayed)
+		return (layout.x, layout.y, layout.width, layout.offscreenHeight, visibleHeight, canBeDisplayed, direction)
+	}
+	
+	private func computeLayoutBottomDisplay(#window: UIWindow) -> ComputeLayoutTuple {
+		var offscreenHeight: CGFloat = 0
+		
+		let anchorViewX = (anchorView?.windowFrame?.minX ?? 0)
+		let anchorViewY = (anchorView?.windowFrame?.minY ?? 0)
+		
+		let x = anchorViewX + bottomOffset.x
+		let y = anchorViewY + bottomOffset.y
+		
+		let maxY = y + tableHeight
+		let windowMaxY = window.bounds.maxY - UI.HeightPadding
+		
+		let keyboardListener = KeyboardListener.sharedInstance
+		let keyboardMinY = keyboardListener.keyboardFrame.minY - UI.HeightPadding
+		
+		if keyboardListener.isVisible && maxY > keyboardMinY {
+			offscreenHeight = abs(maxY - keyboardMinY)
+		} else if maxY > windowMaxY {
+			offscreenHeight = abs(maxY - windowMaxY)
+		}
+		
+		let width = self.width ?? (anchorView?.bounds.width ?? 0) - bottomOffset.x
+		
+		return (x, y, width, offscreenHeight)
+	}
+	
+	private func computeLayoutForTopDisplay(#window: UIWindow) -> ComputeLayoutTuple {
+		var offscreenHeight: CGFloat = 0
+		
+		let anchorViewX = (anchorView?.windowFrame?.minX ?? 0)
+		let anchorViewMaxY = (anchorView?.windowFrame?.maxY ?? 0)
+		
+		let x = anchorViewX + topOffset.x
+		let y = (anchorViewMaxY + topOffset.y) - tableHeight
+		
+		let windowY = window.bounds.minY + UI.HeightPadding
+		
+		if y < windowY {
+			offscreenHeight = abs(y - windowY)
+		}
+		
+		let width = self.width ?? (anchorView?.bounds.width ?? 0) - topOffset.x
+		
+		return (x, y, width, offscreenHeight)
 	}
 	
 }
@@ -408,6 +500,10 @@ extension DropDown {
 	:returns: Wether it succeed and how much height is needed to display all cells at once.
 	*/
 	public func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
+		if self == DropDown.VisibleDropDown {
+			return (true, 0)
+		}
+		
 		if let visibleDropDown = DropDown.VisibleDropDown {
 			visibleDropDown.cancel()
 		}
@@ -423,11 +519,11 @@ extension DropDown {
 		self.setTranslatesAutoresizingMaskIntoConstraints(false)
 		visibleWindow?.addUniversalConstraints(format: "|[dropDown]|", views: ["dropDown": self])
 		
-		let (_, offScreenHeight, canBeDisplayed) = computeHeightForDisplay()
+		let layout = computeLayout()
 		
-		if !canBeDisplayed {
+		if !layout.canBeDisplayed {
 			hide()
-			return (canBeDisplayed, offScreenHeight)
+			return (layout.canBeDisplayed, layout.offscreenHeight)
 		}
 		
 		hidden = false
@@ -444,12 +540,23 @@ extension DropDown {
 		
 		selectRowAtIndex(selectedRowIndex)
 		
-		return (canBeDisplayed, offScreenHeight)
+		return (layout.canBeDisplayed, layout.offscreenHeight)
 	}
 	
 	/// Hides the drop down.
 	public func hide() {
-		DropDown.VisibleDropDown = nil
+		if self == DropDown.VisibleDropDown {
+			/*
+			If one drop down is showed and another one is not
+			but we call `hide()` on the hidden one:
+			we don't want it to set the `VisibleDropDown` to nil.
+			*/
+			DropDown.VisibleDropDown = nil
+		}
+		
+		if hidden {
+			return
+		}
 		
 		UIView.animateWithDuration(
 			Animation.Duration,
