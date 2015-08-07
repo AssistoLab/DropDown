@@ -59,9 +59,7 @@ public final class DropDown: UIView {
 	
 	/// The view to which the drop down will displayed onto.
 	public var anchorView: UIView! {
-		didSet {
-			setNeedsUpdateConstraints()
-		}
+		didSet { setNeedsUpdateConstraints() }
 	}
 	
 	/**
@@ -79,9 +77,7 @@ public final class DropDown: UIView {
 	You can change here the default drop down origin.
 	*/
 	public var topOffset: CGPoint = CGPointZero {
-		didSet {
-			setNeedsUpdateConstraints()
-		}
+		didSet { setNeedsUpdateConstraints() }
 	}
 	
 	/**
@@ -92,9 +88,7 @@ public final class DropDown: UIView {
 	You can change here the default drop down origin.
 	*/
 	public var bottomOffset: CGPoint = CGPointZero {
-		didSet {
-			setNeedsUpdateConstraints()
-		}
+		didSet { setNeedsUpdateConstraints() }
 	}
 	
 	/**
@@ -103,9 +97,7 @@ public final class DropDown: UIView {
 	Defaults to `anchorView.bounds.width - offset.x`.
 	*/
 	public var width: CGFloat? {
-		didSet {
-			setNeedsUpdateConstraints()
-		}
+		didSet { setNeedsUpdateConstraints() }
 	}
 	
 	//MARK: Constraints
@@ -116,12 +108,8 @@ public final class DropDown: UIView {
 	
 	//MARK: Appearance
 	public override var backgroundColor: UIColor? {
-		get {
-			return tableView.backgroundColor
-		}
-		set {
-			tableView.backgroundColor = newValue
-		}
+		get { return tableView.backgroundColor }
+		set { tableView.backgroundColor = newValue }
 	}
 	
 	/**
@@ -130,9 +118,7 @@ public final class DropDown: UIView {
 	Changing the background color automatically reloads the drop down.
 	*/
 	public dynamic var selectionBackgroundColor = UI.SelectionBackgroundColor {
-		didSet {
-			reloadAllComponents()
-		}
+		didSet { reloadAllComponents() }
 	}
 	
 	/**
@@ -141,9 +127,7 @@ public final class DropDown: UIView {
 	Changing the text color automatically reloads the drop down.
 	*/
 	public dynamic var textColor = UIColor.blackColor() {
-		didSet {
-			reloadAllComponents()
-		}
+		didSet { reloadAllComponents() }
 	}
 	
 	/**
@@ -152,9 +136,7 @@ public final class DropDown: UIView {
 	Changing the text font automatically reloads the drop down.
 	*/
 	public dynamic var textFont = UIFont.systemFontOfSize(15) {
-		didSet {
-			reloadAllComponents()
-		}
+		didSet { reloadAllComponents() }
 	}
 	
 	//MARK: Content
@@ -165,9 +147,7 @@ public final class DropDown: UIView {
 	Changing the data source automatically reloads the drop down.
 	*/
 	public var dataSource = [String]() {
-		didSet {
-			reloadAllComponents()
-		}
+		didSet { reloadAllComponents() }
 	}
 	
 	private var selectedRowIndex: Index = -1
@@ -179,9 +159,7 @@ public final class DropDown: UIView {
 	Changing `cellConfiguration` automatically reloads the drop down.
 	*/
 	public var cellConfiguration: ConfigurationClosure? {
-		didSet {
-			reloadAllComponents()
-		}
+		didSet { reloadAllComponents() }
 	}
 	
 	/// The action to execute when the user selects a cell.
