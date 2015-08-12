@@ -117,7 +117,7 @@ public final class DropDown: UIView {
 	
 	Changing the background color automatically reloads the drop down.
 	*/
-	public dynamic var selectionBackgroundColor = UI.SelectionBackgroundColor {
+	public dynamic var selectionBackgroundColor = DPDConstant.UI.SelectionBackgroundColor {
 		didSet { reloadAllComponents() }
 	}
 	
@@ -254,7 +254,7 @@ private extension DropDown {
 		tableView.delegate = self
 		tableView.dataSource = self
 		
-		tableView.registerNib(DropDownCell.Nib, forCellReuseIdentifier: ReusableIdentifier.DropDownCell)
+		tableView.registerNib(DropDownCell.Nib, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
 		
 		startListeningToKeyboard()
 	}
@@ -263,16 +263,16 @@ private extension DropDown {
 		super.backgroundColor = UIColor.clearColor()
 		
 		tableViewContainer.layer.masksToBounds = false
-		tableViewContainer.layer.cornerRadius = UI.CornerRadius
-		tableViewContainer.layer.shadowColor = UI.Shadow.Color
-		tableViewContainer.layer.shadowOffset = UI.Shadow.Offset
-		tableViewContainer.layer.shadowOpacity = UI.Shadow.Opacity
-		tableViewContainer.layer.shadowRadius = UI.Shadow.Radius
+		tableViewContainer.layer.cornerRadius = DPDConstant.UI.CornerRadius
+		tableViewContainer.layer.shadowColor = DPDConstant.UI.Shadow.Color
+		tableViewContainer.layer.shadowOffset = DPDConstant.UI.Shadow.Offset
+		tableViewContainer.layer.shadowOpacity = DPDConstant.UI.Shadow.Opacity
+		tableViewContainer.layer.shadowRadius = DPDConstant.UI.Shadow.Radius
 		
-		backgroundColor = UI.BackgroundColor
-		tableView.rowHeight = UI.RowHeight
-		tableView.separatorColor = UI.SeparatorColor
-		tableView.layer.cornerRadius = UI.CornerRadius
+		backgroundColor = DPDConstant.UI.BackgroundColor
+		tableView.rowHeight = DPDConstant.UI.RowHeight
+		tableView.separatorColor = DPDConstant.UI.SeparatorColor
+		tableView.layer.cornerRadius = DPDConstant.UI.CornerRadius
 		tableView.layer.masksToBounds = true
 		
 		setHiddentState()
@@ -430,10 +430,10 @@ extension DropDown {
 		let y = anchorViewY + bottomOffset.y
 		
 		let maxY = y + tableHeight
-		let windowMaxY = window.bounds.maxY - UI.HeightPadding
+		let windowMaxY = window.bounds.maxY - DPDConstant.UI.HeightPadding
 		
 		let keyboardListener = KeyboardListener.sharedInstance
-		let keyboardMinY = keyboardListener.keyboardFrame.minY - UI.HeightPadding
+		let keyboardMinY = keyboardListener.keyboardFrame.minY - DPDConstant.UI.HeightPadding
 		
 		if keyboardListener.isVisible && maxY > keyboardMinY {
 			offscreenHeight = abs(maxY - keyboardMinY)
@@ -455,7 +455,7 @@ extension DropDown {
 		let x = anchorViewX + topOffset.x
 		let y = (anchorViewMaxY + topOffset.y) - tableHeight
 		
-		let windowY = window.bounds.minY + UI.HeightPadding
+		let windowY = window.bounds.minY + DPDConstant.UI.HeightPadding
 		
 		if y < windowY {
 			offscreenHeight = abs(y - windowY)
@@ -505,12 +505,12 @@ extension DropDown {
 		}
 		
 		hidden = false
-		tableViewContainer.transform = Animation.DownScaleTransform
+		tableViewContainer.transform = DPDConstant.Animation.DownScaleTransform
 		
 		UIView.animateWithDuration(
-			Animation.Duration,
+			DPDConstant.Animation.Duration,
 			delay: 0,
-			options: Animation.EntranceOptions,
+			options: DPDConstant.Animation.EntranceOptions,
 			animations: { [unowned self] in
 				self.setShowedState()
 			},
@@ -537,9 +537,9 @@ extension DropDown {
 		}
 		
 		UIView.animateWithDuration(
-			Animation.Duration,
+			DPDConstant.Animation.Duration,
 			delay: 0,
-			options: Animation.ExitOptions,
+			options: DPDConstant.Animation.ExitOptions,
 			animations: { [unowned self] in
 				self.setHiddentState()
 			},
@@ -621,7 +621,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 	}
 	
 	public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCellWithIdentifier(ReusableIdentifier.DropDownCell, forIndexPath: indexPath) as! DropDownCell
+		let cell = tableView.dequeueReusableCellWithIdentifier(DPDConstant.ReusableIdentifier.DropDownCell, forIndexPath: indexPath) as! DropDownCell
 		
 		cell.optionLabel.textColor = textColor
 		cell.optionLabel.font = textFont
