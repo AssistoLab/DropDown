@@ -174,7 +174,7 @@ public final class DropDown: UIView {
 			if newValue == .OnTap {
 				let gestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissableViewTapped")
 				dismissableView.addGestureRecognizer(gestureRecognizer)
-			} else if let gestureRecognizer = dismissableView.gestureRecognizers?.first as? UIGestureRecognizer {
+			} else if let gestureRecognizer = dismissableView.gestureRecognizers?.first as UIGestureRecognizer? {
 				dismissableView.removeGestureRecognizer(gestureRecognizer)
 			}
 		}
@@ -205,14 +205,14 @@ public final class DropDown: UIView {
 	/**
 	Creates a new instance of a drop down.
 	
-	:param: dataSource        The data source for the drop down.
-	:param: anchorView        The view to which the drop down will displayed onto.
-	:param: offset            The offset point relative to `anchorView`.
-	:param: cellConfiguration The format for the cells' text.
-	:param: selectionAction   The action to execute when the user selects a cell.
-	:param: cancelAction      The action to execute when the user cancels/hides the drop down.
+	- parameter dataSource:        The data source for the drop down.
+	- parameter anchorView:        The view to which the drop down will displayed onto.
+	- parameter offset:            The offset point relative to `anchorView`.
+	- parameter cellConfiguration: The format for the cells' text.
+	- parameter selectionAction:   The action to execute when the user selects a cell.
+	- parameter cancelAction:      The action to execute when the user cancels/hides the drop down.
 	
-	:returns: A new instance of a drop down customized with the above parameters.
+	- returns: A new instance of a drop down customized with the above parameters.
 	*/
 	convenience init(dataSource: [String], anchorView: UIView? = nil, topOffset: CGPoint? = nil, bottomOffset: CGPoint? = nil, cellConfiguration: ConfigurationClosure? = nil, selectionAction: SelectionClosure, cancelAction: Closure? = nil) {
 		self.init()
@@ -234,7 +234,7 @@ public final class DropDown: UIView {
 		setup()
 	}
 	
-	required public init(coder aDecoder: NSCoder) {
+	required public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		setup()
 	}
@@ -316,18 +316,18 @@ extension DropDown {
 	}
 	
 	private func setupConstraints() {
-		setTranslatesAutoresizingMaskIntoConstraints(false)
+		translatesAutoresizingMaskIntoConstraints = false
 		
 		// Dismissable view
 		addSubview(dismissableView)
-		dismissableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+		dismissableView.translatesAutoresizingMaskIntoConstraints = false
 		
 		addUniversalConstraints(format: "|[dismissableView]|", views: ["dismissableView": dismissableView])
 		
 		
 		// Table view container
 		addSubview(tableViewContainer)
-		tableViewContainer.setTranslatesAutoresizingMaskIntoConstraints(false)
+		tableViewContainer.translatesAutoresizingMaskIntoConstraints = false
 		
 		xConstraint = NSLayoutConstraint(
 			item: tableViewContainer,
@@ -371,7 +371,7 @@ extension DropDown {
 		
 		// Table view
 		tableViewContainer.addSubview(tableView)
-		tableView.setTranslatesAutoresizingMaskIntoConstraints(false)
+		tableView.translatesAutoresizingMaskIntoConstraints = false
 		
 		tableViewContainer.addUniversalConstraints(format: "|[tableView]|", views: ["tableView": tableView])
 	}
@@ -420,7 +420,7 @@ extension DropDown {
 		return (layout.x, layout.y, layout.width, layout.offscreenHeight, visibleHeight, canBeDisplayed, direction)
 	}
 	
-	private func computeLayoutBottomDisplay(#window: UIWindow) -> ComputeLayoutTuple {
+	private func computeLayoutBottomDisplay(window window: UIWindow) -> ComputeLayoutTuple {
 		var offscreenHeight: CGFloat = 0
 		
 		let anchorViewX = (anchorView?.windowFrame?.minX ?? 0)
@@ -446,7 +446,7 @@ extension DropDown {
 		return (x, y, width, offscreenHeight)
 	}
 	
-	private func computeLayoutForTopDisplay(#window: UIWindow) -> ComputeLayoutTuple {
+	private func computeLayoutForTopDisplay(window window: UIWindow) -> ComputeLayoutTuple {
 		var offscreenHeight: CGFloat = 0
 		
 		let anchorViewX = (anchorView?.windowFrame?.minX ?? 0)
@@ -475,7 +475,7 @@ extension DropDown {
 	/**
 	Shows the drop down if enough height.
 	
-	:returns: Wether it succeed and how much height is needed to display all cells at once.
+	- returns: Wether it succeed and how much height is needed to display all cells at once.
 	*/
 	public func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
 		if self == DropDown.VisibleDropDown {
@@ -494,7 +494,7 @@ extension DropDown {
 		visibleWindow?.addSubview(self)
 		visibleWindow?.bringSubviewToFront(self)
 		
-		self.setTranslatesAutoresizingMaskIntoConstraints(false)
+		self.translatesAutoresizingMaskIntoConstraints = false
 		visibleWindow?.addUniversalConstraints(format: "|[dropDown]|", views: ["dropDown": self])
 		
 		let layout = computeLayout()
@@ -584,21 +584,23 @@ extension DropDown {
 	/// (Pre)selects a row at a certain index.
 	public func selectRowAtIndex(index: Index) {
 		selectedRowIndex = index
+        if index > -1 {
 		
-		tableView.selectRowAtIndexPath(
-			NSIndexPath(forRow: index, inSection: 0),
-			animated: false,
-			scrollPosition: .Middle)
+            tableView.selectRowAtIndexPath(
+                NSIndexPath(forRow: index, inSection: 0),
+                animated: false,
+                scrollPosition: .Middle)
+        }
 	}
 	
 	/// Returns the index of the selected row.
 	public func indexForSelectedRow() -> Index? {
-		return tableView.indexPathForSelectedRow()?.row
+		return tableView.indexPathForSelectedRow?.row
 	}
 	
 	/// Returns the selected item.
 	public func selectedItem() -> String? {
-		if let row = tableView.indexPathForSelectedRow()?.row {
+		if let row = tableView.indexPathForSelectedRow?.row {
 			return dataSource[row]
 		} else {
 			return nil
