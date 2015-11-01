@@ -45,8 +45,8 @@ internal struct DPDConstant {
 	internal struct Animation {
 		
 		static let Duration = 0.15
-		static let EntranceOptions = UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.CurveEaseOut
-		static let ExitOptions = UIViewAnimationOptions.AllowUserInteraction | UIViewAnimationOptions.CurveEaseIn
+		static let EntranceOptions: UIViewAnimationOptions = [.AllowUserInteraction, .CurveEaseOut]
+		static let ExitOptions: UIViewAnimationOptions = [.AllowUserInteraction, .CurveEaseIn]
 		static let DownScaleTransform = CGAffineTransformMakeScale(0.9, 0.9)
 		
 	}

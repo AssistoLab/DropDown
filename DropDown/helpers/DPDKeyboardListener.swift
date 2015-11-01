@@ -8,12 +8,12 @@
 
 import UIKit
 
-public final class KeyboardListener {
+internal final class KeyboardListener {
 	
 	static let sharedInstance = KeyboardListener()
 	
-	public private(set) var isVisible = false
-	public private(set) var keyboardFrame = CGRectZero
+	private(set) var isVisible = false
+	private(set) var keyboardFrame = CGRectZero
 	private var isListening = false
 	
 	deinit {
@@ -24,7 +24,7 @@ public final class KeyboardListener {
 
 //MARK: - Notifications
 
-public extension KeyboardListener {
+extension KeyboardListener {
 	
 	func startListeningToKeyboard() {
 		if isListening {
