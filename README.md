@@ -2,7 +2,7 @@
 
 [![Twitter: @kevinh6113](http://img.shields.io/badge/contact-%40kevinh6113-70a1fb.svg?style=flat)](https://twitter.com/kevinh6113)
 [![License: MIT](http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat)](https://github.com/kevin-hirsch/KVNProgress/blob/master/README.md)
-[![Version](http://img.shields.io/badge/version-0.1.3-green.svg?style=flat)](https://github.com/kevin-hirsch/DropDown)
+[![Version](http://img.shields.io/badge/version-0.1.4-green.svg?style=flat)](https://github.com/kevin-hirsch/DropDown)
 [![Cocoapods](http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat)](http://cocoadocs.org/docsets/DropDown/)
 
 A Material Design drop down for iOS written in Swift.
@@ -56,16 +56,16 @@ The default value is `.Any`. Here is the *Protocol* code:
 
 ```swift
 enum Direction {
-	
+
 	/// The drop down will show below the anchor view when possible, otherwise above if there is more place than below.
 	case Any
-	
+
 	/// The drop down will show above the anchor view or will not be showed if not enough space.
 	case Top
-	
+
 	/// The drop down will show below or will not be showed if not enough space.
 	case Bottom
-	
+
 }
 ```
 

@@ -36,7 +36,7 @@ class ViewController: UIViewController {
 //		}
 		
 		dropDown.anchorView = actionButton
-		dropDown.offset = CGPoint(x: 0, y:actionButton.bounds.height)
+		dropDown.bottomOffset = CGPoint(x: 0, y:actionButton.bounds.height)
 //		dropDown.dismissMode = .Automatic
 		
 //		dropDown.selectRowAtIndex(3)
