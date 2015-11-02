@@ -267,14 +267,20 @@ private extension DropDown {
 		tableViewContainer.layer.shadowOpacity = DPDConstant.UI.Shadow.Opacity
 		tableViewContainer.layer.shadowRadius = DPDConstant.UI.Shadow.Radius
 		
-		backgroundColor = DPDConstant.UI.BackgroundColor
-		tableView.rowHeight = DPDConstant.UI.RowHeight
-		tableView.separatorColor = DPDConstant.UI.SeparatorColor
-		tableView.layer.cornerRadius = DPDConstant.UI.CornerRadius
-		tableView.layer.masksToBounds = true
+		setupTableViewUI()
 		
 		setHiddentState()
 		hidden = true
+	}
+	
+	func setupTableViewUI() {
+		backgroundColor = DPDConstant.UI.BackgroundColor
+		tableView.rowHeight = DPDConstant.UI.RowHeight
+		tableView.separatorColor = DPDConstant.UI.SeparatorColor
+		tableView.separatorStyle = DPDConstant.UI.SeparatorStyle
+		tableView.separatorInset = DPDConstant.UI.SeparatorInsets
+		tableView.layer.cornerRadius = DPDConstant.UI.CornerRadius
+		tableView.layer.masksToBounds = true
 	}
 	
 }
@@ -576,6 +582,10 @@ extension DropDown {
 	and `cellConfiguration` implicitly calls `reloadAllComponents()`.
 	*/
 	public func reloadAllComponents() {
+		if #available(iOS 9, *) {
+			setupTableViewUI()
+		}
+		
 		tableView.reloadData()
 		setNeedsUpdateConstraints()
 	}

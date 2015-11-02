@@ -27,6 +27,8 @@ internal struct DPDConstant {
 		static let BackgroundColor = UIColor(white: 0.94, alpha: 1)
 		static let SelectionBackgroundColor = UIColor(white: 0.89, alpha: 1)
 		static let SeparatorColor = UIColor.clearColor()
+		static let SeparatorStyle = UITableViewCellSeparatorStyle.None
+		static let SeparatorInsets = UIEdgeInsetsZero
 		static let CornerRadius: CGFloat = 2
 		static let RowHeight: CGFloat = 44
 		static let HeightPadding: CGFloat = 20
