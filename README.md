@@ -3,7 +3,7 @@
 [![Twitter: @kevinh6113](http://img.shields.io/badge/contact-%40kevinh6113-70a1fb.svg?style=flat)](https://twitter.com/kevinh6113)
 [![License: MIT](http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat)](https://github.com/kevin-hirsch/KVNProgress/blob/master/README.md)
 [![Version](http://img.shields.io/badge/version-0.1.4-green.svg?style=flat)](https://github.com/kevin-hirsch/DropDown)
-[![Cocoapods](http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat)](http://cocoadocs.org/docsets/DropDown/)
+[![CocoaPods](http://img.shields.io/badge/CocoaPods-available-green.svg?style=flat)](http://cocoadocs.org/docsets/DropDown/)
 
 A Material Design drop down for iOS written in Swift.
 ***
@@ -18,7 +18,7 @@ To install [CocoaPods](http://www.cocoapods.org), run `sudo gem install cocoapod
 
 ## Installation
 
-### Cocoapods
+### CocoaPods
 
 Use [CocoaPods](http://www.cocoapods.org).
 
