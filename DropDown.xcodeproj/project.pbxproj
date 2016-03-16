@@ -26,6 +26,7 @@
 		942BF05A1C99CE43002220DA /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3281B6B85A600A8DC0D /* DPDConstants.swift */; };
 		942BF05B1C99CE43002220DA /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3291B6B85A600A8DC0D /* DPDKeyboardListener.swift */; };
 		942BF05C1C99CE43002220DA /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32A1B6B85A600A8DC0D /* DPDUIView+Extension.swift */; };
+		942BF0721C99F466002220DA /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AC1C32C1B6B85A600A8DC0D /* DropDownCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -343,6 +344,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				942BF0721C99F466002220DA /* DropDownCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -630,6 +632,7 @@
 				942BF0551C99CDF5002220DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
