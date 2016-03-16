@@ -18,6 +18,15 @@
 		0AC1C3371B6B85A600A8DC0D /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32E1B6B85A600A8DC0D /* DropDown.swift */; };
 		0AC1C3381B6B85A600A8DC0D /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32F1B6B85A600A8DC0D /* DropDownCell.swift */; };
 		0AC1C33A1B6B884100A8DC0D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AC1C3391B6B884100A8DC0D /* Images.xcassets */; };
+		942BF04E1C99CDF5002220DA /* DropDowniOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 942BF04D1C99CDF5002220DA /* DropDowniOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		942BF0521C99CDF5002220DA /* DropDowniOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 942BF04B1C99CDF5002220DA /* DropDowniOS.framework */; };
+		942BF0531C99CDF5002220DA /* DropDowniOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 942BF04B1C99CDF5002220DA /* DropDowniOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		942BF0581C99CE2F002220DA /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32E1B6B85A600A8DC0D /* DropDown.swift */; };
+		942BF0591C99CE2F002220DA /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32F1B6B85A600A8DC0D /* DropDownCell.swift */; };
+		942BF05A1C99CE43002220DA /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3281B6B85A600A8DC0D /* DPDConstants.swift */; };
+		942BF05B1C99CE43002220DA /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3291B6B85A600A8DC0D /* DPDKeyboardListener.swift */; };
+		942BF05C1C99CE43002220DA /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32A1B6B85A600A8DC0D /* DPDUIView+Extension.swift */; };
+		942BF0721C99F466002220DA /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AC1C32C1B6B85A600A8DC0D /* DropDownCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +37,28 @@
 			remoteGlobalIDString = 0A76440E1B676C2300BF1A2D;
 			remoteInfo = DropDown;
 		};
+		942BF0501C99CDF5002220DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A7644071B676C2300BF1A2D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 942BF04A1C99CDF5002220DA;
+			remoteInfo = DropDowniOS;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		942BF0571C99CDF5002220DA /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				942BF0531C99CDF5002220DA /* DropDowniOS.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0A46ED0B1B7B83AA00E7FD13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = DropDown/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
@@ -46,6 +76,9 @@
 		0AC1C32E1B6B85A600A8DC0D /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
 		0AC1C32F1B6B85A600A8DC0D /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
 		0AC1C3391B6B884100A8DC0D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DropDown/Images.xcassets; sourceTree = "<group>"; };
+		942BF04B1C99CDF5002220DA /* DropDowniOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DropDowniOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		942BF04D1C99CDF5002220DA /* DropDowniOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropDowniOS.h; sourceTree = "<group>"; };
+		942BF04F1C99CDF5002220DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,10 +86,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				942BF0521C99CDF5002220DA /* DropDowniOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0A7644211B676C2300BF1A2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		942BF0471C99CDF5002220DA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -72,6 +113,7 @@
 				0A7644111B676C2300BF1A2D /* DropDown */,
 				0AC1C3391B6B884100A8DC0D /* Images.xcassets */,
 				0A7644271B676C2300BF1A2D /* DropDownTests */,
+				942BF04C1C99CDF5002220DA /* DropDowniOS */,
 				0A7644101B676C2300BF1A2D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -81,6 +123,7 @@
 			children = (
 				0A76440F1B676C2300BF1A2D /* DropDown.app */,
 				0A7644241B676C2300BF1A2D /* DropDownTests.xctest */,
+				942BF04B1C99CDF5002220DA /* DropDowniOS.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,7 +202,27 @@
 			path = src;
 			sourceTree = "<group>";
 		};
+		942BF04C1C99CDF5002220DA /* DropDowniOS */ = {
+			isa = PBXGroup;
+			children = (
+				942BF04D1C99CDF5002220DA /* DropDowniOS.h */,
+				942BF04F1C99CDF5002220DA /* Info.plist */,
+			);
+			path = DropDowniOS;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		942BF0481C99CDF5002220DA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				942BF04E1C99CDF5002220DA /* DropDowniOS.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		0A76440E1B676C2300BF1A2D /* DropDown */ = {
@@ -169,10 +232,12 @@
 				0A76440B1B676C2300BF1A2D /* Sources */,
 				0A76440C1B676C2300BF1A2D /* Frameworks */,
 				0A76440D1B676C2300BF1A2D /* Resources */,
+				942BF0571C99CDF5002220DA /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				942BF0511C99CDF5002220DA /* PBXTargetDependency */,
 			);
 			name = DropDown;
 			productName = DropDown;
@@ -197,6 +262,24 @@
 			productReference = 0A7644241B676C2300BF1A2D /* DropDownTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		942BF04A1C99CDF5002220DA /* DropDowniOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 942BF0561C99CDF5002220DA /* Build configuration list for PBXNativeTarget "DropDowniOS" */;
+			buildPhases = (
+				942BF0461C99CDF5002220DA /* Sources */,
+				942BF0471C99CDF5002220DA /* Frameworks */,
+				942BF0481C99CDF5002220DA /* Headers */,
+				942BF0491C99CDF5002220DA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DropDowniOS;
+			productName = DropDowniOS;
+			productReference = 942BF04B1C99CDF5002220DA /* DropDowniOS.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -213,6 +296,9 @@
 					0A7644231B676C2300BF1A2D = {
 						CreatedOnToolsVersion = 6.4;
 						TestTargetID = 0A76440E1B676C2300BF1A2D;
+					};
+					942BF04A1C99CDF5002220DA = {
+						CreatedOnToolsVersion = 7.2.1;
 					};
 				};
 			};
@@ -231,6 +317,7 @@
 			targets = (
 				0A76440E1B676C2300BF1A2D /* DropDown */,
 				0A7644231B676C2300BF1A2D /* DropDownTests */,
+				942BF04A1C99CDF5002220DA /* DropDowniOS */,
 			);
 		};
 /* End PBXProject section */
@@ -250,6 +337,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		942BF0491C99CDF5002220DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				942BF0721C99F466002220DA /* DropDownCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +373,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		942BF0461C99CDF5002220DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				942BF05A1C99CE43002220DA /* DPDConstants.swift in Sources */,
+				942BF0591C99CE2F002220DA /* DropDownCell.swift in Sources */,
+				942BF0581C99CE2F002220DA /* DropDown.swift in Sources */,
+				942BF05B1C99CE43002220DA /* DPDKeyboardListener.swift in Sources */,
+				942BF05C1C99CE43002220DA /* DPDUIView+Extension.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -285,6 +392,11 @@
 			isa = PBXTargetDependency;
 			target = 0A76440E1B676C2300BF1A2D /* DropDown */;
 			targetProxy = 0A7644251B676C2300BF1A2D /* PBXContainerItemProxy */;
+		};
+		942BF0511C99CDF5002220DA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 942BF04A1C99CDF5002220DA /* DropDowniOS */;
+			targetProxy = 942BF0501C99CDF5002220DA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -386,6 +498,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = DropDown/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -397,6 +510,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = DropDown/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -437,6 +551,50 @@
 			};
 			name = Release;
 		};
+		942BF0541C99CDF5002220DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_TESTABILITY = YES;
+				INFOPLIST_FILE = DropDowniOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.freiraum.DropDowniOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		942BF0551C99CDF5002220DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = DropDowniOS/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = de.freiraum.DropDowniOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -463,6 +621,15 @@
 			buildConfigurations = (
 				0A7644321B676C2300BF1A2D /* Debug */,
 				0A7644331B676C2300BF1A2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		942BF0561C99CDF5002220DA /* Build configuration list for PBXNativeTarget "DropDowniOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				942BF0541C99CDF5002220DA /* Debug */,
+				942BF0551C99CDF5002220DA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
