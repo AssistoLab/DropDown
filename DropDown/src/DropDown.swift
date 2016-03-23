@@ -158,7 +158,7 @@ public final class DropDown: UIView {
 	*/
 	public var localizationKeysDataSource = [String]() {
 		didSet {
-			dataSource = localizationKeysDataSource.map { localized($0) }
+			dataSource = localizationKeysDataSource
 		}
 	}
 	
