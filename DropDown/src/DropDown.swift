@@ -488,6 +488,24 @@ extension DropDown {
 //MARK: - Actions
 
 extension DropDown {
+    
+    /**
+     An Objective-C alias for the show() method which converts the returned tuple into an NSDictionary.
+     
+     - returns: An NSDictionary with a value for the "canBeDisplayed" Bool, and possibly for the "offScreenHeight" Optional(CGFloat).
+     */
+    @objc(show)
+    public func objc_show() -> NSDictionary {
+        let (canBeDisplayed, offScreenHeight) = show()
+        
+        var info = [NSObject : AnyObject]()
+        info["canBeDisplayed"] = canBeDisplayed
+        if let offScreenHeight = offScreenHeight {
+            info["offScreenHeight"] = offScreenHeight
+        }
+        
+        return NSDictionary(dictionary: info)
+    }
 	
 	/**
 	Shows the drop down if enough height.
