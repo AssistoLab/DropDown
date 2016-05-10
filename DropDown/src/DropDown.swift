@@ -160,7 +160,9 @@ public final class DropDown: UIView {
 	This has uses for setting accibility identifiers on the drop down cells (same ones as the localization keys).
 	*/
 	public var localizationKeysDataSource = [String]() {
-		didSet { dataSource = localizationKeysDataSource }
+		didSet {
+			dataSource = localizationKeysDataSource.map { NSLocalizedString($0, comment: "") }
+		}
 	}
 	
 	/// The index of the row after its seleciton.
