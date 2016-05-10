@@ -147,7 +147,10 @@ public final class DropDown: UIView {
 	Changing the data source automatically reloads the drop down.
 	*/
 	public var dataSource = [String]() {
-		didSet { reloadAllComponents() }
+		didSet {
+			deselectRowAtIndexPath(selectedRowIndex)
+			reloadAllComponents()
+		}
 	}
 	
 	/**
@@ -157,9 +160,7 @@ public final class DropDown: UIView {
 	This has uses for setting accibility identifiers on the drop down cells (same ones as the localization keys).
 	*/
 	public var localizationKeysDataSource = [String]() {
-		didSet {
-			dataSource = localizationKeysDataSource
-		}
+		didSet { dataSource = localizationKeysDataSource }
 	}
 	
 	/// The index of the row after its seleciton.
