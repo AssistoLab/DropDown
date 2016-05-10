@@ -263,8 +263,11 @@ public final class DropDown: UIView {
 private extension DropDown {
 	
 	func setup() {
-		updateConstraintsIfNeeded()
-		setupUI()
+		dispatch_async(dispatch_get_main_queue()) {
+			//HACK: If not done in dispatch_async on main queue `setupUI` will have no effect
+			self.updateConstraintsIfNeeded()
+			self.setupUI()
+		}
 		
 		dismissMode = .OnTap
 		
