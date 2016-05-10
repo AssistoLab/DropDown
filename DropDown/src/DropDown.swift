@@ -76,7 +76,7 @@ public final class DropDown: UIView {
 	left corner for its origin, so an offset equal to (0, 0).
 	You can change here the default drop down origin.
 	*/
-	public var topOffset: CGPoint = CGPointZero {
+	public var topOffset: CGPoint = .zero {
 		didSet { setNeedsUpdateConstraints() }
 	}
 	
@@ -87,7 +87,7 @@ public final class DropDown: UIView {
 	left corner for its origin, so an offset equal to (0, 0).
 	You can change here the default drop down origin.
 	*/
-	public var bottomOffset: CGPoint = CGPointZero {
+	public var bottomOffset: CGPoint = .zero {
 		didSet { setNeedsUpdateConstraints() }
 	}
 	
@@ -218,7 +218,7 @@ public final class DropDown: UIView {
 	at least before calling `show()`.
 	*/
 	public convenience init() {
-		self.init(frame: CGRectZero)
+		self.init(frame: .zero)
 	}
 	
 	/**
@@ -235,13 +235,13 @@ public final class DropDown: UIView {
 	- returns: A new instance of a drop down customized with the above parameters.
 	*/
 	public convenience init(anchorView: UIView, selectionAction: SelectionClosure? = nil, dataSource: [String] = [], topOffset: CGPoint? = nil, bottomOffset: CGPoint? = nil, cellConfiguration: ConfigurationClosure? = nil, cancelAction: Closure? = nil) {
-		self.init(frame: CGRectZero)
+		self.init(frame: .zero)
 		
 		self.anchorView = anchorView
 		self.selectionAction = selectionAction
 		self.dataSource = dataSource
-		self.topOffset = topOffset ?? CGPointZero
-		self.bottomOffset = bottomOffset ?? CGPointZero
+		self.topOffset = topOffset ?? .zero
+		self.bottomOffset = bottomOffset ?? .zero
 		self.cellConfiguration = cellConfiguration
 		self.cancelAction = cancelAction
 	}
