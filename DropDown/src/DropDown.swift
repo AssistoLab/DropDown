@@ -14,6 +14,29 @@ public typealias SelectionClosure = (Index, String) -> Void
 public typealias ConfigurationClosure = (Index, String) -> String
 private typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
+/// Can be `UIView` or `UIBarButtonItem`.
+public protocol AnchorView: class {
+	
+	var plainView: UIView { get }
+	
+}
+
+extension UIView: AnchorView {
+	
+	public var plainView: UIView {
+		return self
+	}
+	
+}
+
+extension UIBarButtonItem: AnchorView {
+	
+	public var plainView: UIView {
+		return valueForKey("view") as! UIView
+	}
+	
+}
+
 /// A Material Design drop down in replacement for `UIPickerView`.
 public final class DropDown: UIView {
 	
@@ -58,7 +81,7 @@ public final class DropDown: UIView {
 	private let tableView = UITableView()
 	
 	/// The view to which the drop down will displayed onto.
-	public weak var anchorView: UIView? {
+	public weak var anchorView: AnchorView? {
 		didSet { setNeedsUpdateConstraints() }
 	}
 	
@@ -238,7 +261,7 @@ public final class DropDown: UIView {
 	
 	- returns: A new instance of a drop down customized with the above parameters.
 	*/
-	public convenience init(anchorView: UIView, selectionAction: SelectionClosure? = nil, dataSource: [String] = [], topOffset: CGPoint? = nil, bottomOffset: CGPoint? = nil, cellConfiguration: ConfigurationClosure? = nil, cancelAction: Closure? = nil) {
+	public convenience init(anchorView: AnchorView, selectionAction: SelectionClosure? = nil, dataSource: [String] = [], topOffset: CGPoint? = nil, bottomOffset: CGPoint? = nil, cellConfiguration: ConfigurationClosure? = nil, cancelAction: Closure? = nil) {
 		self.init(frame: .zero)
 		
 		self.anchorView = anchorView
@@ -416,27 +439,39 @@ extension DropDown {
 		var layout: ComputeLayoutTuple = (0, 0, 0, 0)
 		var direction = self.direction
 		
-		if let window = UIWindow.visibleWindow() {
-			switch direction {
-			case .Any:
-				layout = computeLayoutBottomDisplay(window: window)
-				direction = .Bottom
+		guard let window = UIWindow.visibleWindow() else { return (0, 0, 0, 0, 0, false, direction) }
+		
+		barButtonItemCondition: if anchorView is UIBarButtonItem? {
+			let isRightBarButtonItem = anchorView?.plainView.frame.minX > window.frame.midX
+			
+			guard isRightBarButtonItem else { break barButtonItemCondition }
+			
+			let width = self.width ?? 0
+			let anchorViewWidth = anchorView?.plainView.frame.width ?? 0
+			let x = -(width - anchorViewWidth)
+			
+			bottomOffset = CGPoint(x: x, y: 0)
+		}
+		
+		switch direction {
+		case .Any:
+			layout = computeLayoutBottomDisplay(window: window)
+			direction = .Bottom
+			
+			if layout.offscreenHeight > 0 {
+				let topLayout = computeLayoutForTopDisplay(window: window)
 				
-				if layout.offscreenHeight > 0 {
-					let topLayout = computeLayoutForTopDisplay(window: window)
-					
-					if topLayout.offscreenHeight < layout.offscreenHeight {
-						layout = topLayout
-						direction = .Top
-					}
+				if topLayout.offscreenHeight < layout.offscreenHeight {
+					layout = topLayout
+					direction = .Top
 				}
-			case .Bottom:
-				layout = computeLayoutBottomDisplay(window: window)
-				direction = .Bottom
-			case .Top:
-				layout = computeLayoutForTopDisplay(window: window)
-				direction = .Top
 			}
+		case .Bottom:
+			layout = computeLayoutBottomDisplay(window: window)
+			direction = .Bottom
+		case .Top:
+			layout = computeLayoutForTopDisplay(window: window)
+			direction = .Top
 		}
 		
 		let visibleHeight = tableHeight - layout.offscreenHeight
@@ -448,8 +483,8 @@ extension DropDown {
 	private func computeLayoutBottomDisplay(window window: UIWindow) -> ComputeLayoutTuple {
 		var offscreenHeight: CGFloat = 0
 		
-		let anchorViewX = (anchorView?.windowFrame?.minX ?? 0)
-		let anchorViewY = (anchorView?.windowFrame?.minY ?? 0)
+		let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? 0
+		let anchorViewY = anchorView?.plainView.windowFrame?.minY ?? 0
 		
 		let x = anchorViewX + bottomOffset.x
 		let y = anchorViewY + bottomOffset.y
@@ -466,7 +501,7 @@ extension DropDown {
 			offscreenHeight = abs(maxY - windowMaxY)
 		}
 		
-		let width = self.width ?? (anchorView?.bounds.width ?? 0) - bottomOffset.x
+		let width = self.width ?? (anchorView?.plainView.bounds.width ?? 0) - bottomOffset.x
 		
 		return (x, y, width, offscreenHeight)
 	}
@@ -474,8 +509,8 @@ extension DropDown {
 	private func computeLayoutForTopDisplay(window window: UIWindow) -> ComputeLayoutTuple {
 		var offscreenHeight: CGFloat = 0
 		
-		let anchorViewX = (anchorView?.windowFrame?.minX ?? 0)
-		let anchorViewMaxY = (anchorView?.windowFrame?.maxY ?? 0)
+		let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? 0
+		let anchorViewMaxY = anchorView?.plainView.windowFrame?.maxY ?? 0
 		
 		let x = anchorViewX + topOffset.x
 		var y = (anchorViewMaxY + topOffset.y) - tableHeight
@@ -487,7 +522,7 @@ extension DropDown {
 			y = windowY
 		}
 		
-		let width = self.width ?? (anchorView?.bounds.width ?? 0) - topOffset.x
+		let width = self.width ?? (anchorView?.plainView.bounds.width ?? 0) - topOffset.x
 		
 		return (x, y, width, offscreenHeight)
 	}
@@ -627,7 +662,7 @@ extension DropDown {
 		selectedRowIndex = nil
 		
 		guard let index = index
-			where index > 0 
+			where index >= 0
 			else { return }
 		
 		tableView.deselectRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0), animated: true)
@@ -688,6 +723,12 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 	public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		selectedRowIndex = indexPath.row
 		selectionAction?(selectedRowIndex!, dataSource[selectedRowIndex!])
+		
+		if anchorView is UIBarButtonItem? {
+			// DropDown's from UIBarButtonItem are menus so we deselect the selected menu right after selection
+			deselectRowAtIndexPath(selectedRowIndex)
+		}
+		
 		hide()
 	}
 	
