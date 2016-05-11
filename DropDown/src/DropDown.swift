@@ -324,6 +324,7 @@ private extension DropDown {
 		tableViewContainer.layer.shadowRadius = DPDConstant.UI.Shadow.Radius
 		
 		tableView.rowHeight = cellHeight
+		tableView.backgroundColor = tableViewBackgroundColor
 		tableView.separatorColor = DPDConstant.UI.SeparatorColor
 		tableView.layer.cornerRadius = DPDConstant.UI.CornerRadius
 		tableView.layer.masksToBounds = true
