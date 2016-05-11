@@ -130,6 +130,11 @@ public final class DropDown: UIView {
 	private var yConstraint: NSLayoutConstraint!
 	
 	//MARK: Appearance
+	public dynamic var cellHeight = DPDConstant.UI.RowHeight {
+		willSet { tableView.rowHeight = newValue }
+		didSet { reloadAllComponents() }
+	}
+	
 	private dynamic var tableViewBackgroundColor = DPDConstant.UI.BackgroundColor {
 		willSet { tableView.backgroundColor = newValue }
 	}
@@ -318,7 +323,7 @@ private extension DropDown {
 		tableViewContainer.layer.shadowOpacity = DPDConstant.UI.Shadow.Opacity
 		tableViewContainer.layer.shadowRadius = DPDConstant.UI.Shadow.Radius
 		
-		tableView.rowHeight = DPDConstant.UI.RowHeight
+		tableView.rowHeight = cellHeight
 		tableView.separatorColor = DPDConstant.UI.SeparatorColor
 		tableView.layer.cornerRadius = DPDConstant.UI.CornerRadius
 		tableView.layer.masksToBounds = true
