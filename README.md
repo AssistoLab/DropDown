@@ -167,6 +167,7 @@ You can customize these properties of the drop down:
 - `textColor`: the color of the text for each cells of the drop down.
 - `backgroundColor`: the background color of the drop down.
 - `selectionBackgroundColor`: the background color of the selected cell in the drop down.
+- `cellHeight`: the height of the drop down cells.
 
 You can change them through each instance of `DropDown` or via `UIAppearance` like this for example:
 
@@ -175,6 +176,7 @@ DropDown.appearance().textColor = UIColor.blackColor()
 DropDown.appearance().textFont = UIFont.systemFontOfSize(15)
 DropDown.appearance().backgroundColor = UIColor.whiteColor()
 DropDown.appearance().selectionBackgroundColor = UIColor.lightGrayColor()
+DropDown.appearance().cellHeight = 60
 ```
 
 ## Expert mode
