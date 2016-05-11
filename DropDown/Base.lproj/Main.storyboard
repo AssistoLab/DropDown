@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E36b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="6vj-VF-JaB">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vku-BY-Uzo">
-                                <rect key="frame" x="30" y="148" width="540" height="40"/>
+                                <rect key="frame" x="30" y="192" width="540" height="40"/>
                                 <color key="backgroundColor" red="0.83930421270718236" green="0.83930421270718236" blue="0.83930421270718236" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="ZQR-BF-ukN"/>
@@ -33,12 +33,12 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Focus here to test with keyboard" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dET-0t-URe">
-                                <rect key="frame" x="30" y="48" width="540" height="30"/>
+                                <rect key="frame" x="30" y="92" width="540" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7rm-SA-osO">
-                                <rect key="frame" x="247" y="98" width="107" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7rm-SA-osO">
+                                <rect key="frame" x="248" y="142" width="106" height="30"/>
                                 <state key="normal" title="Random button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -61,8 +61,22 @@
                             <outletCollection property="gestureRecognizers" destination="Pgd-VX-BIf" appends="YES" id="Ng7-os-Bjv"/>
                         </connections>
                     </view>
+                    <navigationItem key="navigationItem" id="2VY-da-j73">
+                        <barButtonItem key="leftBarButtonItem" title="•••" id="7HL-OV-wFS">
+                            <connections>
+                                <action selector="showLeft:" destination="vXZ-lx-hvc" id="t9i-ZT-eId"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="•••" id="Go8-kG-PuV">
+                            <connections>
+                                <action selector="showRight:" destination="vXZ-lx-hvc" id="fAo-uR-q0b"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="actionButton" destination="Vku-BY-Uzo" id="lne-cw-Km8"/>
+                        <outlet property="leftBarButton" destination="7HL-OV-wFS" id="5Zc-QS-esj"/>
+                        <outlet property="rightBarButton" destination="Go8-kG-PuV" id="wBb-lo-Aeo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -71,6 +85,24 @@
                         <action selector="viewTapped" destination="vXZ-lx-hvc" id="DGg-lb-but"/>
                     </connections>
                 </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1589" y="681"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BXm-fh-f0T">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6vj-VF-JaB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="nbq-CX-E1j">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="mLv-ak-gFb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IYQ-tQ-ioz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="777" y="681"/>
         </scene>
