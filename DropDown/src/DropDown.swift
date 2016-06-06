@@ -568,11 +568,30 @@ extension DropDown {
 				direction = .Top
 			}
 		}
-
+		
+		constraintWidthToBoundsIfNecessary(&layout, in: window)
+		
 		let visibleHeight = tableHeight - layout.offscreenHeight
 		let canBeDisplayed = visibleHeight >= minHeight
 
 		return (layout.x, layout.y, layout.width, layout.offscreenHeight, visibleHeight, canBeDisplayed, direction)
+	}
+	
+	private func constraintWidthToBoundsIfNecessary(inout layout: ComputeLayoutTuple, in window: UIWindow) {
+		let windowMaxX = window.bounds.maxX
+		let maxX = layout.x + layout.width
+		
+		if maxX > windowMaxX {
+			let delta = maxX - windowMaxX
+			let newOrigin = layout.x - delta
+			
+			if newOrigin > 0 {
+				layout.x = newOrigin
+			} else {
+				layout.x = 0
+				layout.width += newOrigin // newOrigin is negative, so this operation is a substraction
+			}
+		}
 	}
 
 	private func computeLayoutBottomDisplay(window window: UIWindow) -> ComputeLayoutTuple {
