@@ -69,7 +69,7 @@ class ViewController: UIViewController {
 	}
 
 	func setupLeftBarButtonItemDropDown() {
-		dropDownLeft.width = 100 // Important to set or the dropdown will have a 0 width
+		dropDownLeft.width = 100 // Comment this line to have a fitting width
 		dropDownLeft.anchorView = leftBarButton
 		dropDownLeft.dataSource = [
 			"Menu 1",
@@ -81,12 +81,12 @@ class ViewController: UIViewController {
 	}
 
 	func setupRightBarButtonItemDropDown() {
-		dropDownRight.width = 100 // Important to set or the dropdown will have a 0 width
+//		dropDownRight.width = 100 // Comment this line to have a fitting width
 		dropDownRight.anchorView = rightBarButton
 		dropDownRight.dataSource = [
-			"Menu 1",
-			"Menu 2",
-			"Menu 3",
+			"Short menu",
+			"Long menu with the biggest text",
+			"Medium size menu",
 		]
 	}
 

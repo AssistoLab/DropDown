@@ -379,6 +379,8 @@ public final class DropDown: UIView {
 private extension DropDown {
 
 	func setup() {
+		tableView.registerNib(DropDownCell.Nib, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
+		
 		dispatch_async(dispatch_get_main_queue()) {
 			//HACK: If not done in dispatch_async on main queue `setupUI` will have no effect
 			self.updateConstraintsIfNeeded()
@@ -389,9 +391,7 @@ private extension DropDown {
 
 		tableView.delegate = self
 		tableView.dataSource = self
-
-		tableView.registerNib(DropDownCell.Nib, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
-
+		
 		startListeningToKeyboard()
 
 		accessibilityIdentifier = "drop_down"
@@ -536,7 +536,7 @@ extension DropDown {
 
 			guard isRightBarButtonItem else { break barButtonItemCondition }
 
-			let width = self.width ?? 0
+			let width = self.width ?? fittingWidth()
 			let anchorViewWidth = anchorView?.plainView.frame.width ?? 0
 			let x = -(width - anchorViewWidth)
 
@@ -590,9 +590,9 @@ extension DropDown {
 		} else if maxY > windowMaxY {
 			offscreenHeight = abs(maxY - windowMaxY)
 		}
-
-		let width = self.width ?? (anchorView?.plainView.bounds.width ?? 0) - bottomOffset.x
-
+		
+		let width = self.width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - bottomOffset.x
+		
 		return (x, y, width, offscreenHeight)
 	}
 
@@ -611,12 +611,32 @@ extension DropDown {
 			offscreenHeight = abs(y - windowY)
 			y = windowY
 		}
-
-		let width = self.width ?? (anchorView?.plainView.bounds.width ?? 0) - topOffset.x
-
+		
+		let width = self.width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - topOffset.x
+		
 		return (x, y, width, offscreenHeight)
 	}
-
+	
+	private func fittingWidth() -> CGFloat {
+		struct Static {
+			static let templateCell = DropDownCell.Nib.instantiateWithOwner(nil, options: nil)[0] as! DropDownCell
+		}
+		
+		var maxWidth: CGFloat = 0
+		
+		for item in dataSource {
+			Static.templateCell.optionLabel.text = item
+			Static.templateCell.bounds.size.height = cellHeight
+			let width = Static.templateCell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).width
+			
+			if width > maxWidth {
+				maxWidth = width
+			}
+		}
+		
+		return maxWidth
+	}
+	
 }
 
 //MARK: - Actions
