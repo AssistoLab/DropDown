@@ -10,6 +10,7 @@ A Material Design drop down for iOS written in Swift.
 
 [![](Screenshots/1.png)](Screenshots/1.png)
 [![](Screenshots/2.png)](Screenshots/2.png)
+[![](Screenshots/3.png)](Screenshots/3.png)
 
 ## Demo
 
