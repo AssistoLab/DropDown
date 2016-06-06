@@ -220,15 +220,24 @@ public final class DropDown: UIView {
 	public dynamic var animationduration = DPDConstant.Animation.Duration
 
 	/**
-	The option of the show animation.
+	The option of the show animation. Global change.
 	*/
-	public var animationEntranceOptions = DPDConstant.Animation.EntranceOptions
-
+	public static var animationEntranceOptions = DPDConstant.Animation.EntranceOptions
+	
 	/**
-	The option of the hide animation.
+	The option of the hide animation. Global change.
 	*/
-	public var animationExitOptions = DPDConstant.Animation.ExitOptions
-
+	public static var animationExitOptions = DPDConstant.Animation.ExitOptions
+	
+	/**
+	The option of the show animation. Only change the caller. To change all drop down's use the static var.
+	*/
+	public var animationEntranceOptions: UIViewAnimationOptions = DropDown.animationEntranceOptions
+	
+	/**
+	The option of the hide animation. Only change the caller. To change all drop down's use the static var.
+	*/
+	public var animationExitOptions: UIViewAnimationOptions = DropDown.animationExitOptions
 
 	/**
 	The downScale transformation of the tableview when the DropDown is appearing
