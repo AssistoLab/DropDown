@@ -542,26 +542,31 @@ extension DropDown {
 
 			bottomOffset = CGPoint(x: x, y: 0)
 		}
-
-		switch direction {
-		case .Any:
+		
+		if anchorView == nil {
 			layout = computeLayoutBottomDisplay(window: window)
-			direction = .Bottom
-
-			if layout.offscreenHeight > 0 {
-				let topLayout = computeLayoutForTopDisplay(window: window)
-
-				if topLayout.offscreenHeight < layout.offscreenHeight {
-					layout = topLayout
-					direction = .Top
+			direction = .Any
+		} else {
+			switch direction {
+			case .Any:
+				layout = computeLayoutBottomDisplay(window: window)
+				direction = .Bottom
+				
+				if layout.offscreenHeight > 0 {
+					let topLayout = computeLayoutForTopDisplay(window: window)
+					
+					if topLayout.offscreenHeight < layout.offscreenHeight {
+						layout = topLayout
+						direction = .Top
+					}
 				}
+			case .Bottom:
+				layout = computeLayoutBottomDisplay(window: window)
+				direction = .Bottom
+			case .Top:
+				layout = computeLayoutForTopDisplay(window: window)
+				direction = .Top
 			}
-		case .Bottom:
-			layout = computeLayoutBottomDisplay(window: window)
-			direction = .Bottom
-		case .Top:
-			layout = computeLayoutForTopDisplay(window: window)
-			direction = .Top
 		}
 
 		let visibleHeight = tableHeight - layout.offscreenHeight
@@ -572,26 +577,26 @@ extension DropDown {
 
 	private func computeLayoutBottomDisplay(window window: UIWindow) -> ComputeLayoutTuple {
 		var offscreenHeight: CGFloat = 0
-
-		let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? 0
-		let anchorViewY = anchorView?.plainView.windowFrame?.minY ?? 0
-
+		
+		let width = self.width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - bottomOffset.x
+		
+		let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? window.frame.midX - (width / 2)
+		let anchorViewY = anchorView?.plainView.windowFrame?.minY ?? window.frame.midY - (tableHeight / 2)
+		
 		let x = anchorViewX + bottomOffset.x
 		let y = anchorViewY + bottomOffset.y
-
+		
 		let maxY = y + tableHeight
 		let windowMaxY = window.bounds.maxY - DPDConstant.UI.HeightPadding
-
+		
 		let keyboardListener = KeyboardListener.sharedInstance
 		let keyboardMinY = keyboardListener.keyboardFrame.minY - DPDConstant.UI.HeightPadding
-
+		
 		if keyboardListener.isVisible && maxY > keyboardMinY {
 			offscreenHeight = abs(maxY - keyboardMinY)
 		} else if maxY > windowMaxY {
 			offscreenHeight = abs(maxY - windowMaxY)
 		}
-		
-		let width = self.width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - bottomOffset.x
 		
 		return (x, y, width, offscreenHeight)
 	}

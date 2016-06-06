@@ -30,8 +30,10 @@ class ViewController: UIViewController {
 		dropDown.anchorView = actionButton
 
 		// Will set a custom with instead of anchor view width
-//		dropDownLeft.width = 100
-
+//		dropDown.width = 100
+		
+		dropDown.direction = .Bottom // The drop down will show below or will not be showed if not enough space.
+		
 		// By default, the dropdown will have its origin on the top left corner of its anchor view
 		// So it will come over the anchor view and hide it completely
 		// If you want to have the dropdown underneath your anchor view, you can do this:
@@ -52,8 +54,7 @@ class ViewController: UIViewController {
 		dropDown.selectionAction = { [unowned self] (index, item) in
 			self.actionButton.setTitle(item, forState: .Normal)
 		}
-
-
+		
 		// Action triggered on dropdown cancelation (hide)
 //		dropDown.cancelAction = { [unowned self] in
 //			// You could for example deselect the selected item
