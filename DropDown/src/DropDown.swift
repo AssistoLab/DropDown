@@ -540,7 +540,7 @@ extension DropDown {
 
 		guard let window = UIWindow.visibleWindow() else { return (0, 0, 0, 0, 0, false, direction) }
 
-		barButtonItemCondition: if anchorView is UIBarButtonItem? {
+		barButtonItemCondition: if let _ = anchorView as? UIBarButtonItem {
 			let isRightBarButtonItem = anchorView?.plainView.frame.minX > window.frame.midX
 
 			guard isRightBarButtonItem else { break barButtonItemCondition }
@@ -894,7 +894,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		selectedRowIndex = indexPath.row
 		selectionAction?(selectedRowIndex!, dataSource[selectedRowIndex!])
 
-		if anchorView is UIBarButtonItem? {
+		if let _ = anchorView as? UIBarButtonItem {
 			// DropDown's from UIBarButtonItem are menus so we deselect the selected menu right after selection
 			deselectRowAtIndexPath(selectedRowIndex)
 		}
