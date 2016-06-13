@@ -34,7 +34,7 @@ Use [CocoaPods](http://www.cocoapods.org).
 Use [Carthage](https://github.com/Carthage/Carthage).
 
 1. Create a file name `Cartfile`.
-2. Add the line `github "DropDown/DropDown"`.
+2. Add the line `github "AssistoLab/DropDown"`.
 3. Run `carthage update`.
 4. Drag the built `DropDown.framework` into your Xcode project.
 
