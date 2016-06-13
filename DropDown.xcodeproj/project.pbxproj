@@ -7,27 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A46ED0C1B7B83AA00E7FD13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A46ED0A1B7B83AA00E7FD13 /* Main.storyboard */; };
 		0A76442B1B676C2300BF1A2D /* DropDownTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A76442A1B676C2300BF1A2D /* DropDownTests.swift */; };
-		0AB5D8191D0EC07B002D3A17 /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5D8181D0EC07B002D3A17 /* DropDown+Appearance.swift */; };
-		0AB5D81A1D0EC07B002D3A17 /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5D8181D0EC07B002D3A17 /* DropDown+Appearance.swift */; };
-		0ABA8F3E1D05E3BF0087C518 /* NiceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA8F3D1D05E3BF0087C518 /* NiceButton.swift */; };
-		0AC1C3301B6B85A600A8DC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3241B6B85A600A8DC0D /* AppDelegate.swift */; };
-		0AC1C3321B6B85A600A8DC0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3261B6B85A600A8DC0D /* ViewController.swift */; };
-		0AC1C3331B6B85A600A8DC0D /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3281B6B85A600A8DC0D /* DPDConstants.swift */; };
-		0AC1C3341B6B85A600A8DC0D /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3291B6B85A600A8DC0D /* DPDKeyboardListener.swift */; };
-		0AC1C3351B6B85A600A8DC0D /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32A1B6B85A600A8DC0D /* DPDUIView+Extension.swift */; };
-		0AC1C3361B6B85A600A8DC0D /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AC1C32C1B6B85A600A8DC0D /* DropDownCell.xib */; };
-		0AC1C3371B6B85A600A8DC0D /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32E1B6B85A600A8DC0D /* DropDown.swift */; };
-		0AC1C3381B6B85A600A8DC0D /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32F1B6B85A600A8DC0D /* DropDownCell.swift */; };
+		0AB5D8881D0EEEFF002D3A17 /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5D87E1D0EEEFF002D3A17 /* DPDConstants.swift */; };
+		0AB5D8891D0EEEFF002D3A17 /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5D87F1D0EEEFF002D3A17 /* DPDKeyboardListener.swift */; };
+		0AB5D88A1D0EEEFF002D3A17 /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5D8801D0EEEFF002D3A17 /* DPDUIView+Extension.swift */; };
+		0AB5D88B1D0EEEFF002D3A17 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AB5D8821D0EEEFF002D3A17 /* DropDownCell.xib */; };
+		0AB5D88C1D0EEEFF002D3A17 /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5D8841D0EEEFF002D3A17 /* DropDown+Appearance.swift */; };
+		0AB5D88D1D0EEEFF002D3A17 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5D8851D0EEEFF002D3A17 /* DropDown.swift */; };
+		0AB5D88E1D0EEEFF002D3A17 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5D8861D0EEEFF002D3A17 /* DropDownCell.swift */; };
+		0AB5D88F1D0EEEFF002D3A17 /* DropDown.h in Headers */ = {isa = PBXBuildFile; fileRef = 0AB5D8871D0EEEFF002D3A17 /* DropDown.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0AB5D8901D0EEFA8002D3A17 /* DropDown.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB5D8711D0EEECD002D3A17 /* DropDown.framework */; };
+		0AB5D8911D0EEFA8002D3A17 /* DropDown.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0AB5D8711D0EEECD002D3A17 /* DropDown.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0AB5D8981D0EF15D002D3A17 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5D8951D0EF15D002D3A17 /* AppDelegate.swift */; };
+		0AB5D8991D0EF15D002D3A17 /* NiceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5D8961D0EF15D002D3A17 /* NiceButton.swift */; };
+		0AB5D89A1D0EF15D002D3A17 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5D8971D0EF15D002D3A17 /* ViewController.swift */; };
+		0AB5D8A11D0EF173002D3A17 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0AB5D89F1D0EF173002D3A17 /* Main.storyboard */; };
 		0AC1C33A1B6B884100A8DC0D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AC1C3391B6B884100A8DC0D /* Images.xcassets */; };
-		BC48639D1CB4111800B4BA74 /* DropDownFramework.h in Headers */ = {isa = PBXBuildFile; fileRef = BC48639C1CB4111800B4BA74 /* DropDownFramework.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BC4863A21CB4114E00B4BA74 /* DPDConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3281B6B85A600A8DC0D /* DPDConstants.swift */; };
-		BC4863A31CB4115100B4BA74 /* DPDKeyboardListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3291B6B85A600A8DC0D /* DPDKeyboardListener.swift */; };
-		BC4863A41CB4115400B4BA74 /* DPDUIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32A1B6B85A600A8DC0D /* DPDUIView+Extension.swift */; };
-		BC4863A51CB4116000B4BA74 /* DropDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AC1C32C1B6B85A600A8DC0D /* DropDownCell.xib */; };
-		BC4863A61CB4116B00B4BA74 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32E1B6B85A600A8DC0D /* DropDown.swift */; };
-		BC4863A71CB4116E00B4BA74 /* DropDownCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C32F1B6B85A600A8DC0D /* DropDownCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,29 +33,50 @@
 			remoteGlobalIDString = 0A76440E1B676C2300BF1A2D;
 			remoteInfo = DropDown;
 		};
+		0AB5D8921D0EEFA8002D3A17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A7644071B676C2300BF1A2D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0AB5D8701D0EEECD002D3A17;
+			remoteInfo = DropDown;
+		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		0AB5D8941D0EEFA8002D3A17 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				0AB5D8911D0EEFA8002D3A17 /* DropDown.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		0A46ED0B1B7B83AA00E7FD13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = DropDown/Base.lproj/Main.storyboard; sourceTree = SOURCE_ROOT; };
-		0A76440F1B676C2300BF1A2D /* DropDown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DropDown.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		0A7644131B676C2300BF1A2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A76440F1B676C2300BF1A2D /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7644241B676C2300BF1A2D /* DropDownTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DropDownTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7644291B676C2300BF1A2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A76442A1B676C2300BF1A2D /* DropDownTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTests.swift; sourceTree = "<group>"; };
-		0AB5D8181D0EC07B002D3A17 /* DropDown+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DropDown+Appearance.swift"; sourceTree = "<group>"; };
-		0ABA8F3D1D05E3BF0087C518 /* NiceButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiceButton.swift; sourceTree = "<group>"; };
-		0AC1C3241B6B85A600A8DC0D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0AC1C3261B6B85A600A8DC0D /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		0AC1C3281B6B85A600A8DC0D /* DPDConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDConstants.swift; sourceTree = "<group>"; };
-		0AC1C3291B6B85A600A8DC0D /* DPDKeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDKeyboardListener.swift; sourceTree = "<group>"; };
-		0AC1C32A1B6B85A600A8DC0D /* DPDUIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DPDUIView+Extension.swift"; sourceTree = "<group>"; };
-		0AC1C32C1B6B85A600A8DC0D /* DropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownCell.xib; sourceTree = "<group>"; };
-		0AC1C32E1B6B85A600A8DC0D /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
-		0AC1C32F1B6B85A600A8DC0D /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
-		0AC1C3391B6B884100A8DC0D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = DropDown/Images.xcassets; sourceTree = "<group>"; };
-		BC48639A1CB4111800B4BA74 /* DropDownFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DropDownFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BC48639C1CB4111800B4BA74 /* DropDownFramework.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DropDownFramework.h; sourceTree = "<group>"; };
-		BC48639E1CB4111800B4BA74 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0AB5D8521D0EEC2A002D3A17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = /Users/kevin/Documents/Xcode/DropDown/Info.plist; sourceTree = "<absolute>"; };
+		0AB5D8711D0EEECD002D3A17 /* DropDown.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DropDown.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0AB5D8751D0EEECD002D3A17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0AB5D87E1D0EEEFF002D3A17 /* DPDConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDConstants.swift; sourceTree = "<group>"; };
+		0AB5D87F1D0EEEFF002D3A17 /* DPDKeyboardListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DPDKeyboardListener.swift; sourceTree = "<group>"; };
+		0AB5D8801D0EEEFF002D3A17 /* DPDUIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DPDUIView+Extension.swift"; sourceTree = "<group>"; };
+		0AB5D8821D0EEEFF002D3A17 /* DropDownCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropDownCell.xib; sourceTree = "<group>"; };
+		0AB5D8841D0EEEFF002D3A17 /* DropDown+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DropDown+Appearance.swift"; sourceTree = "<group>"; };
+		0AB5D8851D0EEEFF002D3A17 /* DropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
+		0AB5D8861D0EEEFF002D3A17 /* DropDownCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCell.swift; sourceTree = "<group>"; };
+		0AB5D8871D0EEEFF002D3A17 /* DropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDown.h; sourceTree = "<group>"; };
+		0AB5D8951D0EF15D002D3A17 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0AB5D8961D0EF15D002D3A17 /* NiceButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiceButton.swift; sourceTree = "<group>"; };
+		0AB5D8971D0EF15D002D3A17 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0AB5D8A01D0EF173002D3A17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0AC1C3391B6B884100A8DC0D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Demo/Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AB5D8901D0EEFA8002D3A17 /* DropDown.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,7 +95,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BC4863961CB4111800B4BA74 /* Frameworks */ = {
+		0AB5D86D1D0EEECD002D3A17 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -91,10 +108,10 @@
 		0A7644061B676C2300BF1A2D = {
 			isa = PBXGroup;
 			children = (
-				0A7644111B676C2300BF1A2D /* DropDown */,
+				0AB5D8721D0EEECD002D3A17 /* DropDown */,
+				0A7644111B676C2300BF1A2D /* Demo */,
 				0AC1C3391B6B884100A8DC0D /* Images.xcassets */,
 				0A7644271B676C2300BF1A2D /* DropDownTests */,
-				BC48639B1CB4111800B4BA74 /* DropDownFramework */,
 				0A7644101B676C2300BF1A2D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -102,29 +119,29 @@
 		0A7644101B676C2300BF1A2D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0A76440F1B676C2300BF1A2D /* DropDown.app */,
+				0A76440F1B676C2300BF1A2D /* Demo.app */,
 				0A7644241B676C2300BF1A2D /* DropDownTests.xctest */,
-				BC48639A1CB4111800B4BA74 /* DropDownFramework.framework */,
+				0AB5D8711D0EEECD002D3A17 /* DropDown.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0A7644111B676C2300BF1A2D /* DropDown */ = {
+		0A7644111B676C2300BF1A2D /* Demo */ = {
 			isa = PBXGroup;
 			children = (
-				0AC1C3231B6B85A600A8DC0D /* demo */,
-				0AC1C3271B6B85A600A8DC0D /* helpers */,
-				0AC1C32B1B6B85A600A8DC0D /* resources */,
-				0AC1C32D1B6B85A600A8DC0D /* src */,
+				0AB5D8951D0EF15D002D3A17 /* AppDelegate.swift */,
+				0AB5D8971D0EF15D002D3A17 /* ViewController.swift */,
+				0AB5D89F1D0EF173002D3A17 /* Main.storyboard */,
+				0AB5D8961D0EF15D002D3A17 /* NiceButton.swift */,
 				0A7644121B676C2300BF1A2D /* Supporting Files */,
 			);
-			path = DropDown;
+			path = Demo;
 			sourceTree = "<group>";
 		};
 		0A7644121B676C2300BF1A2D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0A7644131B676C2300BF1A2D /* Info.plist */,
+				0AB5D8521D0EEC2A002D3A17 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -146,83 +163,77 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0AC1C3231B6B85A600A8DC0D /* demo */ = {
+		0AB5D8721D0EEECD002D3A17 /* DropDown */ = {
 			isa = PBXGroup;
 			children = (
-				0AC1C3241B6B85A600A8DC0D /* AppDelegate.swift */,
-				0AC1C3261B6B85A600A8DC0D /* ViewController.swift */,
-				0A46ED0A1B7B83AA00E7FD13 /* Main.storyboard */,
-				0ABA8F3D1D05E3BF0087C518 /* NiceButton.swift */,
+				0AB5D8871D0EEEFF002D3A17 /* DropDown.h */,
+				0AB5D8751D0EEECD002D3A17 /* Info.plist */,
+				0AB5D87D1D0EEEFF002D3A17 /* helpers */,
+				0AB5D8811D0EEEFF002D3A17 /* resources */,
+				0AB5D8831D0EEEFF002D3A17 /* src */,
 			);
-			path = demo;
+			path = DropDown;
 			sourceTree = "<group>";
 		};
-		0AC1C3271B6B85A600A8DC0D /* helpers */ = {
+		0AB5D87D1D0EEEFF002D3A17 /* helpers */ = {
 			isa = PBXGroup;
 			children = (
-				0AC1C3281B6B85A600A8DC0D /* DPDConstants.swift */,
-				0AC1C3291B6B85A600A8DC0D /* DPDKeyboardListener.swift */,
-				0AC1C32A1B6B85A600A8DC0D /* DPDUIView+Extension.swift */,
+				0AB5D87E1D0EEEFF002D3A17 /* DPDConstants.swift */,
+				0AB5D87F1D0EEEFF002D3A17 /* DPDKeyboardListener.swift */,
+				0AB5D8801D0EEEFF002D3A17 /* DPDUIView+Extension.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
 		};
-		0AC1C32B1B6B85A600A8DC0D /* resources */ = {
+		0AB5D8811D0EEEFF002D3A17 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				0AC1C32C1B6B85A600A8DC0D /* DropDownCell.xib */,
+				0AB5D8821D0EEEFF002D3A17 /* DropDownCell.xib */,
 			);
 			path = resources;
 			sourceTree = "<group>";
 		};
-		0AC1C32D1B6B85A600A8DC0D /* src */ = {
+		0AB5D8831D0EEEFF002D3A17 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				0AC1C32E1B6B85A600A8DC0D /* DropDown.swift */,
-				0AB5D8181D0EC07B002D3A17 /* DropDown+Appearance.swift */,
-				0AC1C32F1B6B85A600A8DC0D /* DropDownCell.swift */,
+				0AB5D8841D0EEEFF002D3A17 /* DropDown+Appearance.swift */,
+				0AB5D8851D0EEEFF002D3A17 /* DropDown.swift */,
+				0AB5D8861D0EEEFF002D3A17 /* DropDownCell.swift */,
 			);
 			path = src;
-			sourceTree = "<group>";
-		};
-		BC48639B1CB4111800B4BA74 /* DropDownFramework */ = {
-			isa = PBXGroup;
-			children = (
-				BC48639C1CB4111800B4BA74 /* DropDownFramework.h */,
-				BC48639E1CB4111800B4BA74 /* Info.plist */,
-			);
-			path = DropDownFramework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		BC4863971CB4111800B4BA74 /* Headers */ = {
+		0AB5D86E1D0EEECD002D3A17 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC48639D1CB4111800B4BA74 /* DropDownFramework.h in Headers */,
+				0AB5D88F1D0EEEFF002D3A17 /* DropDown.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0A76440E1B676C2300BF1A2D /* DropDown */ = {
+		0A76440E1B676C2300BF1A2D /* Demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A76442E1B676C2300BF1A2D /* Build configuration list for PBXNativeTarget "DropDown" */;
+			buildConfigurationList = 0A76442E1B676C2300BF1A2D /* Build configuration list for PBXNativeTarget "Demo" */;
 			buildPhases = (
 				0A76440B1B676C2300BF1A2D /* Sources */,
 				0A76440C1B676C2300BF1A2D /* Frameworks */,
 				0A76440D1B676C2300BF1A2D /* Resources */,
+				0AB5D8941D0EEFA8002D3A17 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0AB5D8931D0EEFA8002D3A17 /* PBXTargetDependency */,
 			);
-			name = DropDown;
+			name = Demo;
 			productName = DropDown;
-			productReference = 0A76440F1B676C2300BF1A2D /* DropDown.app */;
+			productReference = 0A76440F1B676C2300BF1A2D /* Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		0A7644231B676C2300BF1A2D /* DropDownTests */ = {
@@ -243,22 +254,22 @@
 			productReference = 0A7644241B676C2300BF1A2D /* DropDownTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		BC4863991CB4111800B4BA74 /* DropDownFramework */ = {
+		0AB5D8701D0EEECD002D3A17 /* DropDown */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BC4863A11CB4111800B4BA74 /* Build configuration list for PBXNativeTarget "DropDownFramework" */;
+			buildConfigurationList = 0AB5D87A1D0EEECD002D3A17 /* Build configuration list for PBXNativeTarget "DropDown" */;
 			buildPhases = (
-				BC4863951CB4111800B4BA74 /* Sources */,
-				BC4863961CB4111800B4BA74 /* Frameworks */,
-				BC4863971CB4111800B4BA74 /* Headers */,
-				BC4863981CB4111800B4BA74 /* Resources */,
+				0AB5D86C1D0EEECD002D3A17 /* Sources */,
+				0AB5D86D1D0EEECD002D3A17 /* Frameworks */,
+				0AB5D86E1D0EEECD002D3A17 /* Headers */,
+				0AB5D86F1D0EEECD002D3A17 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = DropDownFramework;
-			productName = DropDownFramework;
-			productReference = BC48639A1CB4111800B4BA74 /* DropDownFramework.framework */;
+			name = DropDown;
+			productName = DropDown;
+			productReference = 0AB5D8711D0EEECD002D3A17 /* DropDown.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -267,7 +278,7 @@
 		0A7644071B676C2300BF1A2D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0710;
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = "Kevin Hirsch";
 				TargetAttributes = {
@@ -278,8 +289,8 @@
 						CreatedOnToolsVersion = 6.4;
 						TestTargetID = 0A76440E1B676C2300BF1A2D;
 					};
-					BC4863991CB4111800B4BA74 = {
-						CreatedOnToolsVersion = 7.3;
+					0AB5D8701D0EEECD002D3A17 = {
+						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
 			};
@@ -296,9 +307,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0A76440E1B676C2300BF1A2D /* DropDown */,
+				0A76440E1B676C2300BF1A2D /* Demo */,
 				0A7644231B676C2300BF1A2D /* DropDownTests */,
-				BC4863991CB4111800B4BA74 /* DropDownFramework */,
+				0AB5D8701D0EEECD002D3A17 /* DropDown */,
 			);
 		};
 /* End PBXProject section */
@@ -308,9 +319,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A46ED0C1B7B83AA00E7FD13 /* Main.storyboard in Resources */,
-				0AC1C3361B6B85A600A8DC0D /* DropDownCell.xib in Resources */,
 				0AC1C33A1B6B884100A8DC0D /* Images.xcassets in Resources */,
+				0AB5D8A11D0EF173002D3A17 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,11 +331,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BC4863981CB4111800B4BA74 /* Resources */ = {
+		0AB5D86F1D0EEECD002D3A17 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC4863A51CB4116000B4BA74 /* DropDownCell.xib in Resources */,
+				0AB5D88B1D0EEEFF002D3A17 /* DropDownCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -336,15 +346,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0AC1C3341B6B85A600A8DC0D /* DPDKeyboardListener.swift in Sources */,
-				0AC1C3321B6B85A600A8DC0D /* ViewController.swift in Sources */,
-				0AC1C3371B6B85A600A8DC0D /* DropDown.swift in Sources */,
-				0AC1C3381B6B85A600A8DC0D /* DropDownCell.swift in Sources */,
-				0AC1C3301B6B85A600A8DC0D /* AppDelegate.swift in Sources */,
-				0AC1C3351B6B85A600A8DC0D /* DPDUIView+Extension.swift in Sources */,
-				0ABA8F3E1D05E3BF0087C518 /* NiceButton.swift in Sources */,
-				0AC1C3331B6B85A600A8DC0D /* DPDConstants.swift in Sources */,
-				0AB5D8191D0EC07B002D3A17 /* DropDown+Appearance.swift in Sources */,
+				0AB5D89A1D0EF15D002D3A17 /* ViewController.swift in Sources */,
+				0AB5D8991D0EF15D002D3A17 /* NiceButton.swift in Sources */,
+				0AB5D8981D0EF15D002D3A17 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,16 +360,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BC4863951CB4111800B4BA74 /* Sources */ = {
+		0AB5D86C1D0EEECD002D3A17 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC4863A71CB4116E00B4BA74 /* DropDownCell.swift in Sources */,
-				BC4863A41CB4115400B4BA74 /* DPDUIView+Extension.swift in Sources */,
-				0AB5D81A1D0EC07B002D3A17 /* DropDown+Appearance.swift in Sources */,
-				BC4863A21CB4114E00B4BA74 /* DPDConstants.swift in Sources */,
-				BC4863A61CB4116B00B4BA74 /* DropDown.swift in Sources */,
-				BC4863A31CB4115100B4BA74 /* DPDKeyboardListener.swift in Sources */,
+				0AB5D88D1D0EEEFF002D3A17 /* DropDown.swift in Sources */,
+				0AB5D88C1D0EEEFF002D3A17 /* DropDown+Appearance.swift in Sources */,
+				0AB5D88A1D0EEEFF002D3A17 /* DPDUIView+Extension.swift in Sources */,
+				0AB5D8881D0EEEFF002D3A17 /* DPDConstants.swift in Sources */,
+				0AB5D88E1D0EEEFF002D3A17 /* DropDownCell.swift in Sources */,
+				0AB5D8891D0EEEFF002D3A17 /* DPDKeyboardListener.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -374,16 +378,21 @@
 /* Begin PBXTargetDependency section */
 		0A7644261B676C2300BF1A2D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0A76440E1B676C2300BF1A2D /* DropDown */;
+			target = 0A76440E1B676C2300BF1A2D /* Demo */;
 			targetProxy = 0A7644251B676C2300BF1A2D /* PBXContainerItemProxy */;
+		};
+		0AB5D8931D0EEFA8002D3A17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0AB5D8701D0EEECD002D3A17 /* DropDown */;
+			targetProxy = 0AB5D8921D0EEFA8002D3A17 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		0A46ED0A1B7B83AA00E7FD13 /* Main.storyboard */ = {
+		0AB5D89F1D0EF173002D3A17 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				0A46ED0B1B7B83AA00E7FD13 /* Base */,
+				0AB5D8A01D0EF173002D3A17 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -427,7 +436,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -465,7 +474,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -477,9 +486,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				INFOPLIST_FILE = DropDown/Info.plist;
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.assistoLab.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -489,8 +502,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				INFOPLIST_FILE = DropDown/Info.plist;
+				CLANG_ENABLE_MODULES = YES;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.assistoLab.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -511,7 +527,7 @@
 				INFOPLIST_FILE = DropDownTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DropDown.app/DropDown";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 			};
 			name = Debug;
 		};
@@ -526,11 +542,11 @@
 				INFOPLIST_FILE = DropDownTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DropDown.app/DropDown";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Demo.app/Demo";
 			};
 			name = Release;
 		};
-		BC48639F1CB4111800B4BA74 /* Debug */ = {
+		0AB5D87B1D0EEECD002D3A17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
@@ -541,11 +557,11 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_TESTABILITY = YES;
-				INFOPLIST_FILE = DropDownFramework/Info.plist;
+				INFOPLIST_FILE = DropDown/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kevin.hirsch.DropDownFramework;
+				PRODUCT_BUNDLE_IDENTIFIER = com.assistoLab.DropDown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -554,7 +570,7 @@
 			};
 			name = Debug;
 		};
-		BC4863A01CB4111800B4BA74 /* Release */ = {
+		0AB5D87C1D0EEECD002D3A17 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
@@ -563,11 +579,11 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = DropDownFramework/Info.plist;
+				INFOPLIST_FILE = DropDown/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kevin.hirsch.DropDownFramework;
+				PRODUCT_BUNDLE_IDENTIFIER = com.assistoLab.DropDown;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -588,7 +604,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0A76442E1B676C2300BF1A2D /* Build configuration list for PBXNativeTarget "DropDown" */ = {
+		0A76442E1B676C2300BF1A2D /* Build configuration list for PBXNativeTarget "Demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A76442F1B676C2300BF1A2D /* Debug */,
@@ -606,14 +622,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		BC4863A11CB4111800B4BA74 /* Build configuration list for PBXNativeTarget "DropDownFramework" */ = {
+		0AB5D87A1D0EEECD002D3A17 /* Build configuration list for PBXNativeTarget "DropDown" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BC48639F1CB4111800B4BA74 /* Debug */,
-				BC4863A01CB4111800B4BA74 /* Release */,
+				0AB5D87B1D0EEECD002D3A17 /* Debug */,
+				0AB5D87C1D0EEECD002D3A17 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

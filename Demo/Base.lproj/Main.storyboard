@@ -10,7 +10,7 @@
         <!--DropDown-->
         <scene sceneID="XzU-vm-ggE">
             <objects>
-                <viewController id="0v1-k3-K39" customClass="ViewController" customModule="DropDown" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0v1-k3-K39" customClass="ViewController" customModule="DropDown_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Gb4-Nu-YHj"/>
                         <viewControllerLayoutGuide type="bottom" id="Fqn-ZE-M5e"/>
@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="636"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0B-sh-55C" customClass="NiceButton" customModule="DropDown" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0B-sh-55C" customClass="NiceButton" customModule="DropDown_Demo" customModuleProvider="target">
                                 <rect key="frame" x="20" y="30" width="420" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="3dq-es-BqE"/>
@@ -29,7 +29,7 @@
                                     <action selector="chooseArticle:" destination="0v1-k3-K39" eventType="touchUpInside" id="yMI-d3-97H"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KF-lo-KS7" customClass="NiceButton" customModule="DropDown" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KF-lo-KS7" customClass="NiceButton" customModule="DropDown_Demo" customModuleProvider="target">
                                 <rect key="frame" x="450" y="30" width="54" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="6zC-a1-xQe"/>
@@ -40,7 +40,7 @@
                                     <action selector="changeAmount:" destination="0v1-k3-K39" eventType="touchUpInside" id="d0C-am-RjH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="svj-jk-Xj6" customClass="NiceButton" customModule="DropDown" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="svj-jk-Xj6" customClass="NiceButton" customModule="DropDown_Demo" customModuleProvider="target">
                                 <rect key="frame" x="20" y="78" width="66" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Iua-Ub-iO0"/>
@@ -73,7 +73,7 @@
                                     <action selector="changeDIsmissMode:" destination="0v1-k3-K39" eventType="valueChanged" id="8kQ-Ck-czx"/>
                                 </connections>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72P-V6-wxi" customClass="NiceButton" customModule="DropDown" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72P-V6-wxi" customClass="NiceButton" customModule="DropDown_Demo" customModuleProvider="target">
                                 <rect key="frame" x="20" y="126" width="259" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="7gE-OB-toM"/>
