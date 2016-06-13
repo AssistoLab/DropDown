@@ -251,7 +251,7 @@ public final class DropDown: UIView {
 
 	Changing the text color automatically reloads the drop down.
 	*/
-	public dynamic var textColor = UIColor.blackColor() {
+	public dynamic var textColor = DPDConstant.UI.TextColor {
 		didSet { reloadAllComponents() }
 	}
 
@@ -260,7 +260,7 @@ public final class DropDown: UIView {
 
 	Changing the text font automatically reloads the drop down.
 	*/
-	public dynamic var textFont = UIFont.systemFontOfSize(15) {
+	public dynamic var textFont = DPDConstant.UI.TextFont {
 		didSet { reloadAllComponents() }
 	}
 

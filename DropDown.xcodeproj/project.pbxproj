@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0A46ED0C1B7B83AA00E7FD13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A46ED0A1B7B83AA00E7FD13 /* Main.storyboard */; };
 		0A76442B1B676C2300BF1A2D /* DropDownTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A76442A1B676C2300BF1A2D /* DropDownTests.swift */; };
+		0AB5D8191D0EC07B002D3A17 /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5D8181D0EC07B002D3A17 /* DropDown+Appearance.swift */; };
+		0AB5D81A1D0EC07B002D3A17 /* DropDown+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB5D8181D0EC07B002D3A17 /* DropDown+Appearance.swift */; };
 		0ABA8F3E1D05E3BF0087C518 /* NiceButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ABA8F3D1D05E3BF0087C518 /* NiceButton.swift */; };
 		0AC1C3301B6B85A600A8DC0D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3241B6B85A600A8DC0D /* AppDelegate.swift */; };
 		0AC1C3321B6B85A600A8DC0D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC1C3261B6B85A600A8DC0D /* ViewController.swift */; };
@@ -45,6 +47,7 @@
 		0A7644241B676C2300BF1A2D /* DropDownTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DropDownTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A7644291B676C2300BF1A2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A76442A1B676C2300BF1A2D /* DropDownTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTests.swift; sourceTree = "<group>"; };
+		0AB5D8181D0EC07B002D3A17 /* DropDown+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DropDown+Appearance.swift"; sourceTree = "<group>"; };
 		0ABA8F3D1D05E3BF0087C518 /* NiceButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NiceButton.swift; sourceTree = "<group>"; };
 		0AC1C3241B6B85A600A8DC0D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0AC1C3261B6B85A600A8DC0D /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -176,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				0AC1C32E1B6B85A600A8DC0D /* DropDown.swift */,
+				0AB5D8181D0EC07B002D3A17 /* DropDown+Appearance.swift */,
 				0AC1C32F1B6B85A600A8DC0D /* DropDownCell.swift */,
 			);
 			path = src;
@@ -340,6 +344,7 @@
 				0AC1C3351B6B85A600A8DC0D /* DPDUIView+Extension.swift in Sources */,
 				0ABA8F3E1D05E3BF0087C518 /* NiceButton.swift in Sources */,
 				0AC1C3331B6B85A600A8DC0D /* DPDConstants.swift in Sources */,
+				0AB5D8191D0EC07B002D3A17 /* DropDown+Appearance.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,6 +362,7 @@
 			files = (
 				BC4863A71CB4116E00B4BA74 /* DropDownCell.swift in Sources */,
 				BC4863A41CB4115400B4BA74 /* DPDUIView+Extension.swift in Sources */,
+				0AB5D81A1D0EC07B002D3A17 /* DropDown+Appearance.swift in Sources */,
 				BC4863A21CB4114E00B4BA74 /* DPDConstants.swift in Sources */,
 				BC4863A61CB4116B00B4BA74 /* DropDown.swift in Sources */,
 				BC4863A31CB4115100B4BA74 /* DPDKeyboardListener.swift in Sources */,

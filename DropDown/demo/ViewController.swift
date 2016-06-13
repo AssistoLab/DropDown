@@ -76,6 +76,14 @@ class ViewController: UIViewController {
 		}
 	}
 	
+	@IBAction func changeUI(sender: UISegmentedControl) {
+		switch sender.selectedSegmentIndex {
+		case 0: DropDown.setupDefaultAppearance()
+		case 1: customizeDropDown(self)
+		default: break;
+		}
+	}
+	
 	@IBAction func showKeyboard(sender: AnyObject) {
 		textField.becomeFirstResponder()
 	}
@@ -84,7 +92,7 @@ class ViewController: UIViewController {
 		view.endEditing(false)
 	}
 	
-	@IBAction func customizeDropDown(sender: AnyObject) {
+	func customizeDropDown(sender: AnyObject) {
 		let appearance = DropDown.appearance()
 		
 		appearance.cellHeight = 60

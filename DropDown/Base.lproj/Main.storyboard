@@ -53,13 +53,13 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Options" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJF-wb-wuG">
                                 <rect key="frame" x="20" y="204" width="74" height="26"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dismiss mode (on tap: need a tap to dismiss, auto: interact with other UI elements to dismiss, manual: when you want in code)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MeY-qi-ZDF">
                                 <rect key="frame" x="20" y="250" width="540" height="38"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="SPc-ge-GiP">
@@ -87,7 +87,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Direction (of the dropdown, any: below anchor view if possible, otherwise, above)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sxf-NX-PA6">
                                 <rect key="frame" x="20" y="344" width="540" height="38"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="evd-34-0pX">
@@ -101,46 +101,48 @@
                                     <action selector="changeDirection:" destination="0v1-k3-K39" eventType="valueChanged" id="sTg-QW-wGb"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't forget to test the orientation! (even with a drop down displayed)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajN-P2-z3O">
+                                <rect key="frame" x="20" y="504" width="540" height="18"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aXM-aw-Gwc">
+                                <rect key="frame" x="20" y="426" width="540" height="29"/>
+                                <segments>
+                                    <segment title="Basic DropDown UI"/>
+                                    <segment title="Example of custom UI"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeUI:" destination="0v1-k3-K39" eventType="valueChanged" id="BfR-fl-VtX"/>
+                                </connections>
+                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhl-iV-Oh8">
-                                <rect key="frame" x="20" y="438" width="106" height="30"/>
+                                <rect key="frame" x="20" y="462" width="106" height="30"/>
                                 <state key="normal" title="Show keyboard"/>
                                 <connections>
                                     <action selector="showKeyboard:" destination="0v1-k3-K39" eventType="touchUpInside" id="zSf-f9-3io"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XFG-lc-Tx1">
-                                <rect key="frame" x="20" y="468" width="190" height="30"/>
-                                <state key="normal" title="Test customized drop down"/>
-                                <connections>
-                                    <action selector="customizeDropDown:" destination="0v1-k3-K39" eventType="touchUpInside" id="ItT-Ze-7rq"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't forget to test the orientation! (even with a drop down displayed)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajN-P2-z3O">
-                                <rect key="frame" x="20" y="513" width="540" height="18"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="SPc-ge-GiP" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="3Yu-YO-Bst"/>
+                            <constraint firstItem="aXM-aw-Gwc" firstAttribute="width" secondItem="lH9-eW-CtL" secondAttribute="width" multiplier="0.9" id="4ya-ii-se3"/>
                             <constraint firstItem="F0B-sh-55C" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="7XM-oA-ZhU"/>
                             <constraint firstItem="SPc-ge-GiP" firstAttribute="top" secondItem="MeY-qi-ZDF" secondAttribute="bottom" constant="8" id="Edg-YB-Ub6"/>
                             <constraint firstItem="SPc-ge-GiP" firstAttribute="width" secondItem="lH9-eW-CtL" secondAttribute="width" multiplier="0.9" id="F42-dQ-JyG"/>
                             <constraint firstItem="Sxf-NX-PA6" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="Hw2-lv-2du"/>
                             <constraint firstItem="7KF-lo-KS7" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="lH9-eW-CtL" secondAttribute="trailingMargin" id="Igv-cT-HVL"/>
                             <constraint firstItem="Sxf-NX-PA6" firstAttribute="width" secondItem="lH9-eW-CtL" secondAttribute="width" multiplier="0.9" id="KVK-Kk-EtS"/>
-                            <constraint firstItem="XFG-lc-Tx1" firstAttribute="top" secondItem="jhl-iV-Oh8" secondAttribute="bottom" id="LBB-Lj-HVm"/>
-                            <constraint firstItem="ajN-P2-z3O" firstAttribute="top" secondItem="XFG-lc-Tx1" secondAttribute="bottom" constant="15" id="Lme-cG-U1B"/>
-                            <constraint firstItem="XFG-lc-Tx1" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="NUx-kY-npm"/>
                             <constraint firstItem="evd-34-0pX" firstAttribute="top" secondItem="Sxf-NX-PA6" secondAttribute="bottom" constant="8" id="OZG-VZ-HM4"/>
                             <constraint firstItem="evd-34-0pX" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="PGH-uc-SAz"/>
-                            <constraint firstItem="jhl-iV-Oh8" firstAttribute="top" secondItem="evd-34-0pX" secondAttribute="bottom" constant="20" id="SUD-g1-dXG"/>
+                            <constraint firstItem="jhl-iV-Oh8" firstAttribute="top" secondItem="aXM-aw-Gwc" secondAttribute="bottom" constant="8" id="U2P-vV-bpD"/>
                             <constraint firstItem="Fqn-ZE-M5e" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ajN-P2-z3O" secondAttribute="bottom" constant="10" id="UAN-Pv-bi4"/>
                             <constraint firstItem="MeY-qi-ZDF" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="XFF-eD-vfh"/>
                             <constraint firstItem="FJF-wb-wuG" firstAttribute="top" secondItem="72P-V6-wxi" secondAttribute="bottom" constant="38" id="XM1-YU-8jU"/>
+                            <constraint firstItem="ajN-P2-z3O" firstAttribute="top" secondItem="jhl-iV-Oh8" secondAttribute="bottom" constant="12" id="XU4-OF-hpy"/>
                             <constraint firstItem="72P-V6-wxi" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="Y2t-sg-yPI"/>
                             <constraint firstItem="F0B-sh-55C" firstAttribute="width" secondItem="lH9-eW-CtL" secondAttribute="width" multiplier="0.7" id="ZmR-kz-XHa"/>
                             <constraint firstItem="7KF-lo-KS7" firstAttribute="leading" secondItem="F0B-sh-55C" secondAttribute="trailing" constant="10" id="a6o-Ac-dQd"/>
@@ -151,9 +153,11 @@
                             <constraint firstItem="svj-jk-Xj6" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="era-T9-k0M"/>
                             <constraint firstItem="FJF-wb-wuG" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="gxu-66-zAP"/>
                             <constraint firstItem="7KF-lo-KS7" firstAttribute="top" secondItem="Gb4-Nu-YHj" secondAttribute="bottom" constant="30" id="iGa-F5-Oit"/>
+                            <constraint firstItem="aXM-aw-Gwc" firstAttribute="top" secondItem="evd-34-0pX" secondAttribute="bottom" constant="8" id="ike-zP-JTg"/>
                             <constraint firstItem="72P-V6-wxi" firstAttribute="top" secondItem="svj-jk-Xj6" secondAttribute="bottom" constant="8" id="isJ-eZ-UFj"/>
                             <constraint firstItem="svj-jk-Xj6" firstAttribute="top" secondItem="F0B-sh-55C" secondAttribute="bottom" constant="8" id="l8q-21-xUW"/>
                             <constraint firstItem="jhl-iV-Oh8" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="s5z-Ij-3Yh"/>
+                            <constraint firstItem="aXM-aw-Gwc" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="sJ2-xV-ahU"/>
                             <constraint firstItem="MeY-qi-ZDF" firstAttribute="top" secondItem="FJF-wb-wuG" secondAttribute="bottom" constant="20" id="sdq-De-xHl"/>
                             <constraint firstItem="Sxf-NX-PA6" firstAttribute="top" secondItem="SPc-ge-GiP" secondAttribute="bottom" constant="20" id="uEp-oe-y6h"/>
                             <constraint firstItem="ajN-P2-z3O" firstAttribute="width" secondItem="lH9-eW-CtL" secondAttribute="width" multiplier="0.9" id="zVj-Km-tFB"/>
