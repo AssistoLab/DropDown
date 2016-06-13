@@ -1,9 +1,11 @@
 ![DropDown](Screenshots/logo.png)
 
 [![Twitter: @kevinh6113](http://img.shields.io/badge/contact-%40kevinh6113-70a1fb.svg?style=flat)](https://twitter.com/kevinh6113)
-[![License: MIT](http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat)](https://github.com/kevin-hirsch/KVNProgress/blob/master/README.md)
-[![Version](http://img.shields.io/badge/version-0.1.5-green.svg?style=flat)](https://github.com/kevin-hirsch/DropDown)
+[![License: MIT](http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat)](https://github.com/AssistoLab/DropDown/blob/master/README.md)
+[![Version](http://img.shields.io/badge/version-1.0-green.svg?style=flat)](https://github.com/AssistoLab/DropDown)
 [![Cocoapods](http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat)](http://cocoadocs.org/docsets/DropDown/)
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+
 
 A Material Design drop down for iOS written in Swift.
 ***
@@ -27,9 +29,18 @@ Use [CocoaPods](http://www.cocoapods.org).
 2. Install the pod(s) by running `pod install`.
 3. Add `import DropDown` in the .swift files where you want to use it
 
+### Carthage
+
+Use [Carthage](https://github.com/Carthage/Carthage).
+
+1. Create a file name `Cartfile`.
+2. Add the line `github "DropDown/DropDown"`.
+3. Run `carthage update`.
+4. Drag the built `DropDown.framework` into your Xcode project.
+
 ### Source files
 
-1. Download the [latest code version](http://github.com/kevin-hirsch/DropDown/archive/master.zip) or add the repository as a git submodule to your git-tracked project.
+1. Download the [latest code version](http://github.com/AssistoLab/DropDown/archive/master.zip) or add the repository as a git submodule to your git-tracked project.
 2. Drag and drop the **src**, **helpers** and also the **resources** directory from the archive in your project navigator. Make sure to select *Copy items* when asked if you extracted the code archive outside of your project.
 
 ## Basic usage
@@ -193,8 +204,8 @@ when calling the `show` method, it returns a tuple like this:
 
 ## Requirements
 
-* Xcode 6+
-* iOS 7+
+* Xcode 7+
+* iOS 8+
 * ARC
 
 ## License
