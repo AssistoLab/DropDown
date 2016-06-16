@@ -410,7 +410,7 @@ public final class DropDown: UIView {
 private extension DropDown {
 
 	func setup() {
-        tableView.registerNib(cellNib, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
+		tableView.registerNib(cellNib, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
 		
 		dispatch_async(dispatch_get_main_queue()) {
 			//HACK: If not done in dispatch_async on main queue `setupUI` will have no effect
@@ -901,6 +901,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		} else {
 			cell.optionLabel.text = dataSource[index]
 		}
+        
         customCellConfiguration?(index, dataSource[index], cell)
 
 		return cell
