@@ -80,6 +80,8 @@ public final class DropDown: UIView {
 	private let dismissableView = UIView()
 	private let tableViewContainer = UIView()
 	private let tableView = UITableView()
+	private var templateCell: DropDownCell!
+
 
 	/// The view to which the drop down will displayed onto.
 	public weak var anchorView: AnchorView? {
@@ -273,6 +275,7 @@ public final class DropDown: UIView {
     public var cellNib = UINib(nibName: "DropDownCell", bundle: NSBundle(forClass: DropDownCell.self)) {
         didSet {
             tableView.registerNib(cellNib, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
+			templateCell = nil
             reloadAllComponents()
         }
     }
@@ -411,7 +414,7 @@ private extension DropDown {
 
 	func setup() {
 		tableView.registerNib(cellNib, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
-		
+
 		dispatch_async(dispatch_get_main_queue()) {
 			//HACK: If not done in dispatch_async on main queue `setupUI` will have no effect
 			self.updateConstraintsIfNeeded()
@@ -657,7 +660,10 @@ extension DropDown {
 	}
 	
 	private func fittingWidth() -> CGFloat {
-		let templateCell = cellNib.instantiateWithOwner(nil, options: nil)[0] as! DropDownCell
+		if templateCell == nil {
+			templateCell = cellNib.instantiateWithOwner(nil, options: nil)[0] as! DropDownCell
+		}
+		
 		var maxWidth: CGFloat = 0
 		
 		for item in dataSource {
