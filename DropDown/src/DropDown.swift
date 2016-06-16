@@ -902,7 +902,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 			cell.optionLabel.text = dataSource[index]
 		}
         
-        customCellConfiguration?(index, dataSource[index], cell)
+		customCellConfiguration?(index, dataSource[index], cell)
 
 		return cell
 	}
