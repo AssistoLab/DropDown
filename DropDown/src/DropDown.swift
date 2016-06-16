@@ -272,14 +272,14 @@ public final class DropDown: UIView {
      
      Changing the cell nib automatically reloads the drop down.
      */
-    public var cellNib = UINib(nibName: "DropDownCell", bundle: NSBundle(forClass: DropDownCell.self)) {
-        didSet {
-            tableView.registerNib(cellNib, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
+	public var cellNib = UINib(nibName: "DropDownCell", bundle: NSBundle(forClass: DropDownCell.self)) {
+		didSet {
+			tableView.registerNib(cellNib, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
 			templateCell = nil
-            reloadAllComponents()
-        }
-    }
-    
+			reloadAllComponents()
+		}
+	}
+	
 	//MARK: Content
 
 	/**
