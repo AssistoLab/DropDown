@@ -12,6 +12,7 @@ public typealias Index = Int
 public typealias Closure = () -> Void
 public typealias SelectionClosure = (Index, String) -> Void
 public typealias ConfigurationClosure = (Index, String) -> String
+public typealias CellConfigurationClosure = (Index, String, DropDownCell) -> Void
 private typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
 /// Can be `UIView` or `UIBarButtonItem`.
@@ -79,6 +80,8 @@ public final class DropDown: UIView {
 	private let dismissableView = UIView()
 	private let tableViewContainer = UIView()
 	private let tableView = UITableView()
+	private var templateCell: DropDownCell!
+
 
 	/// The view to which the drop down will displayed onto.
 	public weak var anchorView: AnchorView? {
@@ -263,7 +266,20 @@ public final class DropDown: UIView {
 	public dynamic var textFont = DPDConstant.UI.TextFont {
 		didSet { reloadAllComponents() }
 	}
-
+    
+    /**
+     The NIB to use for DropDownCells
+     
+     Changing the cell nib automatically reloads the drop down.
+     */
+	public var cellNib = UINib(nibName: "DropDownCell", bundle: NSBundle(forClass: DropDownCell.self)) {
+		didSet {
+			tableView.registerNib(cellNib, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
+			templateCell = nil
+			reloadAllComponents()
+		}
+	}
+	
 	//MARK: Content
 
 	/**
@@ -302,6 +318,15 @@ public final class DropDown: UIView {
 	public var cellConfiguration: ConfigurationClosure? {
 		didSet { reloadAllComponents() }
 	}
+    
+    /**
+     A advanced formatter for the cells. Allows customization when custom cells are used
+     
+     Changing `customCellConfiguration` automatically reloads the drop down.
+     */
+    public var customCellConfiguration: CellConfigurationClosure? {
+        didSet { reloadAllComponents() }
+    }
 
 	/// The action to execute when the user selects a cell.
 	public var selectionAction: SelectionClosure?
@@ -388,8 +413,8 @@ public final class DropDown: UIView {
 private extension DropDown {
 
 	func setup() {
-		tableView.registerNib(DropDownCell.Nib, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
-		
+		tableView.registerNib(cellNib, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
+
 		dispatch_async(dispatch_get_main_queue()) {
 			//HACK: If not done in dispatch_async on main queue `setupUI` will have no effect
 			self.updateConstraintsIfNeeded()
@@ -635,16 +660,16 @@ extension DropDown {
 	}
 	
 	private func fittingWidth() -> CGFloat {
-		struct Static {
-			static let templateCell = DropDownCell.Nib.instantiateWithOwner(nil, options: nil)[0] as! DropDownCell
+		if templateCell == nil {
+			templateCell = cellNib.instantiateWithOwner(nil, options: nil)[0] as! DropDownCell
 		}
 		
 		var maxWidth: CGFloat = 0
 		
 		for item in dataSource {
-			Static.templateCell.optionLabel.text = item
-			Static.templateCell.bounds.size.height = cellHeight
-			let width = Static.templateCell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).width
+			templateCell.optionLabel.text = item
+			templateCell.bounds.size.height = cellHeight
+			let width = templateCell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).width
 			
 			if width > maxWidth {
 				maxWidth = width
@@ -882,6 +907,8 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		} else {
 			cell.optionLabel.text = dataSource[index]
 		}
+        
+		customCellConfiguration?(index, dataSource[index], cell)
 
 		return cell
 	}
