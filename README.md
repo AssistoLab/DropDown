@@ -19,7 +19,7 @@ A Material Design drop down for iOS written in Swift.
 Do `pod try DropDown` in your console and run the project to try a demo.
 To install [CocoaPods](http://www.cocoapods.org), run `sudo gem install cocoapods` in your console.
 
-## Installation
+## Installation 📱
 
 ### CocoaPods
 
@@ -43,7 +43,7 @@ Use [Carthage](https://github.com/Carthage/Carthage).
 1. Download the [latest code version](http://github.com/AssistoLab/DropDown/archive/master.zip) or add the repository as a git submodule to your git-tracked project.
 2. Drag and drop the **src**, **helpers** and also the **resources** directory from the archive in your project navigator. Make sure to select *Copy items* when asked if you extracted the code archive outside of your project.
 
-## Basic usage
+## Basic usage ✨
 
 ```swift
 let dropDown = DropDown()
@@ -74,7 +74,7 @@ dropDown.show()
 dropDown.hide()
 ```
 
-## Important
+## Important ⚠️
 
 Don't forget to put:
 
@@ -84,7 +84,7 @@ DropDown.startListeningToKeyboard()
 
 in your `AppDelegate`'s `didFinishLaunching` method so that the drop down will handle its display with the keyboard displayed even the first time a drop down is showed.
 
-## Advanced usage
+## Advanced usage 🛠
 
 ### Direction
 
@@ -114,7 +114,9 @@ dropDown.topOffset = CGPoint(x: 0, y:-dropDown.anchorView.bounds.height)
 ```
 *Note the minus sign used here to offset to the top.*
 
-### Formatted text
+### Cell configuration
+
+#### Formatted text
 
 By default, the cells in the drop down have the `dataSource` values as text.
 If you want a custom formatted text for the cells, you can set `cellConfiguration` like this:
@@ -124,6 +126,31 @@ dropDown.cellConfiguration = { [unowned self] (index, item) in
   return "- \(item) (option \(index))"
 }
 ```
+
+#### Custom cell
+
+You can also create your own custom cell, from your .xib file. To have something like this for example:
+<br/>[![](Screenshots/3.png)](Screenshots/3.png)
+
+For this you have to:
+
+1. Create your custom xib
+2. Create a [`DropDownCell`](DropDown/src/DropDownCell.swift) subclass
+3. Link the cell in your xib to your custom class
+4. At least have a label in your nib to link to the [`optionLabel`](DropDown/src/DropDownCell.swift#L14) `IBOutlet` in code
+5. You're all set!
+6. From a `DropDown` instance, do:
+```swift
+dropDown.cellNib = UINib(nibName: "YourNib", bundle: nil)
+
+dropDown.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
+   guard let cell = cell as? MyCell else { return }
+
+   // Setup your custom UI components
+   cell.flagImage = flagImages[index]
+}
+```
+7. And you're good to go! 🙆
 
 ### Events
 
@@ -171,7 +198,7 @@ dropDown.selectedItem() // -> String?
 dropDown.indexForSelectedRow() // -> Int?
 ```
 
-## Customize UI
+## Customize UI 🖌
 
 You can customize these properties of the drop down:
 
@@ -191,7 +218,7 @@ DropDown.appearance().selectionBackgroundColor = UIColor.lightGrayColor()
 DropDown.appearance().cellHeight = 60
 ```
 
-## Expert mode
+## Expert mode 🤓
 
 when calling the `show` method, it returns a tuple like this:
 
