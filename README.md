@@ -40,8 +40,25 @@ Use [Carthage](https://github.com/Carthage/Carthage).
 
 ### Source files
 
-1. Download the [latest code version](http://github.com/AssistoLab/DropDown/archive/master.zip) or add the repository as a git submodule to your git-tracked project.
-2. Drag and drop the **src**, **helpers** and also the **resources** directory from the archive in your project navigator. Make sure to select *Copy items* when asked if you extracted the code archive outside of your project.
+A regular way to use DropDown in your project would be using Embedded Framework. There are two approaches, using source code and adding submodule.
+
+Add source code:
+
+1. Download the [latest code version](http://github.com/AssistoLab/DropDown/archive/master.zip).
+2. Unzip the download file, copy `DropDown` folder to your project folder
+
+Add submodule
+
+1. In your favorite terminal, `cd` into your top-level project directory, and entering the following command:
+``` bash
+$ git submodule add git@github.com:AssistoLab/DropDown.git
+```
+
+After you get the source code either by adding it directly or using submodule, then do the following steps:
+
+- Open `DropDown` folder, and drag `DropDown.xcodeproj` into the file navigator of your app project, under you app project.
+- In Xcode, navigate to the target configuration window by clicking the blue project icon, and selecting the application target under the "Targets" heading in the sidebar.
+- Open "Build Phases" panel in the tab bar at the top of the window, expend the "Target Dependencies" group and add `DropDown.framework` under DropDown icon in the popup window by clicking `+`. Similarly, you can also add `DropDown.framework` in "Embedded Binaries" under "General" tab.
 
 ## Basic usage ✨
 
