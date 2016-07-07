@@ -32,7 +32,11 @@ internal struct DPDConstant {
 		static let CornerRadius: CGFloat = 2
 		static let RowHeight: CGFloat = 44
 		static let HeightPadding: CGFloat = 20
-
+        static let HeaderTitleBackgroundColor = BackgroundColor
+        static let HeaderTitleTextFont = UIFont.systemFontOfSize(15)
+        static let HeaderTitleTextColor = UIColor.grayColor()
+        static let HeaderHeight: CGFloat = 22
+        
 		struct Shadow {
 
 			static let Color = UIColor.darkGrayColor()
