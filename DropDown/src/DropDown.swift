@@ -7,12 +7,15 @@
 //
 
 import UIKit
+
+// MARK: Types
+/// Index Protocol
 public protocol Index {
     var asIndexPath : NSIndexPath {get}
     var section: Int {get}
     var row: Int {get}
 }
-
+// Index can only be an Int or  NSIndexPath
 extension Int: Index {
     public var asIndexPath: NSIndexPath { return NSIndexPath(forRow: self, inSection: 0) }
     public var section: Int {return 0}
@@ -21,9 +24,14 @@ extension Int: Index {
 extension NSIndexPath: Index {
     public var asIndexPath: NSIndexPath { return self }
 }
+/// DataSourceType PROTOCOL Represent the data type of the List contents
+public protocol DataSourceType {}
 
+// DataSourceType can only be an Array or a String
+extension Array: DataSourceType {}
+extension String: DataSourceType {}
 
-//public typealias Index = NSIndexPath
+// MARK :- Aliases
 public typealias Closure = () -> Void
 public typealias SelectionClosure = (Index, String) -> Void
 public typealias ConfigurationClosure = (Index, String) -> String
@@ -338,7 +346,7 @@ public final class DropDown: UIView {
      
      Changing the data source automatically reloads the drop down.
      */
-    public var dataSource = [[String]]() {
+    public var dataSource = [DataSourceType]() {
         didSet {
             deselectRowAtIndexPath(selectedRowIndex)
             reloadAllComponents()
@@ -367,6 +375,7 @@ public final class DropDown: UIView {
     }
     
     /// The index of the row after its seleciton.
+    
     private var selectedRowIndex: Index?
     
     /**
@@ -444,7 +453,7 @@ public final class DropDown: UIView {
      
      - returns: A new instance of a drop down customized with the above parameters.
      */
-    public convenience init(anchorView: AnchorView, selectionAction: SelectionClosure? = nil, dataSource: [[String]] = [], topOffset: CGPoint? = nil, bottomOffset: CGPoint? = nil, cellConfiguration: ConfigurationClosure? = nil, cancelAction: Closure? = nil) {
+    public convenience init(anchorView: AnchorView, selectionAction: SelectionClosure? = nil, dataSource: [DataSourceType] = [], topOffset: CGPoint? = nil, bottomOffset: CGPoint? = nil, cellConfiguration: ConfigurationClosure? = nil, cancelAction: Closure? = nil) {
         self.init(frame: .zero)
         
         self.anchorView = anchorView
@@ -726,7 +735,7 @@ extension DropDown {
         var maxWidth: CGFloat = 0
         let _flatted = dataSource.flatMap({$0})
         for item in _flatted {
-            templateCell.optionLabel.text = item
+            templateCell.optionLabel.text = item as? String
             templateCell.bounds.size.height = cellHeight
             let width = templateCell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).width
             
@@ -935,13 +944,11 @@ extension DropDown {
     /// Returns the selected item.
     public var selectedItem: String? {
         guard let index = tableView.indexPathForSelectedRow else { return nil }
-        
-        return dataSource[index.section][index.row]
+        return dataSourceContentFor(index)
     }
-    
     /// Returns the height needed to display all cells.
     private var tableHeight: CGFloat {
-        return tableView.rowHeight * CGFloat(dataSource.flatMap({$0}).count) + headerHeight * CGFloat(titles.count)
+        return tableView.rowHeight * CGFloat(countOfAllElementsInDataSource()) + headerHeight * CGFloat(titles.count)
     }
     
 }
@@ -951,12 +958,15 @@ extension DropDown {
 extension DropDown: UITableViewDataSource, UITableViewDelegate {
     
     public func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        let sectionHeaderHeight: CGFloat = dataSource.count > 1 ? headerHeight : (titles.count == dataSource.count) ? headerHeight : 0.0
-        return sectionHeaderHeight
+        if dataSource.first is [String] {
+            return headerHeight
+        } else {
+            return 0.0
+        }
     }
     
     public func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if titles.count == dataSource.count {
+        if titles.count > section {
             let label = UILabel()
             label.backgroundColor = headerTitleBackGroundColor
             label.text = titles[section]
@@ -969,11 +979,11 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
         
     }
     public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource[section].count
+        return numberOfRowsForSection(section)
     }
     
     public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return dataSource.count
+        return numberOfSections()
     }
     
     public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -989,12 +999,12 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
         cell.selectedBackgroundColor = selectionBackgroundColor
         
         if let cellConfiguration = cellConfiguration {
-            cell.optionLabel.text = cellConfiguration(index, dataSource[index.section][index.row])
+            cell.optionLabel.text = cellConfiguration(index, dataSourceContentFor(index)!)
         } else {
-            cell.optionLabel.text = dataSource[index.section][index.row]
+            cell.optionLabel.text = dataSourceContentFor(index)
         }
         
-        customCellConfiguration?(index, dataSource[index.section][index.row], cell)
+        customCellConfiguration?(index, dataSourceContentFor(index)!, cell)
         
         return cell
     }
@@ -1004,9 +1014,11 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedRowIndex = indexPath
+        if dataSource.first is [String] {
+            selectedRowIndex = indexPath
+        }
         selectedRowIndex = indexPath.row
-        selectionAction?(selectedRowIndex!, dataSource[(selectedRowIndex?.asIndexPath.section)!][(selectedRowIndex?.asIndexPath.row)!])
+        selectionAction?(selectedRowIndex!, dataSourceContentFor(indexPath)!)
         
         if let _ = anchorView as? UIBarButtonItem {
             // DropDown's from UIBarButtonItem are menus so we deselect the selected menu right after selection
@@ -1076,4 +1088,47 @@ extension DropDown {
         self.setNeedsUpdateConstraints()
     }
     
+}
+
+// MARK: - Utlities
+extension DropDown {
+    private func dataSourceContentFor(index: NSIndexPath) -> String? {
+        if dataSource.first is [String] {
+            if let _content = dataSource[index.section] as? [String] {
+                return _content[index.row]
+            }
+        } else {
+            return dataSource[index.row] as? String
+        }
+        return nil
+    }
+    private func numberOfRowsForSection(section: Int) -> Int {
+        if dataSource.first is [String] {
+            if let _content = dataSource[section] as? [String] {
+                return _content.count
+            }
+        } else {
+            return dataSource.count
+        }
+        return 0
+    }
+    private func numberOfSections() -> Int {
+        if dataSource.first is [String] {
+            return dataSource.count
+        } else {
+            return 1
+        }
+    }
+    private func countOfAllElementsInDataSource() -> Int {
+        var count = 0
+        dataSource.forEach { (ds) in
+            if ds is String {
+                count += 1
+            } else {
+                assert(ds is [String], "Only Strings allowed inside the array")
+                count += (ds as! [String]).count
+            }
+        }
+        return count
+    }
 }

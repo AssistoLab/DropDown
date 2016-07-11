@@ -188,7 +188,7 @@ class ViewController: UIViewController {
 		amountDropDown.bottomOffset = CGPoint(x: 0, y: amountButton.bounds.height)
 		
 		// You can also use localizationKeysDataSource instead. Check the docs.
-		amountDropDown.dataSource = [[
+		amountDropDown.dataSource = [
 			"10 €",
 			"20 €",
 			"30 €",
@@ -201,11 +201,13 @@ class ViewController: UIViewController {
 			"100 €",
 			"110 €",
 			"120 €"
-		]]
+		]
 		
 		// Action triggered on selection
 		amountDropDown.selectionAction = { [unowned self] (index, item) in
 			self.amountButton.setTitle(item, forState: .Normal)
+            debugPrint("selection section amount \(index.section) row \(index.row) .. \(index)")
+
 		}
 	}
 	
@@ -218,11 +220,11 @@ class ViewController: UIViewController {
 		chooseDropDown.bottomOffset = CGPoint(x: 0, y: chooseButton.bounds.height)
 		
 		// You can also use localizationKeysDataSource instead. Check the docs.
-		chooseDropDown.dataSource = [[
+		chooseDropDown.dataSource = [
 			"Lorem ipsum dolor",
 			"sit amet consectetur",
 			"cadipisci en..."
-		]]
+		]
 		
 		// Action triggered on selection
 		chooseDropDown.selectionAction = { [unowned self] (index, item) in
@@ -235,24 +237,24 @@ class ViewController: UIViewController {
 //		centeredDropDown.anchorView = centeredDropDownButton
 		
 		// You can also use localizationKeysDataSource instead. Check the docs.
-		centeredDropDown.dataSource = [[
+		centeredDropDown.dataSource = [
 			"The drop down",
 			"Is centered on",
 			"the view because",
 			"it has no anchor view defined.",
 			"Click anywhere to dismiss."
-		]]
+		]
 	}
 	
 	func setupRightBarDropDown() {
 		rightBarDropDown.anchorView = rightBarButton
 		
 		// You can also use localizationKeysDataSource instead. Check the docs.
-		rightBarDropDown.dataSource = [[
+		rightBarDropDown.dataSource = [
 			"Menu 1",
 			"Menu 2",
 			"Menu 3",
 			"Menu 4"
-		]]
+		]
 	}
 }
