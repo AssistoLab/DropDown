@@ -7,14 +7,35 @@
 //
 
 import UIKit
+public protocol Index {
+    var asIndexPath : NSIndexPath {get}
+    var section: Int {get}
+    var row: Int {get}
+}
 
-public typealias Index = NSIndexPath
+extension Int: Index {
+    public var asIndexPath: NSIndexPath { return NSIndexPath(forRow: self, inSection: 0) }
+    public var section: Int {return 0}
+    public var row: Int {return self}
+}
+extension NSIndexPath: Index {
+    public var asIndexPath: NSIndexPath { return self }
+}
+
+
+//public typealias Index = NSIndexPath
 public typealias Closure = () -> Void
 public typealias SelectionClosure = (Index, String) -> Void
 public typealias ConfigurationClosure = (Index, String) -> String
 public typealias CellConfigurationClosure = (Index, String, DropDownCell) -> Void
 private typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
-private func >=(lhs: NSIndexPath,rhs: Int) -> Bool { return lhs.section >= rhs && lhs.row >= rhs }
+private func >=(lhs: Index,rhs: Int) -> Bool {
+    if let _index = lhs as? NSIndexPath {
+        return _index.section >= rhs && _index.row >= rhs
+    } else {
+        return lhs as! Int >= rhs
+    }
+}
 /// Can be `UIView` or `UIBarButtonItem`.
 @objc
 public protocol AnchorView: class {
@@ -879,9 +900,14 @@ extension DropDown {
     
     /// (Pre)selects a row at a certain index.
     public func selectRowAtIndex(index: Index?) {
-        if let index = index {
+        if let index = index as? NSIndexPath{
             tableView.selectRowAtIndexPath(
                 index,
+                animated: false,
+                scrollPosition: .Middle)
+        } else if let index = index as? Int{
+            tableView.selectRowAtIndexPath(
+                NSIndexPath(forItem: index, inSection: 0),
                 animated: false,
                 scrollPosition: .Middle)
         } else {
@@ -898,7 +924,7 @@ extension DropDown {
             where index >= 0
             else { return }
         
-        tableView.deselectRowAtIndexPath(index, animated: true)
+        tableView.deselectRowAtIndexPath(index.asIndexPath, animated: true)
     }
     
     /// Returns the index of the selected row.
@@ -974,12 +1000,13 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.selected = indexPath == selectedRowIndex
+        cell.selected = indexPath == selectedRowIndex?.asIndexPath
     }
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedRowIndex = indexPath
-        selectionAction?(selectedRowIndex!, dataSource[(selectedRowIndex?.section)!][(selectedRowIndex?.row)!])
+        selectedRowIndex = indexPath.row
+        selectionAction?(selectedRowIndex!, dataSource[(selectedRowIndex?.asIndexPath.section)!][(selectedRowIndex?.asIndexPath.row)!])
         
         if let _ = anchorView as? UIBarButtonItem {
             // DropDown's from UIBarButtonItem are menus so we deselect the selected menu right after selection

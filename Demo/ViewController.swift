@@ -165,7 +165,7 @@ class ViewController: UIViewController {
 		// Action triggered on selection
 		chooseArticleDropDown.selectionAction = { [unowned self] (index, item) in
 			self.chooseArticleButton.setTitle(item, forState: .Normal)
-            debugPrint("selection section\(index.section) row \(index.row)")
+            debugPrint("selection section\(index.section) row \(index.row) .. \(index)")
 		}
 		
 		// Action triggered on dropdown cancelation (hide)
