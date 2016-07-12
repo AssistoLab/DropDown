@@ -1014,10 +1014,10 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
     }
     
     public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        selectedRowIndex = indexPath.row
         if dataSource.first is [String] {
             selectedRowIndex = indexPath
         }
-        selectedRowIndex = indexPath.row
         selectionAction?(selectedRowIndex!, dataSourceContentFor(indexPath)!)
         
         if let _ = anchorView as? UIBarButtonItem {
