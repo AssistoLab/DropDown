@@ -12,6 +12,8 @@ open class DropDownCell: UITableViewCell {
 		
 	//UI
 	@IBOutlet open weak var optionLabel: UILabel!
+    @IBOutlet open weak var leftIcon: UIImageView!
+    @IBOutlet open weak var rightIcon: UIImageView!
 	
 	var selectedBackgroundColor: UIColor?
 
@@ -64,5 +66,20 @@ extension DropDownCell {
 			executeSelection()
 		}
 	}
+    
+    public func setupNoIcon() {
+        leftIcon.removeFromSuperview()
+        rightIcon.removeFromSuperview()
+    }
+    
+    public func setupLeftIcon(icon: UIImage) {
+        rightIcon.removeFromSuperview()
+        leftIcon.image = icon
+    }
+    
+    public func setupRightIcon(icon: UIImage) {
+        leftIcon.removeFromSuperview()
+        rightIcon.image = icon
+    }
 	
 }
