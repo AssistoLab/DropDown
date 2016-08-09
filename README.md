@@ -120,14 +120,14 @@ If you need the drop down to be below your anchor view when the direction of the
 
 ```swift
 // Top of drop down will be below the anchorView
-dropDown.bottomOffset = CGPoint(x: 0, y:dropDown.anchorView.bounds.height)
+dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
 ```
 
 If you set the drop down direction to `.Any` or `.Top` you can also precise the offset when the drop down will shown above like this:
 
 ```swift
 // When drop down is displayed with `Direction.Top`, it will be above the anchorView
-dropDown.topOffset = CGPoint(x: 0, y:-dropDown.anchorView.bounds.height)
+dropDown.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
 ```
 *Note the minus sign used here to offset to the top.*
 
