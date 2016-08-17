@@ -151,29 +151,42 @@ You can also create your own custom cell, from your .xib file. To have something
 
 For this you have to:
 
-1. Create a [`DropDownCell`](DropDown/src/DropDownCell.swift) subclass (e.g. **MyCell.swift**)
+- Create a [`DropDownCell`](DropDown/src/DropDownCell.swift) subclass (e.g. *MyCell.swift*)
 ```swift
 class MyCell: DropDownCell {
-   @IBOutlet weak pirvate var flagImageView: UIImageView!
+   @IBOutlet weak var suffixLabel: UILabel!
 }
 ```
-2. Create your custom xib (e.g. **MyCell.xib**) and design your cell view in it
-3. Link the cell in your xib to your custom class
-4. At least have a label in your xib to link to the [`optionLabel`](DropDown/src/DropDownCell.swift#L14) `IBOutlet` in code (`optionLabel` is a property of `DropDownCell`)
-6. Then, you simply need to do this:
+- Create your custom xib (e.g. *MyCell.xib*) and design your cell view in it
+<br/>![](https://s3.postimg.org/8k3s2ya0z/custom_1.png)
+- Link the cell in your xib to your custom class
+<br/>![](https://s3.postimg.org/wcd3ehc1v/custom_2.png)
+- At least have a label in your xib to link to the [`optionLabel`](DropDown/src/DropDownCell.swift#L14) `IBOutlet` in code (`optionLabel` is a property of `DropDownCell`)
+<br/>![](https://s3.postimg.org/3o05b99vn/custom_3.png)
+- Then, you simply need to do this:
 ```swift
 let dropDown = DropDown()
 
+// The view to which the drop down will appear on
+dropDown.anchorView = view // UIView or UIBarButtonItem
+
+// The list of items to display. Can be changed dynamically
+dropDown.dataSource = ["Car", "Motorcycle", "Truck"]
+
+/*** IMPORTANT PART FOR CUSTOM CELLS ***/
 dropDown.cellNib = UINib(nibName: "MyCell", bundle: nil)
 
 dropDown.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
    guard let cell = cell as? MyCell else { return }
 
    // Setup your custom UI components
-   cell.flagImageView.image = flagImages[index]
+   cell.suffixLabel.text = "Suffix \(index)"
 }
+/*** END - IMPORTANT PART FOR CUSTOM CELLS ***/
 ```
-7. And you're good to go! 🙆
+- And you're good to go! 🙆
+
+For a complete example, don't hesitate to check the demo app and code.
 
 ### Events
 
