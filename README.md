@@ -151,20 +151,26 @@ You can also create your own custom cell, from your .xib file. To have something
 
 For this you have to:
 
-1. Create your custom xib
-2. Create a [`DropDownCell`](DropDown/src/DropDownCell.swift) subclass
-3. Link the cell in your xib to your custom class
-4. At least have a label in your nib to link to the [`optionLabel`](DropDown/src/DropDownCell.swift#L14) `IBOutlet` in code
-5. You're all set!
-6. From a `DropDown` instance, do:
+1. Create a [`DropDownCell`](DropDown/src/DropDownCell.swift) subclass (e.g. **MyCell.swift**)
 ```swift
-dropDown.cellNib = UINib(nibName: "YourNib", bundle: nil)
+class MyCell: DropDownCell {
+   @IBOutlet weak pirvate var flagImageView: UIImageView!
+}
+```
+2. Create your custom xib (e.g. **MyCell.xib**) and design your cell view in it
+3. Link the cell in your xib to your custom class
+4. At least have a label in your xib to link to the [`optionLabel`](DropDown/src/DropDownCell.swift#L14) `IBOutlet` in code (`optionLabel` is a property of `DropDownCell`)
+6. Then, you simply need to do this:
+```swift
+let dropDown = DropDown()
+
+dropDown.cellNib = UINib(nibName: "MyCell", bundle: nil)
 
 dropDown.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
    guard let cell = cell as? MyCell else { return }
 
    // Setup your custom UI components
-   cell.flagImage = flagImages[index]
+   cell.flagImageView.image = flagImages[index]
 }
 ```
 7. And you're good to go! 🙆
