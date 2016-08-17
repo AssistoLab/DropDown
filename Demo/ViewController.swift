@@ -165,17 +165,29 @@ class ViewController: UIViewController {
 		chooseArticleDropDown.bottomOffset = CGPoint(x: 0, y: chooseArticleButton.bounds.height)
 		
 		// You can also use localizationKeysDataSource instead. Check the docs.
-		chooseArticleDropDown.dataSource = [
+        chooseArticleDropDown.titles = ["Smart Phones","Others"]
+		chooseArticleDropDown.localizationKeysDataSource = [
+            [
 			"iPhone SE | Black | 64G",
 			"Samsung S7",
 			"Huawei P8 Lite Smartphone 4G",
 			"Asus Zenfone Max 4G",
-			"Apple Watwh | Sport Edition"
-		]
-		
+            "iPhone 7 Rumors",
+            "Galaxy Wide smartphone",
+            "Galaxy 7 edge"
+            ],
+            ["iPad Air 4",
+            "Apple Watch | Sport Edition",
+            "macOS Whats new",
+            "WWDC 2016",
+            "Siri for developers",
+            "Swift 3"
+            ]
+        ]
 		// Action triggered on selection
 		chooseArticleDropDown.selectionAction = { [unowned self] (index, item) in
 			self.chooseArticleButton.setTitle(item, forState: .Normal)
+            debugPrint("selection section\(index.section) row \(index.row) .. \(index)")
 		}
 		
 		// Action triggered on dropdown cancelation (hide)
@@ -216,6 +228,8 @@ class ViewController: UIViewController {
 		// Action triggered on selection
 		amountDropDown.selectionAction = { [unowned self] (index, item) in
 			self.amountButton.setTitle(item, forState: .Normal)
+            debugPrint("selection section amount \(index.section) row \(index.row) .. \(index)")
+
 		}
 	}
 	
