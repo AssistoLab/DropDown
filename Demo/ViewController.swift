@@ -79,7 +79,7 @@ class ViewController: UIViewController {
 	
 	@IBAction func changeUI(sender: UISegmentedControl) {
 		switch sender.selectedSegmentIndex {
-		case 0: DropDown.setupDefaultAppearance()
+		case 0: setupDefaultDropDown()
 		case 1: customizeDropDown(self)
 		default: break;
 		}
@@ -91,6 +91,15 @@ class ViewController: UIViewController {
 	
 	@IBAction func hideKeyboard(sender: AnyObject) {
 		view.endEditing(false)
+	}
+	
+	func setupDefaultDropDown() {
+		DropDown.setupDefaultAppearance()
+		
+		dropDowns.forEach {
+			$0.cellNib = UINib(nibName: "DropDownCell", bundle: NSBundle(forClass: DropDownCell.self))
+			$0.customCellConfiguration = nil
+		}
 	}
 	
 	func customizeDropDown(sender: AnyObject) {
@@ -107,6 +116,19 @@ class ViewController: UIViewController {
 		appearance.animationduration = 0.25
 		appearance.textColor = .darkGrayColor()
 //		appearance.textFont = UIFont(name: "Georgia", size: 14)
+		
+		dropDowns.forEach {
+			/*** FOR CUSTOM CELLS ***/
+			$0.cellNib = UINib(nibName: "MyCell", bundle: nil)
+			
+			$0.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
+				guard let cell = cell as? MyCell else { return }
+				
+				// Setup your custom UI components
+				cell.suffixLabel.text = "Suffix \(index)"
+			}
+			/*** ---------------- ***/
+		}
 	}
 	
 	//MARK: - UIViewController
