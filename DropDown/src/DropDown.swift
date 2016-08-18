@@ -667,8 +667,8 @@ extension DropDown {
 		
 		var maxWidth: CGFloat = 0
 		
-		for item in dataSource {
-			templateCell.optionLabel.text = item
+		for index in 0..<dataSource.count {
+			configureCell(templateCell, at: index)
 			templateCell.bounds.size.height = cellHeight
 			let width = templateCell.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).width
 			
@@ -895,23 +895,27 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		let cell = tableView.dequeueReusableCellWithIdentifier(DPDConstant.ReusableIdentifier.DropDownCell, forIndexPath: indexPath) as! DropDownCell
 		let index = indexPath.row
 
+		configureCell(cell, at: index)
+
+		return cell
+	}
+	
+	private func configureCell(cell: DropDownCell, at index: Int) {
 		if index >= 0 && index < localizationKeysDataSource.count {
 			cell.accessibilityIdentifier = localizationKeysDataSource[index]
 		}
-
+		
 		cell.optionLabel.textColor = textColor
 		cell.optionLabel.font = textFont
 		cell.selectedBackgroundColor = selectionBackgroundColor
-
+		
 		if let cellConfiguration = cellConfiguration {
 			cell.optionLabel.text = cellConfiguration(index, dataSource[index])
 		} else {
 			cell.optionLabel.text = dataSource[index]
 		}
-        
+		
 		customCellConfiguration?(index, dataSource[index], cell)
-
-		return cell
 	}
 
 	public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
