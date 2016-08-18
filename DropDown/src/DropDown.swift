@@ -71,6 +71,19 @@ public final class DropDown: UIView {
 		case Bottom
 
 	}
+    
+    /// The position of the icon for each drop down row.
+    public enum IconPosition {
+        
+        /// The drop down icon will not show.
+        case None
+        
+        /// The drop down icon will show on the left side of the row.
+        case Left
+        
+        /// The drop down icon will show on the right side of the row.
+        case Right
+    }
 
 	//MARK: - Properties
 
@@ -126,6 +139,12 @@ public final class DropDown: UIView {
 	public var width: CGFloat? {
 		didSet { setNeedsUpdateConstraints() }
 	}
+    
+    /// The position of the icon to be shown on the row.
+    public var iconPosition: IconPosition?
+    
+    /// The icon image to be shown on the row.
+    public var icon: UIImage?
 
 	//MARK: Constraints
 	private var heightConstraint: NSLayoutConstraint!
@@ -909,7 +928,21 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 			cell.optionLabel.text = dataSource[index]
 		}
         
+        if let position = iconPosition, let iconImage = icon {
+            switch position {
+            case .None:
+                cell.setupNoIcon()
+            case .Left:
+                cell.setupLeftIcon(iconImage)
+            case .Right:
+                cell.setupRightIcon(iconImage)
+            }
+        } else {
+            cell.setupNoIcon()
+        }
+        
 		customCellConfiguration?(index, dataSource[index], cell)
+        
 
 		return cell
 	}
