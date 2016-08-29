@@ -8,13 +8,6 @@
 
 import UIKit
 
-public typealias Index = Int
-public typealias Closure = () -> Void
-public typealias SelectionClosure = (Index, String) -> Void
-public typealias ConfigurationClosure = (Index, String) -> String
-public typealias CellConfigurationClosure = (Index, String, DropDownCell) -> Void
-private typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
-
 /// Can be `UIView` or `UIBarButtonItem`.
 @objc
 public protocol AnchorView: class {
@@ -39,43 +32,145 @@ extension UIBarButtonItem: AnchorView {
 
 }
 
-/// A Material Design drop down in replacement for `UIPickerView`.
-public final class DropDown: UIView {
+/// Allows to specify a type that will be able to act as a datasource for the `DropDown`.
+/// DataSourceType can only be an `Array` or a `String` (to work with a one-section or multi-sections `UITableView`'s)
+public protocol DataSourceType {}
+
+extension Array: DataSourceType {}
+extension String: DataSourceType {}
+
+/// Allows to specify a type that will be able to act as an index for the `DropDown`.
+/// IndexType can only be an `Int` or a `NSIndexPath` (to work with a one-section or multi-sections `UITableView`'s)
+public protocol IndexType {
+	
+	var row: Int { get }
+	var section: Int { get }
+	var indexPath: NSIndexPath { get }
+	
+	static func createIndex(from indexPath: NSIndexPath) -> IndexType
+	
+}
+
+func ==(lhs: IndexType, rhs: IndexType) -> Bool {
+	return lhs.row == rhs.row
+		&& lhs.section == rhs.section
+}
+
+func ==(lhs: IndexType?, rhs: IndexType?) -> Bool {
+	guard let lhs = lhs, rhs = rhs else { return false }
+	
+	return lhs.row == rhs.row
+		&& lhs.section == rhs.section
+}
+
+func <(lhs: IndexType, rhs: IndexType) -> Bool {
+	return (lhs.section == rhs.section
+		&& lhs.row < rhs.row)
+		|| lhs.section < rhs.section
+}
+
+extension Int: IndexType {
+	
+	public var row: Int {
+		return self
+	}
+	
+	public var section: Int {
+		return 0
+	}
+	
+	public var indexPath: NSIndexPath {
+		return NSIndexPath(forRow: row, inSection: section)
+	}
+	
+	public static func createIndex(from indexPath: NSIndexPath) -> IndexType {
+		return indexPath.row
+	}
+	
+}
+
+extension NSIndexPath: IndexType {
+	
+	public var indexPath: NSIndexPath {
+		return self
+	}
+	
+	public static func createIndex(from indexPath: NSIndexPath) -> IndexType {
+		return indexPath
+	}
+
+}
+
+/// The dismiss mode for a drop down.
+public enum DismissMode {
+	
+	/// A tap outside the drop down is required to dismiss.
+	case OnTap
+	
+	/// No tap is required to dismiss, it will dimiss when interacting with anything else.
+	case Automatic
+	
+	/// Not dismissable by the user.
+	case Manual
+	
+}
+
+/// The direction where the drop down will show from the `anchorView`.
+public enum Direction {
+	
+	/// The drop down will show below the anchor view when possible, otherwise above if there is more place than below.
+	case Any
+	
+	/// The drop down will show above the anchor view or will not be showed if not enough space.
+	case Top
+	
+	/// The drop down will show below or will not be showed if not enough space.
+	case Bottom
+	
+}
+
+public protocol VisibleDropDownType: class {
+	
+	func cancel()
+	
+}
+
+extension DropDown: VisibleDropDownType {}
+extension SectionedDropDown: VisibleDropDownType {}
+
+public final class DropDown: DropDownBase<Int, String> {
+	
+	/// The current visible drop down. There can be only one visible drop down at a time.
+	public static weak var VisibleDropDown: VisibleDropDownType?
+	
+	/**
+	The option of the show animation. Global change.
+	*/
+	public static var animationEntranceOptions = DPDConstant.Animation.EntranceOptions
+	
+	/**
+	The option of the hide animation. Global change.
+	*/
+	public static var animationExitOptions = DPDConstant.Animation.ExitOptions
+	
+}
+
+public final class SectionedDropDown: DropDownBase<NSIndexPath, Array<String>> {}
+
+/// A Material Design drop down in replacement for `UIPickerView`. 
+/// This class is not intended to be subclassed. This class is used internally and should not be used or subclassed 
+/// directly. Use `DropDown` or `SectionedDropDown`.
+public class DropDownBase<Index: IndexType, DataSource: DataSourceType>: UIView, UITableViewDataSource, UITableViewDelegate {
+	
+	public typealias Closure = () -> Void
+	public typealias SelectionClosure = (Index, String) -> Void
+	public typealias ConfigurationClosure = (Index, String) -> String
+	public typealias CellConfigurationClosure = (Index, String, DropDownCell) -> Void
+	private typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
 	//TODO: handle iOS 7 landscape mode
 
-	/// The dismiss mode for a drop down.
-	public enum DismissMode {
-
-		/// A tap outside the drop down is required to dismiss.
-		case OnTap
-
-		/// No tap is required to dismiss, it will dimiss when interacting with anything else.
-		case Automatic
-
-		/// Not dismissable by the user.
-		case Manual
-
-	}
-
-	/// The direction where the drop down will show from the `anchorView`.
-	public enum Direction {
-
-		/// The drop down will show below the anchor view when possible, otherwise above if there is more place than below.
-		case Any
-
-		/// The drop down will show above the anchor view or will not be showed if not enough space.
-		case Top
-
-		/// The drop down will show below or will not be showed if not enough space.
-		case Bottom
-
-	}
-
 	//MARK: - Properties
-
-	/// The current visible drop down. There can be only one visible drop down at a time.
-	public static weak var VisibleDropDown: DropDown?
 
 	//MARK: UI
 	private let dismissableView = UIView()
@@ -222,16 +317,6 @@ public final class DropDown: UIView {
 	The duration of the show/hide animation.
 	*/
 	public dynamic var animationduration = DPDConstant.Animation.Duration
-
-	/**
-	The option of the show animation. Global change.
-	*/
-	public static var animationEntranceOptions = DPDConstant.Animation.EntranceOptions
-	
-	/**
-	The option of the hide animation. Global change.
-	*/
-	public static var animationExitOptions = DPDConstant.Animation.ExitOptions
 	
 	/**
 	The option of the show animation. Only change the caller. To change all drop down's use the static var.
@@ -406,13 +491,9 @@ public final class DropDown: UIView {
 		super.init(coder: aDecoder)
 		setup()
 	}
-
-}
-
-//MARK: - Setup
-
-private extension DropDown {
-
+	
+	//MARK: - Setup
+	
 	func setup() {
 		tableView.registerNib(cellNib, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
 
@@ -451,13 +532,9 @@ private extension DropDown {
 		setHiddentState()
 		hidden = true
 	}
-
-}
-
-//MARK: - UI
-
-extension DropDown {
-
+	
+	//MARK: - UI
+	
 	public override func updateConstraints() {
 		if !didSetupConstraints {
 			setupConstraints()
@@ -705,12 +782,8 @@ extension DropDown {
 		}
 	}
 	
-}
-
-//MARK: - Actions
-
-extension DropDown {
-    
+	//MARK: - Actions
+	
     /**
      An Objective-C alias for the show() method which converts the returned tuple into an NSDictionary.
      
@@ -735,18 +808,24 @@ extension DropDown {
 	- returns: Wether it succeed and how much height is needed to display all cells at once.
 	*/
 	public func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
-		if self == DropDown.VisibleDropDown {
+		if self === DropDown.VisibleDropDown {
 			return (true, 0)
 		}
 
 		if let visibleDropDown = DropDown.VisibleDropDown {
 			visibleDropDown.cancel()
 		}
-
+		
 		willShowAction?()
-
-		DropDown.VisibleDropDown = self
-
+		
+		if let dropDown = self as? DropDown {
+			DropDown.VisibleDropDown = dropDown
+		} else if let dropDown = self as? SectionedDropDown {
+			DropDown.VisibleDropDown = dropDown
+		} else {
+			fatalError("Do not subclass DropDownBase. Use DropDown or SectionedDropDown.")
+		}
+		
 		setNeedsUpdateConstraints()
 
 		let visibleWindow = UIWindow.visibleWindow()
@@ -782,7 +861,7 @@ extension DropDown {
 
 	/// Hides the drop down.
 	public func hide() {
-		if self == DropDown.VisibleDropDown {
+		if self === DropDown.VisibleDropDown {
 			/*
 			If one drop down is showed and another one is not
 			but we call `hide()` on the hidden one:
@@ -808,7 +887,7 @@ extension DropDown {
 			})
 	}
 
-	private func cancel() {
+	public func cancel() {
 		hide()
 		cancelAction?()
 	}
@@ -821,13 +900,9 @@ extension DropDown {
 		alpha = 1
 		tableViewContainer.transform = CGAffineTransformIdentity
 	}
-
-}
-
-//MARK: - UITableView
-
-extension DropDown {
-
+	
+	//MARK: - UITableView
+	
 	/**
 	Reloads all the cells.
 
@@ -844,7 +919,7 @@ extension DropDown {
 	public func selectRowAtIndex(index: Index?) {
 		if let index = index {
 			tableView.selectRowAtIndexPath(
-				NSIndexPath(forRow: index, inSection: 0),
+				index.indexPath,
 				animated: false,
 				scrollPosition: .Middle)
 		} else {
@@ -858,15 +933,17 @@ extension DropDown {
 		selectedRowIndex = nil
 
 		guard let index = index
-			where index >= 0
+			where index.row >= 0 && index.section >= 0
 			else { return }
 
-		tableView.deselectRowAtIndexPath(NSIndexPath(forRow: index, inSection: 0), animated: true)
+		tableView.deselectRowAtIndexPath(index.indexPath, animated: true)
 	}
 
 	/// Returns the index of the selected row.
 	public var indexForSelectedRow: Index? {
-		return tableView.indexPathForSelectedRow?.row
+		guard let indexPath = tableView.indexPathForSelectedRow else { return nil }
+		
+		return Index.createIndex(from: indexPath) as? Index
 	}
 
 	/// Returns the selected item.
@@ -880,28 +957,25 @@ extension DropDown {
 	private var tableHeight: CGFloat {
 		return tableView.rowHeight * CGFloat(dataSource.count)
 	}
-
-}
-
-//MARK: - UITableViewDataSource - UITableViewDelegate
-
-extension DropDown: UITableViewDataSource, UITableViewDelegate {
-
+	
+	//MARK: - UITableViewDataSource - UITableViewDelegate
+	
 	public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		return dataSource.count
 	}
 
 	public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCellWithIdentifier(DPDConstant.ReusableIdentifier.DropDownCell, forIndexPath: indexPath) as! DropDownCell
-		let index = indexPath.row
+		let index = Index.createIndex(from: indexPath) as! Index
 
 		configureCell(cell, at: index)
 
 		return cell
 	}
 	
-	private func configureCell(cell: DropDownCell, at index: Int) {
-		if index >= 0 && index < localizationKeysDataSource.count {
+	private func configureCell(cell: DropDownCell, at index: Index) {
+		if index.row >= 0 && index.section >= 0 {
+//			index < localizationKeysDataSource.count
 			cell.accessibilityIdentifier = localizationKeysDataSource[index]
 		}
 		
@@ -919,11 +993,13 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 	}
 
 	public func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-		cell.selected = indexPath.row == selectedRowIndex
+		let rowIndex = Index.createIndex(from: indexPath) as? Index
+		
+		cell.selected = rowIndex == selectedRowIndex
 	}
 
 	public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		selectedRowIndex = indexPath.row
+		selectedRowIndex = Index.createIndex(from: indexPath) as? Index
 		selectionAction?(selectedRowIndex!, dataSource[selectedRowIndex!])
 
 		if let _ = anchorView as? UIBarButtonItem {
@@ -933,13 +1009,9 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 
 		hide()
 	}
-
-}
-
-//MARK: - Auto dismiss
-
-extension DropDown {
-
+	
+	//MARK: - Auto dismiss
+	
 	public override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
 		let view = super.hitTest(point, withEvent: event)
 
@@ -955,17 +1027,11 @@ extension DropDown {
 	private func dismissableViewTapped() {
 		cancel()
 	}
-
-}
-
-//MARK: - Keyboard events
-
-extension DropDown {
-
-	/**
-	Starts listening to keyboard events.
-	Allows the drop down to display correctly when keyboard is showed.
-	*/
+	
+	//MARK: - Keyboard events
+	
+	/// Starts listening to keyboard events.
+	/// Allows the drop down to display correctly when keyboard is showed.
 	public static func startListeningToKeyboard() {
 		KeyboardListener.sharedInstance.startListeningToKeyboard()
 	}
@@ -984,14 +1050,14 @@ extension DropDown {
 			name: UIKeyboardWillHideNotification,
 			object: nil)
 	}
-
+	
 	private func stopListeningToNotifications() {
 		NSNotificationCenter.defaultCenter().removeObserver(self)
 	}
-
+	
 	@objc
 	private func keyboardUpdate() {
 		self.setNeedsUpdateConstraints()
 	}
-
+	
 }
