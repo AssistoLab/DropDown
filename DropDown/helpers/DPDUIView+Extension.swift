@@ -12,11 +12,11 @@ import UIKit
 
 internal extension UIView {
 	
-	func addConstraints(format format: String, options: NSLayoutFormatOptions = [], metrics: [String: AnyObject]? = nil, views: [String: UIView]) {
-		addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(format, options: options, metrics: metrics, views: views))
+	func addConstraints(format: String, options: NSLayoutFormatOptions = [], metrics: [String: AnyObject]? = nil, views: [String: UIView]) {
+		addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: options, metrics: metrics, views: views))
 	}
 	
-	func addUniversalConstraints(format format: String, options: NSLayoutFormatOptions = [], metrics: [String: AnyObject]? = nil, views: [String: UIView]) {
+	func addUniversalConstraints(format: String, options: NSLayoutFormatOptions = [], metrics: [String: AnyObject]? = nil, views: [String: UIView]) {
 		addConstraints(format: "H:\(format)", options: options, metrics: metrics, views: views)
 		addConstraints(format: "V:\(format)", options: options, metrics: metrics, views: views)
 	}
@@ -30,7 +30,7 @@ internal extension UIView {
 internal extension UIView {
 	
 	var windowFrame: CGRect? {
-		return superview?.convertRect(frame, toView: nil)
+		return superview?.convert(frame, to: nil)
 	}
 	
 }
@@ -38,10 +38,10 @@ internal extension UIView {
 internal extension UIWindow {
 	
 	static func visibleWindow() -> UIWindow? {
-		var currentWindow = UIApplication.sharedApplication().keyWindow
+		var currentWindow = UIApplication.shared.keyWindow
 		
 		if currentWindow == nil {
-			let frontToBackWindows = Array(UIApplication.sharedApplication().windows.reverse()) 
+			let frontToBackWindows = Array(UIApplication.shared.windows.reversed()) 
 			
 			for window in frontToBackWindows {
 				if window.windowLevel == UIWindowLevelNormal {

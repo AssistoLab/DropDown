@@ -40,44 +40,44 @@ class ViewController: UIViewController {
 	
 	//MARK: - Actions
 	
-	@IBAction func chooseArticle(sender: AnyObject) {
+	@IBAction func chooseArticle(_ sender: AnyObject) {
 		chooseArticleDropDown.show()
 	}
 	
-	@IBAction func changeAmount(sender: AnyObject) {
+	@IBAction func changeAmount(_ sender: AnyObject) {
 		amountDropDown.show()
 	}
 	
-	@IBAction func choose(sender: AnyObject) {
+	@IBAction func choose(_ sender: AnyObject) {
 		chooseDropDown.show()
 	}
 	
-	@IBAction func showCenteredDropDown(sender: AnyObject) {
+	@IBAction func showCenteredDropDown(_ sender: AnyObject) {
 		centeredDropDown.show()
 	}
 	
-	@IBAction func showBarButtonDropDown(sender: AnyObject) {
+	@IBAction func showBarButtonDropDown(_ sender: AnyObject) {
 		rightBarDropDown.show()
 	}
 	
-	@IBAction func changeDIsmissMode(sender: UISegmentedControl) {
+	@IBAction func changeDIsmissMode(_ sender: UISegmentedControl) {
 		switch sender.selectedSegmentIndex {
-		case 0: dropDowns.forEach { $0.dismissMode = .Automatic }
-		case 1: dropDowns.forEach { $0.dismissMode = .OnTap }
+		case 0: dropDowns.forEach { $0.dismissMode = .automatic }
+		case 1: dropDowns.forEach { $0.dismissMode = .onTap }
 		default: break;
 		}
 	}
 	
-	@IBAction func changeDirection(sender: UISegmentedControl) {
+	@IBAction func changeDirection(_ sender: UISegmentedControl) {
 		switch sender.selectedSegmentIndex {
-		case 0: dropDowns.forEach { $0.direction = .Any }
-		case 1: dropDowns.forEach { $0.direction = .Bottom }
-		case 2: dropDowns.forEach { $0.direction = .Top }
+		case 0: dropDowns.forEach { $0.direction = .any }
+		case 1: dropDowns.forEach { $0.direction = .bottom }
+		case 2: dropDowns.forEach { $0.direction = .top }
 		default: break;
 		}
 	}
 	
-	@IBAction func changeUI(sender: UISegmentedControl) {
+	@IBAction func changeUI(_ sender: UISegmentedControl) {
 		switch sender.selectedSegmentIndex {
 		case 0: setupDefaultDropDown()
 		case 1: customizeDropDown(self)
@@ -85,11 +85,11 @@ class ViewController: UIViewController {
 		}
 	}
 	
-	@IBAction func showKeyboard(sender: AnyObject) {
+	@IBAction func showKeyboard(_ sender: AnyObject) {
 		textField.becomeFirstResponder()
 	}
 	
-	@IBAction func hideKeyboard(sender: AnyObject) {
+	@IBAction func hideKeyboard(_ sender: AnyObject) {
 		view.endEditing(false)
 	}
 	
@@ -97,12 +97,12 @@ class ViewController: UIViewController {
 		DropDown.setupDefaultAppearance()
 		
 		dropDowns.forEach {
-			$0.cellNib = UINib(nibName: "DropDownCell", bundle: NSBundle(forClass: DropDownCell.self))
+			$0.cellNib = UINib(nibName: "DropDownCell", bundle: Bundle(for: DropDownCell.self))
 			$0.customCellConfiguration = nil
 		}
 	}
 	
-	func customizeDropDown(sender: AnyObject) {
+	func customizeDropDown(_ sender: AnyObject) {
 		let appearance = DropDown.appearance()
 		
 		appearance.cellHeight = 60
@@ -114,7 +114,7 @@ class ViewController: UIViewController {
 		appearance.shadowOpacity = 0.9
 		appearance.shadowRadius = 25
 		appearance.animationduration = 0.25
-		appearance.textColor = .darkGrayColor()
+		appearance.textColor = UIColor.darkGray
 //		appearance.textFont = UIFont(name: "Georgia", size: 14)
 		
 		dropDowns.forEach {
@@ -137,8 +137,8 @@ class ViewController: UIViewController {
 		super.viewDidLoad()
 		
 		setupDropDowns()
-		dropDowns.forEach { $0.dismissMode = .OnTap }
-		dropDowns.forEach { $0.direction = .Any }
+		dropDowns.forEach { $0.dismissMode = .onTap }
+		dropDowns.forEach { $0.direction = .any }
 		
 		view.addSubview(textField)
 	}
@@ -175,7 +175,7 @@ class ViewController: UIViewController {
 		
 		// Action triggered on selection
 		chooseArticleDropDown.selectionAction = { [unowned self] (index, item) in
-			self.chooseArticleButton.setTitle(item, forState: .Normal)
+			self.chooseArticleButton.setTitle(item, for: .normal)
 		}
 		
 		// Action triggered on dropdown cancelation (hide)
@@ -215,7 +215,7 @@ class ViewController: UIViewController {
 		
 		// Action triggered on selection
 		amountDropDown.selectionAction = { [unowned self] (index, item) in
-			self.amountButton.setTitle(item, forState: .Normal)
+			self.amountButton.setTitle(item, for: .normal)
 		}
 	}
 	
@@ -236,7 +236,7 @@ class ViewController: UIViewController {
 		
 		// Action triggered on selection
 		chooseDropDown.selectionAction = { [unowned self] (index, item) in
-			self.chooseButton.setTitle(item, forState: .Normal)
+			self.chooseButton.setTitle(item, for: .normal)
 		}
 	}
 	
