@@ -217,7 +217,7 @@ You have 3 dismiss mode with the `DismissMode` enum:
 You can manually (pre)select a row with:
 
 ```swift
-dropDown.selectRow(atIndex: 3)
+dropDown.selectRow(at: 3)
 ```
 
 The data source is reloaded automatically when changing the `dataSource` property.

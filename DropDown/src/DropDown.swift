@@ -290,7 +290,7 @@ public final class DropDown: UIView {
 	*/
 	public var dataSource = [String]() {
 		didSet {
-            deselectRow(atIndex: selectedRowIndex)
+			deselectRow(at: selectedRowIndex)
 			reloadAllComponents()
 		}
 	}
@@ -566,17 +566,17 @@ extension DropDown {
 
 		guard let window = UIWindow.visibleWindow() else { return (0, 0, 0, 0, 0, false, direction) }
 
-        barButtonItemCondition: if let anchorView = anchorView as? UIBarButtonItem {
-            let isRightBarButtonItem = anchorView.plainView.frame.minX > window.frame.midX
-            
-            guard isRightBarButtonItem else { break barButtonItemCondition }
-            
-            let width = self.width ?? fittingWidth()
-            let anchorViewWidth = anchorView.plainView.frame.width
-            let x = -(width - anchorViewWidth)
-            
-            bottomOffset = CGPoint(x: x, y: 0)
-        }
+		barButtonItemCondition: if let anchorView = anchorView as? UIBarButtonItem {
+			let isRightBarButtonItem = anchorView.plainView.frame.minX > window.frame.midX
+
+			guard isRightBarButtonItem else { break barButtonItemCondition }
+
+			let width = self.width ?? fittingWidth()
+			let anchorViewWidth = anchorView.plainView.frame.width
+			let x = -(width - anchorViewWidth)
+
+			bottomOffset = CGPoint(x: x, y: 0)
+		}
 		
 		if anchorView == nil {
 			layout = computeLayoutBottomDisplay(window: window)
@@ -604,8 +604,8 @@ extension DropDown {
 			}
 		}
 		
-        constraintWidthToFittingSizeIfNecessary(layout: &layout)
-        constraintWidthToBoundsIfNecessary(layout: &layout, in: window)
+		constraintWidthToFittingSizeIfNecessary(layout: &layout)
+		constraintWidthToBoundsIfNecessary(layout: &layout, in: window)
 		
 		let visibleHeight = tableHeight - layout.offscreenHeight
 		let canBeDisplayed = visibleHeight >= minHeight
@@ -734,7 +734,7 @@ extension DropDown {
 
 	- returns: Wether it succeed and how much height is needed to display all cells at once.
 	*/
-    @discardableResult
+	@discardableResult
 	public func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
 		if self == DropDown.VisibleDropDown {
 			return (true, 0)
@@ -776,7 +776,7 @@ extension DropDown {
 			},
 			completion: nil)
 
-        selectRow(atIndex: selectedRowIndex)
+		selectRow(at: selectedRowIndex)
 
 		return (layout.canBeDisplayed, layout.offscreenHeight)
 	}
@@ -842,20 +842,20 @@ extension DropDown {
 	}
 
 	/// (Pre)selects a row at a certain index.
-	public func selectRow(atIndex index: Index?) {
+	public func selectRow(at index: Index?) {
 		if let index = index {
 			tableView.selectRow(
 				at: IndexPath(row: index, section: 0),
 				animated: false,
 				scrollPosition: .middle)
 		} else {
-            deselectRow(atIndex: selectedRowIndex)
+			deselectRow(at: selectedRowIndex)
 		}
 
 		selectedRowIndex = index
 	}
 
-	public func deselectRow(atIndex index: Index?) {
+	public func deselectRow(at index: Index?) {
 		selectedRowIndex = nil
 
 		guard let index = index
@@ -929,7 +929,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 
 		if let _ = anchorView as? UIBarButtonItem {
 			// DropDown's from UIBarButtonItem are menus so we deselect the selected menu right after selection
-            deselectRow(atIndex: selectedRowIndex)
+            deselectRow(at: selectedRowIndex)
 		}
 
 		hide()
