@@ -52,16 +52,16 @@ extension KeyboardListener {
 	@objc
 	fileprivate func keyboardWillShow(_ notification: Notification) {
 		isVisible = true
-		keyboardFrame = keyboardFrameFromNotification(notification)
+		keyboardFrame = keyboardFrame(fromNotification: notification)
 	}
 	
 	@objc
 	fileprivate func keyboardWillHide(_ notification: Notification) {
 		isVisible = false
-		keyboardFrame = keyboardFrameFromNotification(notification)
+		keyboardFrame = keyboardFrame(fromNotification: notification)
 	}
 	
-	fileprivate func keyboardFrameFromNotification(_ notification: Notification) -> CGRect {
+    fileprivate func keyboardFrame(fromNotification notification: Notification) -> CGRect {
 		return ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
 	}
 	

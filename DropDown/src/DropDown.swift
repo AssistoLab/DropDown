@@ -7,26 +7,6 @@
 //
 
 import UIKit
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
-
 
 public typealias Index = Int
 public typealias Closure = () -> Void
@@ -310,7 +290,7 @@ public final class DropDown: UIView {
 	*/
 	public var dataSource = [String]() {
 		didSet {
-			deselectRowAtIndexPath(selectedRowIndex)
+            deselectRow(atIndex: selectedRowIndex)
 			reloadAllComponents()
 		}
 	}
@@ -453,7 +433,7 @@ private extension DropDown {
 	}
 
 	func setupUI() {
-		super.backgroundColor = UIColor.clear
+		super.backgroundColor = .clear
 
 		tableViewContainer.layer.masksToBounds = false
 		tableViewContainer.layer.cornerRadius = cornerRadius
@@ -586,17 +566,17 @@ extension DropDown {
 
 		guard let window = UIWindow.visibleWindow() else { return (0, 0, 0, 0, 0, false, direction) }
 
-		barButtonItemCondition: if let _ = anchorView as? UIBarButtonItem {
-			let isRightBarButtonItem = anchorView?.plainView.frame.minX > window.frame.midX
-
-			guard isRightBarButtonItem else { break barButtonItemCondition }
-
-			let width = self.width ?? fittingWidth()
-			let anchorViewWidth = anchorView?.plainView.frame.width ?? 0
-			let x = -(width - anchorViewWidth)
-
-			bottomOffset = CGPoint(x: x, y: 0)
-		}
+        barButtonItemCondition: if let anchorView = anchorView as? UIBarButtonItem {
+            let isRightBarButtonItem = anchorView.plainView.frame.minX > window.frame.midX
+            
+            guard isRightBarButtonItem else { break barButtonItemCondition }
+            
+            let width = self.width ?? fittingWidth()
+            let anchorViewWidth = anchorView.plainView.frame.width
+            let x = -(width - anchorViewWidth)
+            
+            bottomOffset = CGPoint(x: x, y: 0)
+        }
 		
 		if anchorView == nil {
 			layout = computeLayoutBottomDisplay(window: window)
@@ -624,8 +604,8 @@ extension DropDown {
 			}
 		}
 		
-		constraintWidthToFittingSizeIfNecessary(&layout)
-		constraintWidthToBoundsIfNecessary(&layout, in: window)
+        constraintWidthToFittingSizeIfNecessary(layout: &layout)
+        constraintWidthToBoundsIfNecessary(layout: &layout, in: window)
 		
 		let visibleHeight = tableHeight - layout.offscreenHeight
 		let canBeDisplayed = visibleHeight >= minHeight
@@ -700,7 +680,7 @@ extension DropDown {
 		return maxWidth
 	}
 	
-	fileprivate func constraintWidthToBoundsIfNecessary(_ layout: inout ComputeLayoutTuple, in window: UIWindow) {
+	fileprivate func constraintWidthToBoundsIfNecessary(layout: inout ComputeLayoutTuple, in window: UIWindow) {
 		let windowMaxX = window.bounds.maxX
 		let maxX = layout.x + layout.width
 		
@@ -717,7 +697,7 @@ extension DropDown {
 		}
 	}
 	
-	fileprivate func constraintWidthToFittingSizeIfNecessary(_ layout: inout ComputeLayoutTuple) {
+	fileprivate func constraintWidthToFittingSizeIfNecessary(layout: inout ComputeLayoutTuple) {
 		guard width == nil else { return }
 		
 		if layout.width < fittingWidth() {
@@ -754,6 +734,7 @@ extension DropDown {
 
 	- returns: Wether it succeed and how much height is needed to display all cells at once.
 	*/
+    @discardableResult
 	public func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
 		if self == DropDown.VisibleDropDown {
 			return (true, 0)
@@ -795,7 +776,7 @@ extension DropDown {
 			},
 			completion: nil)
 
-		selectRowAtIndex(selectedRowIndex)
+        selectRow(atIndex: selectedRowIndex)
 
 		return (layout.canBeDisplayed, layout.offscreenHeight)
 	}
@@ -861,20 +842,20 @@ extension DropDown {
 	}
 
 	/// (Pre)selects a row at a certain index.
-	public func selectRowAtIndex(_ index: Index?) {
+	public func selectRow(atIndex index: Index?) {
 		if let index = index {
 			tableView.selectRow(
 				at: IndexPath(row: index, section: 0),
 				animated: false,
 				scrollPosition: .middle)
 		} else {
-			deselectRowAtIndexPath(selectedRowIndex)
+            deselectRow(atIndex: selectedRowIndex)
 		}
 
 		selectedRowIndex = index
 	}
 
-	public func deselectRowAtIndexPath(_ index: Index?) {
+	public func deselectRow(atIndex index: Index?) {
 		selectedRowIndex = nil
 
 		guard let index = index
@@ -948,7 +929,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 
 		if let _ = anchorView as? UIBarButtonItem {
 			// DropDown's from UIBarButtonItem are menus so we deselect the selected menu right after selection
-			deselectRowAtIndexPath(selectedRowIndex)
+            deselectRow(atIndex: selectedRowIndex)
 		}
 
 		hide()

@@ -24,7 +24,7 @@ extension DropDownCell {
 	override open func awakeFromNib() {
 		super.awakeFromNib()
 		
-		backgroundColor = UIColor.clear
+		backgroundColor = .clear
 	}
 	
 	override open var isSelected: Bool {
@@ -49,7 +49,7 @@ extension DropDownCell {
 				if selected {
 					self.backgroundColor = selectedBackgroundColor
 				} else {
-					self.backgroundColor = UIColor.clear
+					self.backgroundColor = .clear
 				}
 			}
 		}
