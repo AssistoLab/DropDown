@@ -847,7 +847,7 @@ extension DropDown {
 			tableView.selectRow(
 				at: IndexPath(row: index, section: 0),
 				animated: false,
-				scrollPosition: .middle)
+				scrollPosition: .top)
 		} else {
 			deselectRow(at: selectedRowIndex)
 		}
