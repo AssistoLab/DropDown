@@ -2,7 +2,7 @@
 
 [![Twitter: @kevinh6113](http://img.shields.io/badge/contact-%40kevinh6113-70a1fb.svg?style=flat)](https://twitter.com/kevinh6113)
 [![License: MIT](http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat)](https://github.com/AssistoLab/DropDown/blob/master/README.md)
-[![Version](http://img.shields.io/badge/version-1.0.1-green.svg?style=flat)](https://github.com/AssistoLab/DropDown)
+[![Version](http://img.shields.io/badge/version-2-green.svg?style=flat)](https://github.com/AssistoLab/DropDown)
 [![Cocoapods](http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat)](http://cocoadocs.org/docsets/DropDown/)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
@@ -20,6 +20,8 @@ Do `pod try DropDown` in your console and run the project to try a demo.
 To install [CocoaPods](http://www.cocoapods.org), run `sudo gem install cocoapods` in your console.
 
 ## Installation 📱
+
+This branch supports Swift 3. If you need Swift 2.2: check `swift-2.2` branch.
 
 ### CocoaPods
 
@@ -107,29 +109,29 @@ in your `AppDelegate`'s `didFinishLaunching` method so that the drop down will h
 
 The drop down can be shown below or above the anchor view with:
 ```swift
-dropDown.direction = .Any
+dropDown.direction = .any
 ```
 
-With `.Any` the drop down will try to displa itself below the anchor view when possible, otherwise above if there is more place than below.
-You can restrict the possible directions by using `.Top` or `.Bottom`.
+With `.any` the drop down will try to displa itself below the anchor view when possible, otherwise above if there is more place than below.
+You can restrict the possible directions by using `.top` or `.bottom`.
 
 ### Offset
 
 By default, the drop down will be shown onto to anchor view. It will hide it.
-If you need the drop down to be below your anchor view when the direction of the drop down is `.Bottom`, you can precise an offset like this:
+If you need the drop down to be below your anchor view when the direction of the drop down is `.bottom`, you can precise an offset like this:
 
 ```swift
 // Top of drop down will be below the anchorView
 dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
 ```
 
-If you set the drop down direction to `.Any` or `.Top` you can also precise the offset when the drop down will shown above like this:
+If you set the drop down direction to `.any` or `.top` you can also precise the offset when the drop down will shown above like this:
 
 ```swift
-// When drop down is displayed with `Direction.Top`, it will be above the anchorView
+// When drop down is displayed with `Direction.top`, it will be above the anchorView
 dropDown.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
 ```
-*Note the minus sign used here to offset to the top.*
+*Note the minus sign here that is use to offset to the top.*
 
 ### Cell configuration
 
@@ -203,21 +205,21 @@ dropDown.willShowAction = { [unowned self] in
 ### Dismiss modes
 
 ```swift
-dropDown.dismissMode = .OnTap
+dropDown.dismissMode = .onTap
 ```
 
 You have 3 dismiss mode with the `DismissMode` enum:
 
-- `OnTap`: A tap oustide the drop down is needed to dismiss it (Default)
-- `Automatic`: No tap is needed to dismiss the drop down. As soon as the user interact with anything else than the drop down, the drop down is dismissed
-- `Manual`: The drop down can only be dismissed manually (in code)
+- `onTap`: A tap oustide the drop down is needed to dismiss it (Default)
+- `automatic`: No tap is needed to dismiss the drop down. As soon as the user interact with anything else than the drop down, the drop down is dismissed
+- `manual`: The drop down can only be dismissed manually (in code)
 
 ### Others
 
 You can manually (pre)select a row with:
 
 ```swift
-dropDown.selectRowAtIndex(3)
+dropDown.selectRow(at: 3)
 ```
 
 The data source is reloaded automatically when changing the `dataSource` property.
@@ -230,8 +232,8 @@ dropDown.reloadAllComponents()
 You can get info about the selected item at any time with this:
 
 ```swift
-dropDown.selectedItem() // -> String?
-dropDown.indexForSelectedRow() // -> Int?
+dropDown.selectedItem // String?
+dropDown.indexForSelectedRow // Int?
 ```
 
 ## Customize UI 🖌
@@ -247,10 +249,10 @@ You can customize these properties of the drop down:
 You can change them through each instance of `DropDown` or via `UIAppearance` like this for example:
 
 ```swift
-DropDown.appearance().textColor = UIColor.blackColor()
-DropDown.appearance().textFont = UIFont.systemFontOfSize(15)
-DropDown.appearance().backgroundColor = UIColor.whiteColor()
-DropDown.appearance().selectionBackgroundColor = UIColor.lightGrayColor()
+DropDown.appearance().textColor = UIColor.black
+DropDown.appearance().textFont = UIFont.systemFont(ofSize: 15)
+DropDown.appearance().backgroundColor = UIColor.white
+DropDown.appearance().selectionBackgroundColor = UIColor.lightGray
 DropDown.appearance().cellHeight = 60
 ```
 
@@ -267,7 +269,8 @@ when calling the `show` method, it returns a tuple like this:
 
 ## Requirements
 
-* Xcode 7+
+* Xcode 8+
+* Swift 3.0
 * iOS 8+
 * ARC
 

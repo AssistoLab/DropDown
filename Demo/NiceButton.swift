@@ -21,10 +21,10 @@ class NiceButton: UIButton {
 		
 		view.addConstraint(NSLayoutConstraint(
 			item: view,
-			attribute: .Height,
-			relatedBy: .Equal,
+			attribute: .height,
+			relatedBy: .equal,
 			toItem: nil,
-			attribute: .Height,
+			attribute: .height,
 			multiplier: 1,
 			constant: 1
 			)
@@ -32,10 +32,10 @@ class NiceButton: UIButton {
 		
 		addConstraint(NSLayoutConstraint(
 			item: view,
-			attribute: .Left,
-			relatedBy: .Equal,
+			attribute: .left,
+			relatedBy: .equal,
 			toItem: self,
-			attribute: .Left,
+			attribute: .left,
 			multiplier: 1,
 			constant: 0
 			)
@@ -43,10 +43,10 @@ class NiceButton: UIButton {
 		
 		addConstraint(NSLayoutConstraint(
 			item: view,
-			attribute: .Right,
-			relatedBy: .Equal,
+			attribute: .right,
+			relatedBy: .equal,
 			toItem: self,
-			attribute: .Right,
+			attribute: .right,
 			multiplier: 1,
 			constant: 0
 			)
@@ -54,10 +54,10 @@ class NiceButton: UIButton {
 		
 		addConstraint(NSLayoutConstraint(
 			item: view,
-			attribute: .Bottom,
-			relatedBy: .Equal,
+			attribute: .bottom,
+			relatedBy: .equal,
 			toItem: self,
-			attribute: .Bottom,
+			attribute: .bottom,
 			multiplier: 1,
 			constant: 0
 			)

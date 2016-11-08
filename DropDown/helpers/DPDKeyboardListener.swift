@@ -12,9 +12,9 @@ internal final class KeyboardListener {
 	
 	static let sharedInstance = KeyboardListener()
 	
-	private(set) var isVisible = false
-	private(set) var keyboardFrame = CGRectZero
-	private var isListening = false
+	fileprivate(set) var isVisible = false
+	fileprivate(set) var keyboardFrame = CGRect.zero
+	fileprivate var isListening = false
 	
 	deinit {
 		stopListeningToKeyboard()
@@ -33,36 +33,36 @@ extension KeyboardListener {
 		
 		isListening = true
 		
-		NSNotificationCenter.defaultCenter().addObserver(
+		NotificationCenter.default.addObserver(
 			self,
 			selector: #selector(keyboardWillShow(_:)),
-			name: UIKeyboardWillShowNotification,
+			name: NSNotification.Name.UIKeyboardWillShow,
 			object: nil)
-		NSNotificationCenter.defaultCenter().addObserver(
+		NotificationCenter.default.addObserver(
 			self,
 			selector: #selector(keyboardWillHide(_:)),
-			name: UIKeyboardWillHideNotification,
+			name: NSNotification.Name.UIKeyboardWillHide,
 			object: nil)
 	}
 	
 	func stopListeningToKeyboard() {
-		NSNotificationCenter.defaultCenter().removeObserver(self)
+		NotificationCenter.default.removeObserver(self)
 	}
 	
 	@objc
-	private func keyboardWillShow(notification: NSNotification) {
+	fileprivate func keyboardWillShow(_ notification: Notification) {
 		isVisible = true
-		keyboardFrame = keyboardFrameFromNotification(notification)
+		keyboardFrame = keyboardFrame(fromNotification: notification)
 	}
 	
 	@objc
-	private func keyboardWillHide(notification: NSNotification) {
+	fileprivate func keyboardWillHide(_ notification: Notification) {
 		isVisible = false
-		keyboardFrame = keyboardFrameFromNotification(notification)
+		keyboardFrame = keyboardFrame(fromNotification: notification)
 	}
 	
-	private func keyboardFrameFromNotification(notification: NSNotification) -> CGRect {
-		return (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() ?? CGRectZero
+	fileprivate func keyboardFrame(fromNotification notification: Notification) -> CGRect {
+		return ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue ?? CGRect.zero
 	}
 	
 }
