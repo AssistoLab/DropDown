@@ -174,8 +174,8 @@ class ViewController: UIViewController {
 		]
 		
 		// Action triggered on selection
-		chooseArticleDropDown.selectionAction = { [unowned self] (index, item) in
-			self.chooseArticleButton.setTitle(item, forState: .Normal)
+		chooseArticleDropDown.selectionAction = { [weak self] (index, item) in
+			self?.chooseArticleButton.setTitle(item, forState: .Normal)
 		}
 		
 		// Action triggered on dropdown cancelation (hide)
