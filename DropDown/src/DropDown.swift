@@ -736,7 +736,7 @@ extension DropDown {
 	*/
 	@discardableResult
 	public func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
-		if self == DropDown.VisibleDropDown {
+		if self == DropDown.VisibleDropDown && DropDown.VisibleDropDown?.isHidden == false { // added condition - DropDown.VisibleDropDown?.isHidden == false -> to resolve forever hiding dropdown issue when continuous taping on button - Kartik Patel - 2016-12-29
 			return (true, 0)
 		}
 
