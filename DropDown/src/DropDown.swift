@@ -154,6 +154,8 @@ public final class DropDown: UIView {
                 tableViewContainer.addSubview(arrowIndication)
                 arrowIndication.tintColor = tableViewBackgroundColor
                 arrowIndication.frame = CGRect(origin: CGPoint(x: arrowIndicationX!, y: arrowIndication.frame.origin.y), size: arrowIndication.frame.size)
+            } else {
+                arrowIndication.removeFromSuperview()
             }
         }
     }
