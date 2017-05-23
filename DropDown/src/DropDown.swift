@@ -771,7 +771,7 @@ extension DropDown {
 	- returns: Wether it succeed and how much height is needed to display all cells at once.
 	*/
 	@discardableResult
-    public func show(beforeTransform transform: CGAffineTransform? = nil, anchorPoint: CGPoint = CGPoint(x: 0.5, y: 0.5)) -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
+    public func show(beforeTransform transform: CGAffineTransform? = nil, anchorPoint: CGPoint? = nil) -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
 		if self == DropDown.VisibleDropDown {
 			return (true, 0)
 		}
@@ -801,7 +801,10 @@ extension DropDown {
 		}
 
 		isHidden = false
-        tableViewContainer.layer.anchorPoint = anchorPoint
+        
+        if anchorPoint != nil {
+            tableViewContainer.layer.anchorPoint = anchorPoint!
+        }
         
         if transform != nil {
             tableViewContainer.transform = transform!
