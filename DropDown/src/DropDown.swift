@@ -854,29 +854,24 @@ extension DropDown {
 	/// (Pre)selects a row at a certain index.
 	public func selectRow(at index: Index?) {
 		if let index = index {
-            
-            // if single selection mode then set single row.
-            if multiSelectionAction == nil {
-                tableView.selectRow(
-                    at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .none
-                )
-            }
-            else {
-                tableView.reloadData()
-            }
-            
+            tableView.selectRow(
+                at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .none
+            )
             selectedRowIndices.insert(index)
 		} else {
 			deselectRows(at: selectedRowIndices)
             selectedRowIndices.removeAll()
 		}
-        
-		//selectedRowIndex = index
 	}
     
     public func selectRows(at indices: Set<Index>?) {
         indices?.forEach {
             selectRow(at: $0)
+        }
+        
+        // if we are in multi selection mode then reload data so that all selections are shown
+        if multiSelectionAction != nil {
+            tableView.reloadData()
         }
     }
 
