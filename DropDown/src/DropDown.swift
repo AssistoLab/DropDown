@@ -11,6 +11,7 @@ import UIKit
 public typealias Index = Int
 public typealias Closure = () -> Void
 public typealias SelectionClosure = (Index, String) -> Void
+public typealias MultiSelectionClosure = ([Index], [String]) -> Void
 public typealias ConfigurationClosure = (Index, String) -> String
 public typealias CellConfigurationClosure = (Index, String, DropDownCell) -> Void
 private typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
@@ -290,7 +291,7 @@ public final class DropDown: UIView {
 	*/
 	public var dataSource = [String]() {
 		didSet {
-			deselectRow(at: selectedRowIndex)
+            deselectRows(at: selectedRowIndices)
 			reloadAllComponents()
 		}
 	}
@@ -307,8 +308,8 @@ public final class DropDown: UIView {
 		}
 	}
 
-	/// The index of the row after its seleciton.
-	fileprivate var selectedRowIndex: Index?
+	/// The indicies that have been selected
+	fileprivate var selectedRowIndices = Set<Index>()
 
 	/**
 	The format for the cells' text.
@@ -331,6 +332,14 @@ public final class DropDown: UIView {
 
 	/// The action to execute when the user selects a cell.
 	public var selectionAction: SelectionClosure?
+    
+    /**
+    The action to execute when the user selects multiple cells.
+    
+    Providing an action will turn on multiselection mode.
+    The single selection action will still be called if provided.
+    */
+    public var multiSelectionAction: MultiSelectionClosure?
 
 	/// The action to execute when the drop down will show.
 	public var willShowAction: Closure?
@@ -481,8 +490,8 @@ extension DropDown {
 
 		tableView.isScrollEnabled = layout.offscreenHeight > 0
 
-		DispatchQueue.main.async { [weak self] in
-			self?.tableView.flashScrollIndicators()
+		DispatchQueue.main.async { [unowned self] in
+			self.tableView.flashScrollIndicators()
 		}
 
 		super.updateConstraints()
@@ -776,7 +785,8 @@ extension DropDown {
 			},
 			completion: nil)
 
-		selectRow(at: selectedRowIndex)
+        //deselectRows(at: selectedRowIndices)
+        selectRows(at: selectedRowIndices)
 
 		return (layout.canBeDisplayed, layout.offscreenHeight)
 	}
@@ -846,26 +856,46 @@ extension DropDown {
 	/// (Pre)selects a row at a certain index.
 	public func selectRow(at index: Index?) {
 		if let index = index {
-			tableView.selectRow(
-				at: IndexPath(row: index, section: 0),
-				animated: false,
-				scrollPosition: .middle)
+            tableView.selectRow(
+                at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .none
+            )
+            selectedRowIndices.insert(index)
 		} else {
-			deselectRow(at: selectedRowIndex)
+			deselectRows(at: selectedRowIndices)
+            selectedRowIndices.removeAll()
 		}
-
-		selectedRowIndex = index
 	}
+    
+    public func selectRows(at indices: Set<Index>?) {
+        indices?.forEach {
+            selectRow(at: $0)
+        }
+        
+        // if we are in multi selection mode then reload data so that all selections are shown
+        if multiSelectionAction != nil {
+            tableView.reloadData()
+        }
+    }
 
 	public func deselectRow(at index: Index?) {
-		selectedRowIndex = nil
-
 		guard let index = index
 			, index >= 0
 			else { return }
+        
+        // remove from indices
+        if let selectedRowIndex = selectedRowIndices.index(where: { $0 == index  }) {
+            selectedRowIndices.remove(at: selectedRowIndex)
+        }
 
 		tableView.deselectRow(at: IndexPath(row: index, section: 0), animated: true)
 	}
+    
+    // de-selects the rows at the indices provided
+    public func deselectRows(at indices: Set<Index>?) {
+        indices?.forEach {
+            deselectRow(at: $0)
+        }
+    }
 
 	/// Returns the index of the selected row.
 	public var indexForSelectedRow: Index? {
@@ -938,19 +968,49 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 	}
 
 	public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-		cell.isSelected = (indexPath as NSIndexPath).row == selectedRowIndex
+        cell.isSelected = selectedRowIndices.first{ $0 == (indexPath as NSIndexPath).row } != nil
 	}
 
 	public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		selectedRowIndex = (indexPath as NSIndexPath).row
-		selectionAction?(selectedRowIndex!, dataSource[selectedRowIndex!])
+		let selectedRowIndex = (indexPath as NSIndexPath).row
+        
+        
+        // are we in multi-selection mode?
+        if let multiSelectionCallback = multiSelectionAction {
+            // if already selected then deselect
+            if selectedRowIndices.first(where: { $0 == selectedRowIndex}) != nil {
+                deselectRow(at: selectedRowIndex)
 
-		if let _ = anchorView as? UIBarButtonItem {
-			// DropDown's from UIBarButtonItem are menus so we deselect the selected menu right after selection
+				let selectedRowIndicesArray = Array(selectedRowIndices)
+                let selectedRows = selectedRowIndicesArray.map { dataSource[$0] }
+                multiSelectionCallback(selectedRowIndicesArray, selectedRows)
+                return
+            }
+            else {
+                selectedRowIndices.insert(selectedRowIndex)
+
+				let selectedRowIndicesArray = Array(selectedRowIndices)
+				let selectedRows = selectedRowIndicesArray.map { dataSource[$0] }
+                
+                selectionAction?(selectedRowIndex, dataSource[selectedRowIndex])
+                multiSelectionCallback(selectedRowIndicesArray, selectedRows)
+                tableView.reloadData()
+                return
+            }
+        }
+        
+        // Perform single selection logic
+        selectedRowIndices.removeAll()
+        selectedRowIndices.insert(selectedRowIndex)
+        selectionAction?(selectedRowIndex, dataSource[selectedRowIndex])
+        
+        if let _ = anchorView as? UIBarButtonItem {
+            // DropDown's from UIBarButtonItem are menus so we deselect the selected menu right after selection
             deselectRow(at: selectedRowIndex)
-		}
-
-		hide()
+        }
+        
+        hide()
+    
 	}
 
 }
