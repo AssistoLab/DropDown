@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="6vj-VF-JaB">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--DropDown-->
+        <scene sceneID="XzU-vm-ggE">
+            <objects>
+                <viewController id="0v1-k3-K39" customClass="ViewController" customModule="Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Gb4-Nu-YHj"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fqn-ZE-M5e"/>
+                    </layoutGuides>
+                    <scrollView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="lH9-eW-CtL">
+                        <rect key="frame" x="0.0" y="64" width="600" height="636"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0B-sh-55C" customClass="NiceButton" customModule="Demo" customModuleProvider="target">
+                                <rect key="frame" x="20" y="30" width="420" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="3dq-es-BqE"/>
+                                </constraints>
+                                <state key="normal" title="Choose an article"/>
+                                <connections>
+                                    <action selector="chooseArticle:" destination="0v1-k3-K39" eventType="touchUpInside" id="yMI-d3-97H"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7KF-lo-KS7" customClass="NiceButton" customModule="Demo" customModuleProvider="target">
+                                <rect key="frame" x="450" y="30" width="54" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="54" id="6zC-a1-xQe"/>
+                                    <constraint firstAttribute="height" constant="40" id="BRj-DI-fnn"/>
+                                </constraints>
+                                <state key="normal" title="Amount"/>
+                                <connections>
+                                    <action selector="changeAmount:" destination="0v1-k3-K39" eventType="touchUpInside" id="d0C-am-RjH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="svj-jk-Xj6" customClass="NiceButton" customModule="Demo" customModuleProvider="target">
+                                <rect key="frame" x="20" y="78" width="66" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Iua-Ub-iO0"/>
+                                </constraints>
+                                <state key="normal" title="Choose..."/>
+                                <connections>
+                                    <action selector="choose:" destination="0v1-k3-K39" eventType="touchUpInside" id="8jY-U8-HqT"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Options" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJF-wb-wuG">
+                                <rect key="frame" x="20" y="204" width="77.5" height="26"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dismiss mode (on tap: need a tap to dismiss, auto: interact with other UI elements to dismiss, manual: when you want in code)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MeY-qi-ZDF">
+                                <rect key="frame" x="20" y="250" width="540" height="40.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="SPc-ge-GiP">
+                                <rect key="frame" x="20" y="298.5" width="540" height="29"/>
+                                <segments>
+                                    <segment title="Auto"/>
+                                    <segment title="On Tap"/>
+                                    <segment title="Manual" enabled="NO"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeDIsmissMode:" destination="0v1-k3-K39" eventType="valueChanged" id="8kQ-Ck-czx"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="1" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="72P-V6-wxi" customClass="NiceButton" customModule="Demo" customModuleProvider="target">
+                                <rect key="frame" x="20" y="126" width="259" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="7gE-OB-toM"/>
+                                    <constraint firstAttribute="width" constant="259" id="mPq-LF-yS1"/>
+                                </constraints>
+                                <state key="normal" title="Centered drop down (no anchor view)"/>
+                                <connections>
+                                    <action selector="showCenteredDropDown:" destination="0v1-k3-K39" eventType="touchUpInside" id="BFh-GU-lcD"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Direction (of the dropdown, any: below anchor view if possible, otherwise, above)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sxf-NX-PA6">
+                                <rect key="frame" x="20" y="346.5" width="540" height="40.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="evd-34-0pX">
+                                <rect key="frame" x="20" y="395" width="540" height="29"/>
+                                <segments>
+                                    <segment title="Any"/>
+                                    <segment title="Bottom"/>
+                                    <segment title="Top"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeDirection:" destination="0v1-k3-K39" eventType="valueChanged" id="sTg-QW-wGb"/>
+                                </connections>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aXM-aw-Gwc">
+                                <rect key="frame" x="20" y="431" width="540" height="29"/>
+                                <segments>
+                                    <segment title="Basic DropDown UI"/>
+                                    <segment title="Example of custom UI"/>
+                                </segments>
+                                <connections>
+                                    <action selector="changeUI:" destination="0v1-k3-K39" eventType="valueChanged" id="BfR-fl-VtX"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jhl-iV-Oh8">
+                                <rect key="frame" x="20" y="467" width="106" height="30"/>
+                                <state key="normal" title="Show keyboard"/>
+                                <connections>
+                                    <action selector="showKeyboard:" destination="0v1-k3-K39" eventType="touchUpInside" id="zSf-f9-3io"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't forget to test the orientation! (even with a drop down displayed)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajN-P2-z3O">
+                                <rect key="frame" x="20" y="509" width="540" height="19.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="SPc-ge-GiP" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="3Yu-YO-Bst"/>
+                            <constraint firstItem="aXM-aw-Gwc" firstAttribute="width" secondItem="lH9-eW-CtL" secondAttribute="width" multiplier="0.9" id="4ya-ii-se3"/>
+                            <constraint firstItem="F0B-sh-55C" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="7XM-oA-ZhU"/>
+                            <constraint firstItem="SPc-ge-GiP" firstAttribute="top" secondItem="MeY-qi-ZDF" secondAttribute="bottom" constant="8" id="Edg-YB-Ub6"/>
+                            <constraint firstItem="SPc-ge-GiP" firstAttribute="width" secondItem="lH9-eW-CtL" secondAttribute="width" multiplier="0.9" id="F42-dQ-JyG"/>
+                            <constraint firstItem="Sxf-NX-PA6" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="Hw2-lv-2du"/>
+                            <constraint firstItem="7KF-lo-KS7" firstAttribute="trailing" secondItem="lH9-eW-CtL" secondAttribute="trailingMargin" id="Igv-cT-HVL"/>
+                            <constraint firstItem="Sxf-NX-PA6" firstAttribute="width" secondItem="lH9-eW-CtL" secondAttribute="width" multiplier="0.9" id="KVK-Kk-EtS"/>
+                            <constraint firstItem="evd-34-0pX" firstAttribute="top" secondItem="Sxf-NX-PA6" secondAttribute="bottom" constant="8" id="OZG-VZ-HM4"/>
+                            <constraint firstItem="evd-34-0pX" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="PGH-uc-SAz"/>
+                            <constraint firstItem="jhl-iV-Oh8" firstAttribute="top" secondItem="aXM-aw-Gwc" secondAttribute="bottom" constant="8" id="U2P-vV-bpD"/>
+                            <constraint firstItem="MeY-qi-ZDF" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="XFF-eD-vfh"/>
+                            <constraint firstItem="FJF-wb-wuG" firstAttribute="top" secondItem="72P-V6-wxi" secondAttribute="bottom" constant="38" id="XM1-YU-8jU"/>
+                            <constraint firstItem="ajN-P2-z3O" firstAttribute="top" secondItem="jhl-iV-Oh8" secondAttribute="bottom" constant="12" id="XU4-OF-hpy"/>
+                            <constraint firstItem="72P-V6-wxi" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="Y2t-sg-yPI"/>
+                            <constraint firstItem="F0B-sh-55C" firstAttribute="width" secondItem="lH9-eW-CtL" secondAttribute="width" multiplier="0.7" id="ZmR-kz-XHa"/>
+                            <constraint firstItem="7KF-lo-KS7" firstAttribute="leading" secondItem="F0B-sh-55C" secondAttribute="trailing" constant="10" id="a6o-Ac-dQd"/>
+                            <constraint firstItem="ajN-P2-z3O" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="aFg-Ko-9IR"/>
+                            <constraint firstItem="evd-34-0pX" firstAttribute="width" secondItem="lH9-eW-CtL" secondAttribute="width" multiplier="0.9" id="bv9-o5-Bdr"/>
+                            <constraint firstItem="MeY-qi-ZDF" firstAttribute="width" secondItem="lH9-eW-CtL" secondAttribute="width" multiplier="0.9" id="c2s-Jg-ets"/>
+                            <constraint firstItem="F0B-sh-55C" firstAttribute="top" secondItem="Gb4-Nu-YHj" secondAttribute="bottom" constant="30" id="e3U-xq-mqr"/>
+                            <constraint firstItem="svj-jk-Xj6" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="era-T9-k0M"/>
+                            <constraint firstItem="FJF-wb-wuG" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="gxu-66-zAP"/>
+                            <constraint firstItem="7KF-lo-KS7" firstAttribute="top" secondItem="Gb4-Nu-YHj" secondAttribute="bottom" constant="30" id="iGa-F5-Oit"/>
+                            <constraint firstItem="aXM-aw-Gwc" firstAttribute="top" secondItem="evd-34-0pX" secondAttribute="bottom" constant="8" id="ike-zP-JTg"/>
+                            <constraint firstItem="72P-V6-wxi" firstAttribute="top" secondItem="svj-jk-Xj6" secondAttribute="bottom" constant="8" id="isJ-eZ-UFj"/>
+                            <constraint firstItem="svj-jk-Xj6" firstAttribute="top" secondItem="F0B-sh-55C" secondAttribute="bottom" constant="8" id="l8q-21-xUW"/>
+                            <constraint firstItem="jhl-iV-Oh8" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="s5z-Ij-3Yh"/>
+                            <constraint firstItem="aXM-aw-Gwc" firstAttribute="leading" secondItem="lH9-eW-CtL" secondAttribute="leadingMargin" id="sJ2-xV-ahU"/>
+                            <constraint firstItem="MeY-qi-ZDF" firstAttribute="top" secondItem="FJF-wb-wuG" secondAttribute="bottom" constant="20" id="sdq-De-xHl"/>
+                            <constraint firstItem="Fqn-ZE-M5e" firstAttribute="top" secondItem="ajN-P2-z3O" secondAttribute="bottom" constant="10" id="tie-jc-BSO"/>
+                            <constraint firstItem="Sxf-NX-PA6" firstAttribute="top" secondItem="SPc-ge-GiP" secondAttribute="bottom" constant="20" id="uEp-oe-y6h"/>
+                            <constraint firstItem="ajN-P2-z3O" firstAttribute="width" secondItem="lH9-eW-CtL" secondAttribute="width" multiplier="0.9" id="zVj-Km-tFB"/>
+                        </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="WDJ-03-hAi" appends="YES" id="keE-QV-oxh"/>
+                        </connections>
+                    </scrollView>
+                    <navigationItem key="navigationItem" title="DropDown" id="0mV-mU-nOt">
+                        <barButtonItem key="rightBarButtonItem" title="•••" id="UAB-ZP-MMT">
+                            <connections>
+                                <action selector="showBarButtonDropDown:" destination="0v1-k3-K39" id="LJc-Jl-e4e"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="700"/>
+                    <connections>
+                        <outlet property="amountButton" destination="7KF-lo-KS7" id="k1S-D7-alg"/>
+                        <outlet property="centeredDropDownButton" destination="72P-V6-wxi" id="d50-bh-X1m"/>
+                        <outlet property="chooseArticleButton" destination="F0B-sh-55C" id="Kmi-a1-wRW"/>
+                        <outlet property="chooseButton" destination="svj-jk-Xj6" id="Y43-GZ-f63"/>
+                        <outlet property="rightBarButton" destination="UAB-ZP-MMT" id="p43-xs-XEa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aIH-z2-pSO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="WDJ-03-hAi">
+                    <connections>
+                        <action selector="hideKeyboard:" destination="0v1-k3-K39" id="BiL-rV-eAm"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1487" y="681"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BXm-fh-f0T">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6vj-VF-JaB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="nbq-CX-E1j">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="0v1-k3-K39" kind="relationship" relationship="rootViewController" id="DQa-sw-UIS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IYQ-tQ-ioz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="540" y="696"/>
+        </scene>
+    </scenes>
+</document>

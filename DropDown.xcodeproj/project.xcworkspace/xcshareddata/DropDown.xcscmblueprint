@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "6575E401F0E075B1FD6E179DAD8CCDF3853A7A8E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "E4EC3EC9984A396270972820B35B740A9BEF1CCB" : 0,
+    "6575E401F0E075B1FD6E179DAD8CCDF3853A7A8E" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "26F545BD-A325-473F-B7B3-A037533DDB11",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "E4EC3EC9984A396270972820B35B740A9BEF1CCB" : "",
+    "6575E401F0E075B1FD6E179DAD8CCDF3853A7A8E" : "DropDown\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "DropDown",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "DropDown.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/kevin-hirsch\/DropDown.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6575E401F0E075B1FD6E179DAD8CCDF3853A7A8E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/kevin-hirsch\/FloatingLabel.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E4EC3EC9984A396270972820B35B740A9BEF1CCB"
+    }
+  ]
+}
