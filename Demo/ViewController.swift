@@ -180,10 +180,7 @@ class ViewController: UIViewController {
         
         chooseArticleDropDown.multiSelectionAction = { [unowned self] (indices, items) in
             print("Muti selection action called with: \(items)")
-            if let firstItem = items.first {
-                self.chooseArticleButton.setTitle(firstItem, for: .normal)
-            }
-            else {
+            if items.isEmpty {
                 self.chooseArticleButton.setTitle("", for: .normal)
             }
         }

@@ -490,8 +490,8 @@ extension DropDown {
 
 		tableView.isScrollEnabled = layout.offscreenHeight > 0
 
-		DispatchQueue.main.async { [weak self] in
-			self?.tableView.flashScrollIndicators()
+		DispatchQueue.main.async { [unowned self] in
+			self.tableView.flashScrollIndicators()
 		}
 
 		super.updateConstraints()
@@ -854,6 +854,17 @@ extension DropDown {
 	/// (Pre)selects a row at a certain index.
 	public func selectRow(at index: Index?) {
 		if let index = index {
+            
+            // if single selection mode then set single row.
+            if multiSelectionAction == nil {
+                tableView.selectRow(
+                    at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .none
+                )
+            }
+            else {
+                tableView.reloadData()
+            }
+            
             selectedRowIndices.insert(index)
 		} else {
 			deselectRows(at: selectedRowIndices)
