@@ -35,12 +35,12 @@ extension KeyboardListener {
 		
 		NotificationCenter.default.addObserver(
 			self,
-			selector: #selector(keyboardWillShow(_:)),
+			selector: #selector(KeyboardListener.keyboardWillShow(_:)),
 			name: NSNotification.Name.UIKeyboardWillShow,
 			object: nil)
 		NotificationCenter.default.addObserver(
 			self,
-			selector: #selector(keyboardWillHide(_:)),
+			selector: #selector(KeyboardListener.keyboardWillHide(_:)),
 			name: NSNotification.Name.UIKeyboardWillHide,
 			object: nil)
 	}
@@ -49,14 +49,12 @@ extension KeyboardListener {
 		NotificationCenter.default.removeObserver(self)
 	}
 	
-	@objc
-	fileprivate func keyboardWillShow(_ notification: Notification) {
+    @objc fileprivate func keyboardWillShow(_ notification: Notification) {
 		isVisible = true
 		keyboardFrame = keyboardFrame(fromNotification: notification)
 	}
 	
-	@objc
-	fileprivate func keyboardWillHide(_ notification: Notification) {
+    @objc fileprivate func keyboardWillHide(_ notification: Notification) {
 		isVisible = false
 		keyboardFrame = keyboardFrame(fromNotification: notification)
 	}
