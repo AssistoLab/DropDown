@@ -617,12 +617,13 @@ extension DropDown {
 		var offscreenHeight: CGFloat = 0
 		
 		let width = self.width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - bottomOffset.x
+    let heightAnchorView = anchorView?.plainView.bounds.size.height ?? 0
 		
 		let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? window.frame.midX - (width / 2)
 		let anchorViewY = anchorView?.plainView.windowFrame?.minY ?? window.frame.midY - (tableHeight / 2)
 		
 		let x = anchorViewX + bottomOffset.x
-		let y = anchorViewY + bottomOffset.y
+		let y = anchorViewY + bottomOffset.y + heightAnchorView
 		
 		let maxY = y + tableHeight
 		let windowMaxY = window.bounds.maxY - DPDConstant.UI.HeightPadding
@@ -644,9 +645,11 @@ extension DropDown {
 
 		let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? 0
 		let anchorViewMaxY = anchorView?.plainView.windowFrame?.maxY ?? 0
+    
+    let heightAnchorView = anchorView?.plainView.bounds.size.height ?? 0
 
 		let x = anchorViewX + topOffset.x
-		var y = (anchorViewMaxY + topOffset.y) - tableHeight
+		var y = (anchorViewMaxY + topOffset.y - heightAnchorView) - tableHeight
 
 		let windowY = window.bounds.minY + DPDConstant.UI.HeightPadding
 
