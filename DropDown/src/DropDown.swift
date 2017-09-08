@@ -280,6 +280,19 @@ public final class DropDown: UIView {
 			reloadAllComponents()
 		}
 	}
+
+    /**
+     The class name to use for DropDownCells
+
+     Changing the cell class name automatically reloads the drop down.
+     */
+    public var cellClass = DropDownCell.self {
+        didSet {
+            tableView.register(cellClass.self, forCellReuseIdentifier: String(describing: cellClass.self))
+            templateCell = nil
+            reloadAllComponents()
+        }
+    }
 	
 	//MARK: Content
 
