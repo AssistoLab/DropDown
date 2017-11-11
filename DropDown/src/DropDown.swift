@@ -776,6 +776,8 @@ extension DropDown {
 		isHidden = false
 		tableViewContainer.transform = downScaleTransform
 
+		layoutIfNeeded()
+
 		UIView.animate(
 			withDuration: animationduration,
 			delay: 0,
