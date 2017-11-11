@@ -83,6 +83,22 @@ public final class DropDown: UIView {
 	fileprivate let tableViewContainer = UIView()
 	fileprivate let tableView = UITableView()
 	fileprivate var templateCell: DropDownCell!
+    fileprivate lazy var arrowIndication: UIImageView = {
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: 20, height: 10), false, 0)
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0, y: 10))
+        path.addLine(to: CGPoint(x: 20, y: 10))
+        path.addLine(to: CGPoint(x: 10, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: 10))
+        UIColor.black.setFill()
+        path.fill()
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        let tintImg = img?.withRenderingMode(.alwaysTemplate)
+        let imgv = UIImageView(image: tintImg)
+        imgv.frame = CGRect(x: 0, y: -10, width: 15, height: 10)
+        return imgv
+    }()
 
 
 	/// The view to which the drop down will displayed onto.
@@ -135,6 +151,23 @@ public final class DropDown: UIView {
 	public var width: CGFloat? {
 		didSet { setNeedsUpdateConstraints() }
 	}
+    
+    /**
+     arrowIndication.x
+     
+     arrowIndication will be add to tableViewContainer when configured
+     */
+    public var arrowIndicationX: CGFloat? {
+        didSet{
+            if arrowIndicationX != nil {
+                tableViewContainer.addSubview(arrowIndication)
+                arrowIndication.tintColor = tableViewBackgroundColor
+                arrowIndication.frame = CGRect(origin: CGPoint(x: arrowIndicationX!, y: arrowIndication.frame.origin.y), size: arrowIndication.frame.size)
+            } else {
+                arrowIndication.removeFromSuperview()
+            }
+        }
+    }
 
 	//MARK: Constraints
 	fileprivate var heightConstraint: NSLayoutConstraint!
@@ -149,7 +182,10 @@ public final class DropDown: UIView {
 	}
 
 	@objc fileprivate dynamic var tableViewBackgroundColor = DPDConstant.UI.BackgroundColor {
-		willSet { tableView.backgroundColor = newValue }
+		willSet {
+            tableView.backgroundColor = newValue
+            if arrowIndicationX != nil { arrowIndication.tintColor = newValue }
+        }
 	}
 
 	public override var backgroundColor: UIColor? {
@@ -752,7 +788,7 @@ extension DropDown {
 	- returns: Wether it succeed and how much height is needed to display all cells at once.
 	*/
 	@discardableResult
-	public func show() -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
+    public func show(beforeTransform transform: CGAffineTransform? = nil, anchorPoint: CGPoint? = nil) -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
 		if self == DropDown.VisibleDropDown && DropDown.VisibleDropDown?.isHidden == false { // added condition - DropDown.VisibleDropDown?.isHidden == false -> to resolve forever hiding dropdown issue when continuous taping on button - Kartik Patel - 2016-12-29
 			return (true, 0)
 		}
@@ -782,7 +818,16 @@ extension DropDown {
 		}
 
 		isHidden = false
-		tableViewContainer.transform = downScaleTransform
+        
+        if anchorPoint != nil {
+            tableViewContainer.layer.anchorPoint = anchorPoint!
+        }
+        
+        if transform != nil {
+            tableViewContainer.transform = transform!
+        } else {
+            tableViewContainer.transform = downScaleTransform
+        }
 
 		layoutIfNeeded()
 
