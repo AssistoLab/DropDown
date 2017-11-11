@@ -884,6 +884,22 @@ extension DropDown {
 		return tableView.rowHeight * CGFloat(dataSource.count)
 	}
 
+    //MARK: Objective-C methods for converting the Swift type Index
+    @objc public func selectRow(_ index: Int) {
+        self.selectRow(at:Index(index))
+    }
+    
+    @objc public func clearSelection() {
+        self.selectRow(at:nil)
+    }
+    
+    @objc public func deselectRow(_ index: Int) {
+        tableView.deselectRow(at: IndexPath(row: Index(index), section: 0), animated: true)
+    }
+
+    @objc public var indexPathForSelectedRow: NSIndexPath? {
+        return tableView.indexPathForSelectedRow as NSIndexPath?
+    }
 }
 
 //MARK: - UITableViewDataSource - UITableViewDelegate
