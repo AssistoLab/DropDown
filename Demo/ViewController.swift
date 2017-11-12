@@ -121,7 +121,7 @@ class ViewController: UIViewController {
 			/*** FOR CUSTOM CELLS ***/
 			$0.cellNib = UINib(nibName: "MyCell", bundle: nil)
 			
-			$0.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
+			$0.customCellConfiguration = { (index: Index, item: Option, cell: DropDownCell) -> Void in
 				guard let cell = cell as? MyCell else { return }
 				
 				// Setup your custom UI components
@@ -164,18 +164,17 @@ class ViewController: UIViewController {
 		// If you want to have the dropdown underneath your anchor view, you can do this:
 		chooseArticleDropDown.bottomOffset = CGPoint(x: 0, y: chooseArticleButton.bounds.height)
 		
-		// You can also use localizationKeysDataSource instead. Check the docs.
 		chooseArticleDropDown.dataSource = [
 			"iPhone SE | Black | 64G",
-			"Samsung S7",
-			"Huawei P8 Lite Smartphone 4G",
-			"Asus Zenfone Max 4G",
-			"Apple Watwh | Sport Edition"
+			Option(text: "Samsung S7"),
+			Option(text: "Huawei P8 Lite Smartphone 4G", icon: nil),
+			Option(text: "Asus Zenfone Max 4G", accessibilityIdentifier: "1 test"),
+			Option(text: "Apple Watch | Sport Edition", icon: nil, accessibilityIdentifier: nil)
 		]
 		
 		// Action triggered on selection
-		chooseArticleDropDown.selectionAction = { [unowned self] (index, item) in
-			self.chooseArticleButton.setTitle(item, for: .normal)
+		chooseArticleDropDown.selectionAction = { [unowned self] (index, option) in
+			self.chooseArticleButton.setTitle(option.text, for: .normal)
 		}
         
         chooseArticleDropDown.multiSelectionAction = { [unowned self] (indices, items) in
@@ -204,7 +203,6 @@ class ViewController: UIViewController {
 		// If you want to have the dropdown underneath your anchor view, you can do this:
 		amountDropDown.bottomOffset = CGPoint(x: 0, y: amountButton.bounds.height)
 		
-		// You can also use localizationKeysDataSource instead. Check the docs.
 		amountDropDown.dataSource = [
 			"10 €",
 			"20 €",
@@ -221,8 +219,8 @@ class ViewController: UIViewController {
 		]
 		
 		// Action triggered on selection
-		amountDropDown.selectionAction = { [unowned self] (index, item) in
-			self.amountButton.setTitle(item, for: .normal)
+		amountDropDown.selectionAction = { [unowned self] (index, option) in
+			self.amountButton.setTitle(option.text, for: .normal)
 		}
 	}
 	
@@ -234,7 +232,6 @@ class ViewController: UIViewController {
 		// If you want to have the dropdown underneath your anchor view, you can do this:
 		chooseDropDown.bottomOffset = CGPoint(x: 0, y: chooseButton.bounds.height)
 		
-		// You can also use localizationKeysDataSource instead. Check the docs.
 		chooseDropDown.dataSource = [
 			"Lorem ipsum dolor",
 			"sit amet consectetur",
@@ -242,8 +239,8 @@ class ViewController: UIViewController {
 		]
 		
 		// Action triggered on selection
-		chooseDropDown.selectionAction = { [unowned self] (index, item) in
-			self.chooseButton.setTitle(item, for: .normal)
+		chooseDropDown.selectionAction = { [unowned self] (index, option) in
+			self.chooseButton.setTitle(option.text, for: .normal)
 		}
 	}
 	
@@ -251,7 +248,6 @@ class ViewController: UIViewController {
 		// Not setting the anchor view makes the drop down centered on screen
 //		centeredDropDown.anchorView = centeredDropDownButton
 		
-		// You can also use localizationKeysDataSource instead. Check the docs.
 		centeredDropDown.dataSource = [
 			"The drop down",
 			"Is centered on",
@@ -260,15 +256,14 @@ class ViewController: UIViewController {
 			"Click anywhere to dismiss."
 		]
         
-        centeredDropDown.selectionAction = { [unowned self] (index, item) in
-            self.centeredDropDownButton.setTitle(item, for: .normal)
+        centeredDropDown.selectionAction = { [unowned self] (index, option) in
+            self.centeredDropDownButton.setTitle(option.text, for: .normal)
         }
 	}
 	
 	func setupRightBarDropDown() {
 		rightBarDropDown.anchorView = rightBarButton
 		
-		// You can also use localizationKeysDataSource instead. Check the docs.
 		rightBarDropDown.dataSource = [
 			"Menu 1",
 			"Menu 2",

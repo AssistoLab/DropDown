@@ -10,10 +10,10 @@ import UIKit
 
 public typealias Index = Int
 public typealias Closure = () -> Void
-public typealias SelectionClosure = (Index, String) -> Void
-public typealias MultiSelectionClosure = ([Index], [String]) -> Void
-public typealias ConfigurationClosure = (Index, String) -> String
-public typealias CellConfigurationClosure = (Index, String, DropDownCell) -> Void
+public typealias SelectionClosure = (Index, Option) -> Void
+public typealias MultiSelectionClosure = ([Index], [Option]) -> Void
+public typealias ConfigurationClosure = (Index, Option) -> Option
+public typealias CellConfigurationClosure = (Index, Option, DropDownCell) -> Void
 private typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
 /// Can be `UIView` or `UIBarButtonItem`.
@@ -36,6 +36,26 @@ extension UIBarButtonItem: AnchorView {
 
 	public var plainView: UIView {
 		return value(forKey: "view") as! UIView
+	}
+
+}
+
+public struct Option: ExpressibleByStringLiteral {
+
+	public let text: String
+	public let icon: UIImage?
+	public let accessibilityIdentifier: String?
+
+	public init(text: String, icon: UIImage? = nil, accessibilityIdentifier: String? = nil) {
+		self.text = text
+		self.icon = icon
+		self.accessibilityIdentifier = accessibilityIdentifier
+	}
+
+	public init(stringLiteral value: String) {
+		text = value
+		icon = nil
+		accessibilityIdentifier = nil
 	}
 
 }
@@ -333,7 +353,7 @@ public final class DropDown: UIView {
 
 	Changing the data source automatically reloads the drop down.
 	*/
-	public var dataSource = [String]() {
+	public var dataSource = [Option]() {
 		didSet {
             deselectRows(at: selectedRowIndices)
 			reloadAllComponents()
@@ -346,9 +366,10 @@ public final class DropDown: UIView {
 	Changing this value automatically reloads the drop down.
 	This has uses for setting accibility identifiers on the drop down cells (same ones as the localization keys).
 	*/
+	@available(*, deprecated, message: "Use instead `dataSource` and set its objects `accessibilityIdentifier` value. (`Option.accessibilityIdentifier`)")
 	public var localizationKeysDataSource = [String]() {
 		didSet {
-			dataSource = localizationKeysDataSource.map { NSLocalizedString($0, comment: "") }
+			dataSource = localizationKeysDataSource.map { Option(stringLiteral: NSLocalizedString($0, comment: "")) }
 		}
 	}
 
@@ -438,7 +459,7 @@ public final class DropDown: UIView {
 
 	- returns: A new instance of a drop down customized with the above parameters.
 	*/
-	public convenience init(anchorView: AnchorView, selectionAction: SelectionClosure? = nil, dataSource: [String] = [], topOffset: CGPoint? = nil, bottomOffset: CGPoint? = nil, cellConfiguration: ConfigurationClosure? = nil, cancelAction: Closure? = nil) {
+	public convenience init(anchorView: AnchorView, selectionAction: SelectionClosure? = nil, dataSource: [Option] = [], topOffset: CGPoint? = nil, bottomOffset: CGPoint? = nil, cellConfiguration: ConfigurationClosure? = nil, cancelAction: Closure? = nil) {
 		self.init(frame: .zero)
 
 		self.anchorView = anchorView
@@ -958,7 +979,7 @@ extension DropDown {
 	}
 
 	/// Returns the selected item.
-	public var selectedItem: String? {
+	public var selectedItem: Option? {
 		guard let row = (tableView.indexPathForSelectedRow as NSIndexPath?)?.row else { return nil }
 
 		return dataSource[row]
@@ -1008,18 +1029,25 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		if index >= 0 && index < localizationKeysDataSource.count {
 			cell.accessibilityIdentifier = localizationKeysDataSource[index]
 		}
-		
+
+		let option = dataSource[index]
+
+		cell.isAccessibilityElement = true
+		cell.accessibilityLabel = option.text
+		cell.accessibilityTraits = UIAccessibilityTraitButton
+		cell.accessibilityIdentifier = option.accessibilityIdentifier
+
 		cell.optionLabel.textColor = textColor
 		cell.optionLabel.font = textFont
 		cell.selectedBackgroundColor = selectionBackgroundColor
 		
 		if let cellConfiguration = cellConfiguration {
-			cell.optionLabel.text = cellConfiguration(index, dataSource[index])
+			cell.optionLabel.text = cellConfiguration(index, option).text
 		} else {
-			cell.optionLabel.text = dataSource[index]
+			cell.optionLabel.text = option.text
 		}
 		
-		customCellConfiguration?(index, dataSource[index], cell)
+		customCellConfiguration?(index, option, cell)
 	}
 
 	public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
