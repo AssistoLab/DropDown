@@ -475,6 +475,10 @@ private extension DropDown {
 			self.setupUI()
 		}
 
+		tableView.rowHeight = cellHeight
+		setHiddentState()
+		isHidden = true
+
 		dismissMode = .onTap
 
 		tableView.delegate = self
@@ -495,14 +499,10 @@ private extension DropDown {
 		tableViewContainer.layer.shadowOpacity = shadowOpacity
 		tableViewContainer.layer.shadowRadius = shadowRadius
 
-		tableView.rowHeight = cellHeight
 		tableView.backgroundColor = tableViewBackgroundColor
 		tableView.separatorColor = separatorColor
 		tableView.layer.cornerRadius = cornerRadius
 		tableView.layer.masksToBounds = true
-
-		setHiddentState()
-		isHidden = true
 	}
 
 }
