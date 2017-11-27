@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name = "DropDown"
-  s.version = "2"
+  s.version = "2.0.1"
   s.summary = "A Material Design drop down"
 
   s.description = <<-DESC
