@@ -534,8 +534,8 @@ extension DropDown {
 
 		tableView.isScrollEnabled = layout.offscreenHeight > 0
 
-		DispatchQueue.main.async { [unowned self] in
-			self.tableView.flashScrollIndicators()
+		DispatchQueue.main.async { [weak self] in
+			self?.tableView.flashScrollIndicators()
 		}
 
 		super.updateConstraints()
