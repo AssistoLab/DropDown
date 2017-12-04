@@ -174,14 +174,14 @@ class ViewController: UIViewController {
 		]
 		
 		// Action triggered on selection
-		chooseArticleDropDown.selectionAction = { [unowned self] (index, item) in
-			self.chooseArticleButton.setTitle(item, for: .normal)
+		chooseArticleDropDown.selectionAction = { [weak self] (index, item) in
+			self?.chooseArticleButton.setTitle(item, for: .normal)
 		}
         
-        chooseArticleDropDown.multiSelectionAction = { [unowned self] (indices, items) in
+        chooseArticleDropDown.multiSelectionAction = { [weak self] (indices, items) in
             print("Muti selection action called with: \(items)")
             if items.isEmpty {
-                self.chooseArticleButton.setTitle("", for: .normal)
+                self?.chooseArticleButton.setTitle("", for: .normal)
             }
         }
 		
@@ -221,8 +221,8 @@ class ViewController: UIViewController {
 		]
 		
 		// Action triggered on selection
-		amountDropDown.selectionAction = { [unowned self] (index, item) in
-			self.amountButton.setTitle(item, for: .normal)
+		amountDropDown.selectionAction = { [weak self] (index, item) in
+			self?.amountButton.setTitle(item, for: .normal)
 		}
 	}
 	
@@ -242,8 +242,8 @@ class ViewController: UIViewController {
 		]
 		
 		// Action triggered on selection
-		chooseDropDown.selectionAction = { [unowned self] (index, item) in
-			self.chooseButton.setTitle(item, for: .normal)
+		chooseDropDown.selectionAction = { [weak self] (index, item) in
+			self?.chooseButton.setTitle(item, for: .normal)
 		}
 	}
 	
@@ -260,8 +260,8 @@ class ViewController: UIViewController {
 			"Click anywhere to dismiss."
 		]
         
-        centeredDropDown.selectionAction = { [unowned self] (index, item) in
-            self.centeredDropDownButton.setTitle(item, for: .normal)
+        centeredDropDown.selectionAction = { [weak self] (index, item) in
+            self?.centeredDropDownButton.setTitle(item, for: .normal)
         }
 	}
 	
