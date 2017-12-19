@@ -32,6 +32,8 @@ internal struct DPDConstant {
 		static let CornerRadius: CGFloat = 2
 		static let RowHeight: CGFloat = 44
 		static let HeightPadding: CGFloat = 20
+        static let BorderWidth : CGFloat = 0.0
+        static let BorderColor : CGColor = UIColor.clear.cgColor
 
 		struct Shadow {
 
