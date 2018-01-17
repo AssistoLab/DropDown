@@ -616,7 +616,7 @@ extension DropDown {
 		// We update the constraint to update the position
 		setNeedsUpdateConstraints()
 
-		let shadowPath = UIBezierPath(roundedRect: tableViewContainer.bounds, cornerRadius: DPDConstant.UI.CornerRadius)
+		let shadowPath = UIBezierPath(roundedRect: tableViewContainer.bounds, cornerRadius: cornerRadius)
 		tableViewContainer.layer.shadowPath = shadowPath.cgPath
 	}
 
