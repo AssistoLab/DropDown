@@ -2,7 +2,7 @@
 
 [![Twitter: @kevinh6113](http://img.shields.io/badge/contact-%40kevinh6113-70a1fb.svg?style=flat)](https://twitter.com/kevinh6113)
 [![License: MIT](http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat)](https://github.com/AssistoLab/DropDown/blob/master/README.md)
-[![Version](http://img.shields.io/badge/version-2.0.2-green.svg?style=flat)](https://github.com/AssistoLab/DropDown)
+[![Version](http://img.shields.io/badge/version-2.3.0-green.svg?style=flat)](https://github.com/AssistoLab/DropDown)
 [![Cocoapods](http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat)](http://cocoadocs.org/docsets/DropDown/)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
@@ -245,6 +245,7 @@ You can customize these properties of the drop down:
 - `backgroundColor`: the background color of the drop down.
 - `selectionBackgroundColor`: the background color of the selected cell in the drop down.
 - `cellHeight`: the height of the drop down cells.
+- `dimmedBackgroundColor`: the color of the background (behind the drop down, covering the entire screen).
 
 You can change them through each instance of `DropDown` or via `UIAppearance` like this for example:
 
