@@ -194,6 +194,13 @@ public final class DropDown: UIView {
 	}
 
 	/**
+	The color of the dimmed background (behind the drop down, covering the entire screen.
+	*/
+	public var dimmedBackgroundColor = UIColor.clear {
+		willSet { super.backgroundColor = newValue }
+	}
+
+	/**
 	The background color of the selected cell in the drop down.
 
 	Changing the background color automatically reloads the drop down.
