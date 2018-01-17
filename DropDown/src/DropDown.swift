@@ -151,23 +151,23 @@ public final class DropDown: UIView {
 	public var width: CGFloat? {
 		didSet { setNeedsUpdateConstraints() }
 	}
-    
-    /**
-     arrowIndication.x
-     
-     arrowIndication will be add to tableViewContainer when configured
-     */
-    public var arrowIndicationX: CGFloat? {
-        didSet{
-            if arrowIndicationX != nil {
-                tableViewContainer.addSubview(arrowIndication)
-                arrowIndication.tintColor = tableViewBackgroundColor
-                arrowIndication.frame = CGRect(origin: CGPoint(x: arrowIndicationX!, y: arrowIndication.frame.origin.y), size: arrowIndication.frame.size)
-            } else {
-                arrowIndication.removeFromSuperview()
-            }
-        }
-    }
+
+	/**
+	arrowIndication.x
+
+	arrowIndication will be add to tableViewContainer when configured
+	*/
+	public var arrowIndicationX: CGFloat? {
+		didSet {
+			if let arrowIndicationX = arrowIndicationX {
+				tableViewContainer.addSubview(arrowIndication)
+				arrowIndication.tintColor = tableViewBackgroundColor
+				arrowIndication.frame.origin.x = arrowIndicationX
+			} else {
+				arrowIndication.removeFromSuperview()
+			}
+		}
+	}
 
 	//MARK: Constraints
 	fileprivate var heightConstraint: NSLayoutConstraint!
