@@ -977,8 +977,8 @@ extension DropDown {
 	}
 
     //MARK: Objective-C methods for converting the Swift type Index
-    @objc public func selectRow(_ index: Int) {
-        self.selectRow(at:Index(index))
+    @objc public func selectRow(_ index: Int, scrollPosition: UITableViewScrollPosition = .none) {
+        self.selectRow(at:Index(index), scrollPosition: scrollPosition)
     }
     
     @objc public func clearSelection() {
