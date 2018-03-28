@@ -926,11 +926,16 @@ extension DropDown {
 	}
 
 	/// (Pre)selects a row at a certain index.
-	@objc public func selectRow(at index: Index) {
-        tableView.selectRow(
-            at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .none
-        )
-        selectedRowIndices.insert(index)
+    private func selectRow(at index: Index?) {
+        if let index = index {
+            tableView.selectRow(
+                at: IndexPath(row: index, section: 0), animated: true, scrollPosition: .none
+            )
+            selectedRowIndices.insert(index)
+        } else {
+            deselectRows(at: selectedRowIndices)
+            selectedRowIndices.removeAll()
+        }
 	}
     
     @objc public func selectRows(at indices: Set<Index>?) {
@@ -944,8 +949,9 @@ extension DropDown {
         }
     }
 
-	@objc public func deselectRow(at index: Index) {
-		guard index >= 0
+    private func deselectRow(at index: Index?) {
+        guard let index = index
+            , index >= 0
 			else { return }
         
         // remove from indices
@@ -957,15 +963,15 @@ extension DropDown {
 	}
     
     // de-selects the rows at the indices provided
-    @objc public func deselectRows(at indices: Set<Index>) {
-        indices.forEach {
+    private func deselectRows(at indices: Set<Index>?) {
+        indices?.forEach {
             deselectRow(at: $0)
         }
     }
 
 	/// Returns the index of the selected row.
-	@objc public var indexForSelectedRow: Index {
-		return tableView.indexPathForSelectedRow?.row ?? -1
+    private var indexForSelectedRow: Index? {
+        return (tableView.indexPathForSelectedRow as NSIndexPath?)?.row
 	}
 
 	/// Returns the selected item.
@@ -986,8 +992,7 @@ extension DropDown {
     }
     
     @objc public func clearSelection() {
-        deselectRows(at: selectedRowIndices)
-        selectedRowIndices.removeAll()
+        self.selectRow(at:nil)
     }
     
     @objc public func deselectRow(_ index: Int) {
