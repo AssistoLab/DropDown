@@ -858,7 +858,7 @@ extension DropDown {
 			completion: nil)
 
         //deselectRows(at: selectedRowIndices)
-        selectRows(at: selectedRowIndices, scrollPosition: .none)
+        selectRows(at: selectedRowIndices)
 
 		return (layout.canBeDisplayed, layout.offscreenHeight)
 	}
@@ -926,10 +926,10 @@ extension DropDown {
 	}
 
 	/// (Pre)selects a row at a certain index.
-    private func selectRow(at index: Index?, scrollPosition: UITableViewScrollPosition?) {
+    private func selectRow(at index: Index?, scrollPosition: UITableViewScrollPosition = .none) {
         if let index = index {
             tableView.selectRow(
-                at: IndexPath(row: index, section: 0), animated: true, scrollPosition: scrollPosition ?? .none
+                at: IndexPath(row: index, section: 0), animated: true, scrollPosition: scrollPosition
             )
             selectedRowIndices.insert(index)
         } else {
@@ -937,6 +937,10 @@ extension DropDown {
             selectedRowIndices.removeAll()
         }
 	}
+    
+    @objc public func selectRows(at indices: Set<Index>?) {
+        self.selectRows(at: indices, scrollPosition: .none)
+    }
     
     @objc public func selectRows(at indices: Set<Index>?, scrollPosition: UITableViewScrollPosition) {
         indices?.forEach {
@@ -987,12 +991,16 @@ extension DropDown {
 	}
 
     //MARK: Objective-C methods for converting the Swift type Index
+    @objc public func selectRow(_ index: Int) {
+        self.selectRow(index, scrollPosition: .none)
+    }
+
     @objc public func selectRow(_ index: Int, scrollPosition: UITableViewScrollPosition) {
         self.selectRow(at:Index(index), scrollPosition: scrollPosition)
     }
     
     @objc public func clearSelection() {
-        self.selectRow(at:nil, scrollPosition: .none)
+        self.selectRow(at:nil)
     }
     
     @objc public func deselectRow(_ index: Int) {
