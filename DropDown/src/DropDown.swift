@@ -176,10 +176,12 @@ public final class DropDown: UIView {
 	fileprivate var yConstraint: NSLayoutConstraint!
 
 	//MARK: Appearance
+
 	@objc public dynamic var cellHeight = DPDConstant.UI.RowHeight {
 		willSet { tableView.rowHeight = newValue }
 		didSet { reloadAllComponents() }
 	}
+
 
 	@objc fileprivate dynamic var tableViewBackgroundColor = DPDConstant.UI.BackgroundColor {
 		willSet {
@@ -205,6 +207,7 @@ public final class DropDown: UIView {
 
 	Changing the background color automatically reloads the drop down.
 	*/
+
 	@objc public dynamic var selectionBackgroundColor = DPDConstant.UI.SelectionBackgroundColor
 
 	/**
@@ -212,6 +215,7 @@ public final class DropDown: UIView {
 
 	Changing the separator color automatically reloads the drop down.
 	*/
+
 	@objc public dynamic var separatorColor = DPDConstant.UI.SeparatorColor {
 		willSet { tableView.separatorColor = newValue }
 		didSet { reloadAllComponents() }
@@ -222,6 +226,7 @@ public final class DropDown: UIView {
 
 	Changing the corner radius automatically reloads the drop down.
 	*/
+
 	@objc public dynamic var cornerRadius = DPDConstant.UI.CornerRadius {
 		willSet {
 			tableViewContainer.layer.cornerRadius = newValue
@@ -235,6 +240,8 @@ public final class DropDown: UIView {
 
 	Changing the shadow color automatically reloads the drop down.
 	*/
+
+
 	@objc public dynamic var shadowColor = DPDConstant.UI.Shadow.Color {
 		willSet { tableViewContainer.layer.shadowColor = newValue.cgColor }
 		didSet { reloadAllComponents() }
@@ -245,6 +252,7 @@ public final class DropDown: UIView {
 
 	Changing the shadow color automatically reloads the drop down.
 	*/
+
 	@objc public dynamic var shadowOffset = DPDConstant.UI.Shadow.Offset {
 		willSet { tableViewContainer.layer.shadowOffset = newValue }
 		didSet { reloadAllComponents() }
@@ -255,6 +263,7 @@ public final class DropDown: UIView {
 
 	Changing the shadow opacity automatically reloads the drop down.
 	*/
+
 	@objc public dynamic var shadowOpacity = DPDConstant.UI.Shadow.Opacity {
 		willSet { tableViewContainer.layer.shadowOpacity = newValue }
 		didSet { reloadAllComponents() }
@@ -265,6 +274,7 @@ public final class DropDown: UIView {
 
 	Changing the shadow radius automatically reloads the drop down.
 	*/
+
 	@objc public dynamic var shadowRadius = DPDConstant.UI.Shadow.Radius {
 		willSet { tableViewContainer.layer.shadowRadius = newValue }
 		didSet { reloadAllComponents() }
@@ -273,6 +283,7 @@ public final class DropDown: UIView {
 	/**
 	The duration of the show/hide animation.
 	*/
+
 	@objc public dynamic var animationduration = DPDConstant.Animation.Duration
 
 	/**
@@ -307,6 +318,7 @@ public final class DropDown: UIView {
 
 	Changing the text color automatically reloads the drop down.
 	*/
+    
 	@objc public dynamic var textColor = DPDConstant.UI.TextColor {
 		didSet { reloadAllComponents() }
 	}
@@ -316,6 +328,7 @@ public final class DropDown: UIView {
 
 	Changing the text font automatically reloads the drop down.
 	*/
+
 	@objc public dynamic var textFont = DPDConstant.UI.TextFont {
 		didSet { reloadAllComponents() }
 	}
@@ -1042,20 +1055,24 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
             // if already selected then deselect
             if selectedRowIndices.first(where: { $0 == selectedRowIndex}) != nil {
                 deselectRow(at: selectedRowIndex)
-
-				let selectedRowIndicesArray = Array(selectedRowIndices)
-                let selectedRows = selectedRowIndicesArray.map { dataSource[$0] }
-                multiSelectionCallback(selectedRowIndicesArray, selectedRows)
+                
+                let selectedData = selectedRowIndices.flatMap{
+                    let data = dataSource[$0]
+                    return data
+                }
+                multiSelectionCallback(Array(selectedRowIndices), selectedData )			
                 return
             }
             else {
                 selectedRowIndices.insert(selectedRowIndex)
 
-				let selectedRowIndicesArray = Array(selectedRowIndices)
-				let selectedRows = selectedRowIndicesArray.map { dataSource[$0] }
+                let selectedData = selectedRowIndices.flatMap{
+                    let data = dataSource[$0]
+                    return data
+                }
                 
                 selectionAction?(selectedRowIndex, dataSource[selectedRowIndex])
-                multiSelectionCallback(selectedRowIndicesArray, selectedRows)
+                multiSelectionCallback(Array(selectedRowIndices), selectedData )
                 tableView.reloadData()
                 return
             }

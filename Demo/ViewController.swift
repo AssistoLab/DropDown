@@ -178,12 +178,13 @@ class ViewController: UIViewController {
 			self?.chooseArticleButton.setTitle(item, for: .normal)
 		}
         
-        chooseArticleDropDown.multiSelectionAction = { [weak self] (indices, items) in
-            print("Muti selection action called with: \(items)")
-            if items.isEmpty {
-                self?.chooseArticleButton.setTitle("", for: .normal)
-            }
+
+    chooseArticleDropDown.multiSelectionAction = { [unowned self] (indices, items) in
+        print("Muti selection action called with: \(items)")
+        if items.isEmpty {
+            self.chooseArticleButton.setTitle("", for: .normal)
         }
+    }
 		
 		// Action triggered on dropdown cancelation (hide)
 		//		dropDown.cancelAction = { [unowned self] in
@@ -260,9 +261,9 @@ class ViewController: UIViewController {
 			"Click anywhere to dismiss."
 		]
         
-        centeredDropDown.selectionAction = { [weak self] (index, item) in
-            self?.centeredDropDownButton.setTitle(item, for: .normal)
-        }
+    centeredDropDown.selectionAction = { [unowned self] (index, item) in
+        self.centeredDropDownButton.setTitle(item, for: .normal)
+    }
 	}
 	
 	func setupRightBarDropDown() {
