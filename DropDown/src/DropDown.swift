@@ -1107,7 +1107,7 @@ extension DropDown {
 	Starts listening to keyboard events.
 	Allows the drop down to display correctly when keyboard is showed.
 	*/
-	public static func startListeningToKeyboard() {
+	@objc public static func startListeningToKeyboard() {
 		KeyboardListener.sharedInstance.startListeningToKeyboard()
 	}
 
