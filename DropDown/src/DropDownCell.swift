@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class DropDownCell: UITableViewCell {
+@objc open class DropDownCell: UITableViewCell {
 		
 	//UI
 	@IBOutlet open weak var optionLabel: UILabel!
@@ -21,29 +21,29 @@ open class DropDownCell: UITableViewCell {
 
 extension DropDownCell {
 	
-	override open func awakeFromNib() {
+	@objc override open func awakeFromNib() {
 		super.awakeFromNib()
 		
 		backgroundColor = .clear
 	}
 	
-	override open var isSelected: Bool {
+	@objc override open var isSelected: Bool {
 		willSet {
 			setSelected(newValue, animated: false)
 		}
 	}
 	
-	override open var isHighlighted: Bool {
+	@objc override open var isHighlighted: Bool {
 		willSet {
 			setSelected(newValue, animated: false)
 		}
 	}
 	
-	override open func setHighlighted(_ highlighted: Bool, animated: Bool) {
+	@objc override open func setHighlighted(_ highlighted: Bool, animated: Bool) {
 		setSelected(highlighted, animated: animated)
 	}
 	
-	override open func setSelected(_ selected: Bool, animated: Bool) {
+	@objc override open func setSelected(_ selected: Bool, animated: Bool) {
 		let executeSelection: () -> Void = { [weak self] in
 			guard let `self` = self else { return }
 

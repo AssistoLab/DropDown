@@ -10,7 +10,7 @@ import UIKit
 
 extension DropDown {
 
-	public class func setupDefaultAppearance() {
+	@objc public class func setupDefaultAppearance() {
 		let appearance = DropDown.appearance()
 
 		appearance.cellHeight = DPDConstant.UI.RowHeight
