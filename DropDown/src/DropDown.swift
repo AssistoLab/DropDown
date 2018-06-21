@@ -795,7 +795,7 @@ extension DropDown {
 	- returns: Wether it succeed and how much height is needed to display all cells at once.
 	*/
 	@discardableResult
-    public func show(beforeTransform transform: CGAffineTransform? = nil, anchorPoint: CGPoint? = nil) -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
+    public func show(onTopOf window: UIWindow? = nil, beforeTransform transform: CGAffineTransform? = nil, anchorPoint: CGPoint? = nil) -> (canBeDisplayed: Bool, offscreenHeight: CGFloat?) {
 		if self == DropDown.VisibleDropDown && DropDown.VisibleDropDown?.isHidden == false { // added condition - DropDown.VisibleDropDown?.isHidden == false -> to resolve forever hiding dropdown issue when continuous taping on button - Kartik Patel - 2016-12-29
 			return (true, 0)
 		}
@@ -810,7 +810,7 @@ extension DropDown {
 
 		setNeedsUpdateConstraints()
 
-		let visibleWindow = UIWindow.visibleWindow()
+		let visibleWindow = window != nil ? window : UIWindow.visibleWindow()
 		visibleWindow?.addSubview(self)
 		visibleWindow?.bringSubview(toFront: self)
 
