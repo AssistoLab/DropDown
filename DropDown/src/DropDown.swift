@@ -911,8 +911,10 @@ extension DropDown {
 	and `cellConfiguration` implicitly calls `reloadAllComponents()`.
 	*/
 	public func reloadAllComponents() {
-		tableView.reloadData()
-		setNeedsUpdateConstraints()
+		DispatchQueue.main.async {
+			self.tableView.reloadData()
+			self.setNeedsUpdateConstraints()
+		}
 	}
 
 	/// (Pre)selects a row at a certain index.
