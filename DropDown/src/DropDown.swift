@@ -288,12 +288,12 @@ public final class DropDown: UIView {
 	/**
 	The option of the show animation. Only change the caller. To change all drop down's use the static var.
 	*/
-	public var animationEntranceOptions: UIViewAnimationOptions = DropDown.animationEntranceOptions
+	public var animationEntranceOptions: UIView.AnimationOptions = DropDown.animationEntranceOptions
 	
 	/**
 	The option of the hide animation. Only change the caller. To change all drop down's use the static var.
 	*/
-	public var animationExitOptions: UIViewAnimationOptions = DropDown.animationExitOptions
+	public var animationExitOptions: UIView.AnimationOptions = DropDown.animationExitOptions
 
 	/**
 	The downScale transformation of the tableview when the DropDown is appearing
