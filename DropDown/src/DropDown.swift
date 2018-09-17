@@ -812,7 +812,7 @@ extension DropDown {
 
 		let visibleWindow = UIWindow.visibleWindow()
 		visibleWindow?.addSubview(self)
-		visibleWindow?.bringSubview(toFront: self)
+		visibleWindow?.bringSubviewToFront(self)
 
 		self.translatesAutoresizingMaskIntoConstraints = false
 		visibleWindow?.addUniversalConstraints(format: "|[dropDown]|", views: ["dropDown": self])
