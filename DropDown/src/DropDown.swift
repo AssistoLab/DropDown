@@ -730,7 +730,7 @@ extension DropDown {
 		for index in 0..<dataSource.count {
 			configureCell(templateCell, at: index)
 			templateCell.bounds.size.height = cellHeight
-			let width = templateCell.systemLayoutSizeFitting(UILayoutFittingCompressedSize).width
+			let width = templateCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
 			
 			if width > maxWidth {
 				maxWidth = width
