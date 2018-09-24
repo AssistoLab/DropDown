@@ -2,7 +2,7 @@
 
 [![Twitter: @kevinh6113](http://img.shields.io/badge/contact-%40kevinh6113-70a1fb.svg?style=flat)](https://twitter.com/kevinh6113)
 [![License: MIT](http://img.shields.io/badge/license-MIT-70a1fb.svg?style=flat)](https://github.com/AssistoLab/DropDown/blob/master/README.md)
-[![Version](http://img.shields.io/badge/version-2.3.3-green.svg?style=flat)](https://github.com/AssistoLab/DropDown)
+[![Version](http://img.shields.io/badge/version-2.3.4-green.svg?style=flat)](https://github.com/AssistoLab/DropDown)
 [![Cocoapods](http://img.shields.io/badge/Cocoapods-available-green.svg?style=flat)](http://cocoadocs.org/docsets/DropDown/)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
@@ -23,10 +23,10 @@ To install [CocoaPods](http://www.cocoapods.org), run `sudo gem install cocoapod
 
 `DropDown` supports Swift 4.2. 
 
-If you need Swift 4.0, use version 2.3.2:
-- Manually: use commit `dc69b3d`
-- CocoaPods: `pod 'DropDown', '~> 2.3.2'`
-- Carthage: `github "AssistoLab/DropDown" ~> 2.3.2`
+If you need Swift 4.0, use version 2.3.3:
+- Manually: use tag `2.3.3`
+- CocoaPods: `pod 'DropDown', '~> 2.3.3'`
+- Carthage: `github "AssistoLab/DropDown" ~> 2.3.3`
 
 ### CocoaPods
 
