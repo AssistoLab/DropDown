@@ -231,6 +231,15 @@ public final class DropDown: UIView {
 	}
 
 	/**
+	Alias method for `cornerRadius` variable to avoid ambiguity.
+	*/
+	@objc public dynamic func setupCornerRadius(_ radius: CGFloat) {
+		tableViewContainer.layer.cornerRadius = radius
+		tableView.layer.cornerRadius = radius
+		reloadAllComponents()
+	}
+
+	/**
 	The color of the shadow.
 
 	Changing the shadow color automatically reloads the drop down.
