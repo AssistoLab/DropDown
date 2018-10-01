@@ -23,10 +23,10 @@ To install [CocoaPods](http://www.cocoapods.org), run `sudo gem install cocoapod
 
 `DropDown` supports Swift 4.2 since version `2.3.4`.
 
-If you need Swift 4.0, use version 2.3.3:
+If you need Swift 4.0, use version 2.3.0:
 - Manually: use tag `2.3.3`
-- CocoaPods: `pod 'DropDown', '~> 2.3.3'`
-- Carthage: `github "AssistoLab/DropDown" ~> 2.3.3`
+- CocoaPods: `pod 'DropDown', '~> 2.3.0'`
+- Carthage: `github "AssistoLab/DropDown" ~> 2.3.0`
 
 ### CocoaPods
 
