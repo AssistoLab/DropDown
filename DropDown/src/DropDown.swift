@@ -927,7 +927,7 @@ extension DropDown {
 	}
 
 	/// (Pre)selects a row at a certain index.
-	public func selectRow(at index: Index?, scrollPosition: UITableViewScrollPosition = .none) {
+	public func selectRow(at index: Index?, scrollPosition: UITableView.ScrollPosition = .none) {
 		if let index = index {
             tableView.selectRow(
                 at: IndexPath(row: index, section: 0), animated: true, scrollPosition: scrollPosition
@@ -988,7 +988,7 @@ extension DropDown {
 	}
 
     //MARK: Objective-C methods for converting the Swift type Index
-    @objc public func selectRow(_ index: Int, scrollPosition: UITableViewScrollPosition = .none) {
+	@objc public func selectRow(_ index: Int, scrollPosition: UITableView.ScrollPosition = .none) {
         self.selectRow(at:Index(index), scrollPosition: scrollPosition)
     }
     
