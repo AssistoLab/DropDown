@@ -240,6 +240,18 @@ public final class DropDown: UIView {
 	}
 
 	/**
+	The masked corners of DropDown.
+
+	Changing the masked corners automatically reloads the drop down.
+	*/
+	@available(iOS 11.0, *)
+	@objc public dynamic func setupMaskedCorners(_ cornerMask: CACornerMask) {
+		tableViewContainer.layer.maskedCorners = cornerMask
+		tableView.layer.maskedCorners = cornerMask
+		reloadAllComponents()
+	}
+
+	/**
 	The color of the shadow.
 
 	Changing the shadow color automatically reloads the drop down.
