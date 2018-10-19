@@ -332,6 +332,15 @@ public final class DropDown: UIView {
 		didSet { reloadAllComponents() }
 	}
 
+    /**
+     The color of the text for selected cells of the drop down.
+     
+     Changing the text color automatically reloads the drop down.
+     */
+    @objc public dynamic var selectedTextColor = DPDConstant.UI.SelectedTextColor {
+        didSet { reloadAllComponents() }
+    }
+    
 	/**
 	The font of the text for each cells of the drop down.
 
@@ -1056,6 +1065,8 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		cell.optionLabel.textColor = textColor
 		cell.optionLabel.font = textFont
 		cell.selectedBackgroundColor = selectionBackgroundColor
+        cell.highlightTextColor = selectedTextColor
+        cell.normalTextColor = textColor
 		
 		if let cellConfiguration = cellConfiguration {
 			cell.optionLabel.text = cellConfiguration(index, dataSource[index])
