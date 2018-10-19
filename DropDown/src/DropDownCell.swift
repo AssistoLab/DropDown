@@ -63,6 +63,8 @@ extension DropDownCell {
 		} else {
 			executeSelection()
 		}
+
+		accessibilityTraits = selected ? .selected : .none
 	}
 	
 }

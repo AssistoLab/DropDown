@@ -868,10 +868,23 @@ extension DropDown {
 			},
 			completion: nil)
 
-        //deselectRows(at: selectedRowIndices)
-        selectRows(at: selectedRowIndices)
+		accessibilityViewIsModal = true
+		UIAccessibility.post(notification: .screenChanged, argument: self)
+
+		//deselectRows(at: selectedRowIndices)
+		selectRows(at: selectedRowIndices)
 
 		return (layout.canBeDisplayed, layout.offscreenHeight)
+	}
+
+	public override func accessibilityPerformEscape() -> Bool {
+		switch dismissMode {
+		case .automatic, .onTap:
+			cancel()
+			return true
+		case .manual:
+			return false
+		}
 	}
 
 	/// Hides the drop down.
@@ -901,7 +914,8 @@ extension DropDown {
 
 				self.isHidden = true
 				self.removeFromSuperview()
-			})
+				UIAccessibility.post(notification: .screenChanged, argument: nil)
+		})
 	}
 
 	fileprivate func cancel() {
