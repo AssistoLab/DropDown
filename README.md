@@ -247,15 +247,19 @@ You can customize these properties of the drop down:
 
 - `textFont`: the font of the text for each cells of the drop down.
 - `textColor`: the color of the text for each cells of the drop down.
+- `selectedTextColor`: the color of the text for selected cells of the drop down.
 - `backgroundColor`: the background color of the drop down.
 - `selectionBackgroundColor`: the background color of the selected cell in the drop down.
 - `cellHeight`: the height of the drop down cells.
 - `dimmedBackgroundColor`: the color of the background (behind the drop down, covering the entire screen).
+- `cornerRadius`: the corner radius of the drop down (see [info](#Issues) below if you encounter any issue)
+- `setupMaskedCorners`: the masked corners of the dropdown. Use this along with `cornerRadius` to set the corner radius only on certain corners.
 
 You can change them through each instance of `DropDown` or via `UIAppearance` like this for example:
 
 ```swift
 DropDown.appearance().textColor = UIColor.black
+DropDown.appearance().selectedTextColor = UIColor.red
 DropDown.appearance().textFont = UIFont.systemFont(ofSize: 15)
 DropDown.appearance().backgroundColor = UIColor.white
 DropDown.appearance().selectionBackgroundColor = UIColor.lightGray
