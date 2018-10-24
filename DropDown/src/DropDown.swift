@@ -955,7 +955,7 @@ extension DropDown {
 	and `cellConfiguration` implicitly calls `reloadAllComponents()`.
 	*/
 	public func reloadAllComponents() {
-		DispatchQueue.main.async {
+		DispatchQueue.executeOnMainThread {
 			self.tableView.reloadData()
 			self.setNeedsUpdateConstraints()
 		}
@@ -1183,4 +1183,14 @@ extension DropDown {
 		self.setNeedsUpdateConstraints()
 	}
 
+}
+
+private extension DispatchQueue {
+	static func executeOnMainThread(_ closure: @escaping Closure) {
+		if Thread.isMainThread {
+			closure()
+		} else {
+			main.async(execute: closure)
+		}
+	}
 }
