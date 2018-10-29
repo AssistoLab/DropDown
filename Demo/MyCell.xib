@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,36 +15,35 @@
             <rect key="frame" x="0.0" y="0.0" width="210" height="40"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_0" translatesAutoresizingMaskIntoConstraints="NO" id="wwI-k5-kbU">
+                    <rect key="frame" x="8" y="10" width="20" height="20"/>
+                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="optionLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIB-Xt-ckX">
-                    <rect key="frame" x="8" y="9" width="90" height="21"/>
+                    <rect key="frame" x="36" y="9" width="90" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="suffixLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohS-96-iSV">
-                    <rect key="frame" x="106" y="9" width="84" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="VIB-Xt-ckX" secondAttribute="bottom" constant="10" id="0zj-tF-bzC"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ohS-96-iSV" secondAttribute="trailing" constant="8" id="9Q3-yc-9aj"/>
-                <constraint firstItem="ohS-96-iSV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="9" id="K4S-Hy-PP9"/>
-                <constraint firstItem="VIB-Xt-ckX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="ceQ-YZ-1ri"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VIB-Xt-ckX" secondAttribute="trailing" constant="8" id="OSg-Aj-BFF"/>
+                <constraint firstItem="VIB-Xt-ckX" firstAttribute="leading" secondItem="wwI-k5-kbU" secondAttribute="trailing" constant="8" id="aUx-ZS-D4Q"/>
                 <constraint firstItem="VIB-Xt-ckX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="9" id="fWz-fu-Ghl"/>
-                <constraint firstAttribute="bottom" secondItem="ohS-96-iSV" secondAttribute="bottom" constant="10" id="iqG-w5-Bck"/>
-                <constraint firstItem="ohS-96-iSV" firstAttribute="leading" secondItem="VIB-Xt-ckX" secondAttribute="trailing" constant="8" id="jeo-I3-rzu"/>
+                <constraint firstItem="wwI-k5-kbU" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="oNR-Ox-93x"/>
+                <constraint firstItem="wwI-k5-kbU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="xPu-SG-9dw"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="logoImageView" destination="wwI-k5-kbU" id="DFj-ka-K8K"/>
                 <outlet property="optionLabel" destination="VIB-Xt-ckX" id="RNH-YD-X7E"/>
-                <outlet property="suffixLabel" destination="ohS-96-iSV" id="srg-QB-s9S"/>
             </connections>
             <point key="canvasLocation" x="515" y="409"/>
         </view>
     </objects>
+    <resources>
+        <image name="logo_0" width="20" height="20"/>
+    </resources>
 </document>

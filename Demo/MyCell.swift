@@ -11,6 +11,6 @@ import DropDown
 
 class MyCell: DropDownCell {
 	
-    @IBOutlet weak var suffixLabel: UILabel!
+    @IBOutlet weak var logoImageView: UIImageView!
 	
 }
