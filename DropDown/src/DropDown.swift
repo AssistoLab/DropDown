@@ -362,6 +362,14 @@ public final class DropDown: UIView {
 			reloadAllComponents()
 		}
 	}
+    
+    public var cellClass: AnyClass = DropDownCell.self {
+        didSet {
+            tableView.register(cellClass, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
+            templateCell = nil
+            reloadAllComponents()
+        }
+    }
 	
 	//MARK: Content
 

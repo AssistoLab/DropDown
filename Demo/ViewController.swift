@@ -81,6 +81,7 @@ class ViewController: UIViewController {
 		switch sender.selectedSegmentIndex {
 		case 0: setupDefaultDropDown()
 		case 1: customizeDropDown(self)
+        case 2: customizeDropDownWithClass(self)
 		default: break;
 		}
 	}
@@ -134,6 +135,21 @@ class ViewController: UIViewController {
 			/*** ---------------- ***/
 		}
 	}
+    
+    func customizeDropDownWithClass(_ sender: AnyObject) {
+        dropDowns.forEach {
+            /*** FOR CUSTOM CELLS ***/
+            $0.cellClass = MySecondCell.self
+            
+            $0.customCellConfiguration = { (index: Index, item: String, cell: DropDownCell) -> Void in
+                guard let cell = cell as? MySecondCell else { return }
+            
+                // Setup your custom UI components
+                cell.logoImageView.image = UIImage(named: "logo_\(index % 10)")
+            }
+            /*** ---------------- ***/
+        }
+    }
 	
 	//MARK: - UIViewController
 	
