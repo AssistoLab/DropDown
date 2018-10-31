@@ -82,6 +82,7 @@ class ViewController: UIViewController {
 		case 0: setupDefaultDropDown()
 		case 1: customizeDropDown(self)
         case 2: customizeDropDownWithClass(self)
+        case 3: customizeDropDownSelector(self)
 		default: break;
 		}
 	}
@@ -150,6 +151,16 @@ class ViewController: UIViewController {
             /*** ---------------- ***/
         }
     }
+    
+    func customizeDropDownSelector(_ sender: AnyObject) {
+        dropDowns.forEach {
+            /*** FOR CUSTOM CELLS ***/
+            $0.cellClass = CheckboxCell.self
+            $0.customCellConfiguration = nil
+        }
+    }
+    
+    
 	
 	//MARK: - UIViewController
 	

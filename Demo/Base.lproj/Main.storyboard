@@ -109,9 +109,10 @@
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="aXM-aw-Gwc">
                                         <rect key="frame" x="8" y="429" width="540" height="29"/>
                                         <segments>
-                                            <segment title="Basic DropDown UI"/>
-                                            <segment title="Example of custom UI"/>
-                                            <segment title="Custom UI without nib"/>
+                                            <segment title="Basic"/>
+                                            <segment title="NIB"/>
+                                            <segment title="Custom Class"/>
+                                            <segment title="Checkbox"/>
                                         </segments>
                                         <connections>
                                             <action selector="changeUI:" destination="0v1-k3-K39" eventType="valueChanged" id="BfR-fl-VtX"/>

@@ -29,7 +29,7 @@ open class DropDownCustomCell: DropDownCell {
     override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         optionLabel = strongOptionLabel
-        addSubview(strongOptionLabel)
+        contentView.addSubview(strongOptionLabel)
     }
 }
 
