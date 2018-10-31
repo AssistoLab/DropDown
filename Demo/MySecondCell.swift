@@ -9,9 +9,8 @@
 import UIKit
 import DropDown
 
-class MySecondCell: DropDownCell {
+class MySecondCell: DropDownCustomCell {
     var logoImageView = UIImageView(frame: .zero)
-    var titleView = UILabel(frame: .zero)
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -19,16 +18,13 @@ class MySecondCell: DropDownCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        optionLabel = titleView
-        
         addSubview(logoImageView)
-        addSubview(titleView)
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         logoImageView.frame = CGRect(origin: .zero,
                                      size: CGSize(width: frame.height, height: frame.height))
-        titleView.frame = CGRect(x: frame.height, y: 0, width: frame.width - frame.height, height: frame.height)
+        optionLabel.frame = CGRect(x: frame.height, y: 0, width: frame.width - frame.height, height: frame.height)
     }
 }

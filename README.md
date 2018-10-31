@@ -196,6 +196,12 @@ dropDown.customCellConfiguration = { (index: Index, item: String, cell: DropDown
 
 For a complete example, don't hesitate to check the demo app and code.
 
+To avoid NIBs use 
+```swift
+dropDown.cellClass = CellClassName.self
+```
+Where `CellClassName` is subclass of `DropDownCustomCell`.
+
 ### Events
 
 ```swift

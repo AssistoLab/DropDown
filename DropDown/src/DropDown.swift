@@ -363,7 +363,7 @@ public final class DropDown: UIView {
 		}
 	}
     
-    public var cellClass: AnyClass = DropDownCell.self {
+    public var cellClass: DropDownCustomCell.Type = DropDownCustomCell.self {
         didSet {
             tableView.register(cellClass, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
             templateCell = nil
