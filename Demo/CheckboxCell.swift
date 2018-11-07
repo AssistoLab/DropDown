@@ -27,6 +27,13 @@ class CheckboxCell: DropDownCustomCell {
         accessibilityTraits = selected ? .selected : .none
     }
     
+    override func systemLayoutSizeFitting(_ targetSize: CGSize) -> CGSize {
+        let contentSize = optionLabel.systemLayoutSizeFitting(targetSize)
+        let accessoryViewWidth:CGFloat = 40
+        return CGSize(width: contentSize.width + accessoryViewWidth,
+                      height: contentSize.height)
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         optionLabel.frame = contentView.bounds

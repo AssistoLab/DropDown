@@ -725,7 +725,7 @@ extension DropDown {
 	fileprivate func computeLayoutBottomDisplay(window: UIWindow) -> ComputeLayoutTuple {
 		var offscreenHeight: CGFloat = 0
 		
-		let width = self.width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - bottomOffset.x
+		let width = self.width ?? fittingWidth() - bottomOffset.x
 		
 		let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? window.frame.midX - (width / 2)
 		let anchorViewY = anchorView?.plainView.windowFrame?.minY ?? window.frame.midY - (tableHeight / 2)
@@ -771,13 +771,14 @@ extension DropDown {
 	
 	fileprivate func fittingWidth() -> CGFloat {
 		if templateCell == nil {
-			templateCell = (cellNib.instantiate(withOwner: nil, options: nil)[0] as! DropDownCell)
+            templateCell = (tableView.dequeueReusableCell(withIdentifier: DPDConstant.ReusableIdentifier.DropDownCell) as! DropDownCell)
 		}
 		
 		var maxWidth: CGFloat = 0
 		
 		for index in 0..<dataSource.count {
 			configureCell(templateCell, at: index)
+            templateCell.setSelected(true, animated: false)
 			templateCell.bounds.size.height = cellHeight
 			let width = templateCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
 			
