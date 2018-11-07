@@ -170,6 +170,8 @@ class ViewController: UIViewController {
 		setupDropDowns()
 		dropDowns.forEach { $0.dismissMode = .onTap }
 		dropDowns.forEach { $0.direction = .any }
+        
+        dropDowns.forEach { $0.showArrowIndicator = true }
 		
 		view.addSubview(textField)
 	}

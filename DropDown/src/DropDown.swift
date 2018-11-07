@@ -159,15 +159,21 @@ public final class DropDown: UIView {
 	*/
 	public var arrowIndicationX: CGFloat? {
 		didSet {
-			if let arrowIndicationX = arrowIndicationX {
-				tableViewContainer.addSubview(arrowIndication)
-				arrowIndication.tintColor = tableViewBackgroundColor
-				arrowIndication.frame.origin.x = arrowIndicationX
-			} else {
-				arrowIndication.removeFromSuperview()
-			}
+			guard let x = arrowIndicationX else { return }
+            arrowIndication.frame.origin.x = x
+            showArrowIndicator = true
 		}
 	}
+    public var showArrowIndicator: Bool = false {
+        didSet {
+            if showArrowIndicator {
+                tableViewContainer.addSubview(arrowIndication)
+                arrowIndication.tintColor = tableViewBackgroundColor
+            } else {
+                arrowIndication.removeFromSuperview()
+            }
+        }
+    }
 
 	//MARK: Constraints
 	fileprivate var heightConstraint: NSLayoutConstraint!
@@ -184,7 +190,7 @@ public final class DropDown: UIView {
 	@objc fileprivate dynamic var tableViewBackgroundColor = DPDConstant.UI.BackgroundColor {
 		willSet {
             tableView.backgroundColor = newValue
-            if arrowIndicationX != nil { arrowIndication.tintColor = newValue }
+            if showArrowIndicator { arrowIndication.tintColor = newValue }
         }
 	}
 
@@ -712,13 +718,18 @@ extension DropDown {
 				direction = .top
 			}
 		}
-		
+        
 		constraintWidthToFittingSizeIfNecessary(layout: &layout)
 		constraintWidthToBoundsIfNecessary(layout: &layout, in: window)
 		
 		let visibleHeight = tableHeight - layout.offscreenHeight
 		let canBeDisplayed = visibleHeight >= minHeight
 
+        if showArrowIndicator {
+            arrowIndication.frame.origin.x = computeArrowIndicator(window: window,
+                                                                   layout: layout)
+        }
+        
 		return (layout.x, layout.y, layout.width, layout.offscreenHeight, visibleHeight, canBeDisplayed, direction)
 	}
 
@@ -768,6 +779,16 @@ extension DropDown {
 		
 		return (x, y, width, offscreenHeight)
 	}
+    
+    fileprivate func computeArrowIndicator(window: UIWindow, layout: ComputeLayoutTuple) -> CGFloat {
+        if let x = arrowIndicationX { return x }
+        guard let anchorViewX = anchorView?.plainView.windowFrame?.minX else {
+            return layout.width / 2
+        }
+        let anchorViewWidth = anchorView?.plainView.bounds.width ?? 0
+        let leftSpacing = max(anchorViewX - layout.x, 0)
+        return leftSpacing + anchorViewWidth/2
+    }
 	
 	fileprivate func fittingWidth() -> CGFloat {
 		if templateCell == nil {
