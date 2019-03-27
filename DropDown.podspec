@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name = "DropDown"
-  s.version = "2.3.12"
+  s.version = "2.3.13"
   s.summary = "A Material Design drop down"
 
   s.description = <<-DESC
@@ -26,5 +26,5 @@ Pod::Spec.new do |s|
   s.resources = "DropDown/resources/*.{png,xib}"
   s.requires_arc = true
 
-  s.swift_version = '4.2'
+  s.swift_version = '5.0'
 end

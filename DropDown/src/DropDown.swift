@@ -991,7 +991,7 @@ extension DropDown {
 			else { return }
         
         // remove from indices
-        if let selectedRowIndex = selectedRowIndices.index(where: { $0 == index  }) {
+        if let selectedRowIndex = selectedRowIndices.firstIndex(where: { $0 == index  }) {
             selectedRowIndices.remove(at: selectedRowIndex)
         }
 
