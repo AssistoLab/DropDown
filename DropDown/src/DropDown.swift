@@ -587,8 +587,6 @@ extension DropDown {
         // Enable scrolling if offscreen content or height is set
         tableView.isScrollEnabled = layout.offscreenHeight > 0 || (height ?? 0) > 0
 
-		tableView.isScrollEnabled = layout.offscreenHeight > 0
-
 		DispatchQueue.main.async { [weak self] in
 			self?.tableView.flashScrollIndicators()
 		}
