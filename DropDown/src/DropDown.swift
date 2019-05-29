@@ -100,10 +100,6 @@ public final class DropDown: UIView {
         return imgv
     }()
 
-    public var dropDownHeight: CGFloat = 0.0 {
-        didSet{ setNeedsUpdateConstraints() }
-    }
-
 	/// The view to which the drop down will displayed onto.
 	public weak var anchorView: AnchorView? {
 		didSet { setNeedsUpdateConstraints() }
@@ -154,6 +150,11 @@ public final class DropDown: UIView {
 	public var width: CGFloat? {
 		didSet { setNeedsUpdateConstraints() }
 	}
+
+    // The height of the drop down
+    public var height: CGFloat = 0.0 {
+        didSet{ setNeedsUpdateConstraints() }
+    }
 
 	/**
 	arrowIndication.x
@@ -1022,10 +1023,10 @@ extension DropDown {
 
 	/// Returns the height needed to display all cells.
 	fileprivate var tableHeight: CGFloat {
-        if dropDownHeight == 0.0 {
+        if height == 0.0 {
             return tableView.rowHeight * CGFloat(dataSource.count)
         } else {
-            return dropDownHeight
+            return height
         }
 	}
 
