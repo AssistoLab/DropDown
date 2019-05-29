@@ -72,12 +72,6 @@ public final class DropDown: UIView {
 		case bottom
 
 	}
-
-    public var dropDownHeight: CGFloat = 0.0 {
-        didSet{
-            updateConstraints()
-        }
-    }
     
 	//MARK: - Properties
 
@@ -106,6 +100,9 @@ public final class DropDown: UIView {
         return imgv
     }()
 
+    public var dropDownHeight: CGFloat = 0.0 {
+        didSet{ setNeedsUpdateConstraints() }
+    }
 
 	/// The view to which the drop down will displayed onto.
 	public weak var anchorView: AnchorView? {
