@@ -73,6 +73,12 @@ public final class DropDown: UIView {
 
 	}
 
+    public var dropDownHeight: CGFloat = 0.0 {
+        didSet{
+            updateConstraints()
+        }
+    }
+    
 	//MARK: - Properties
 
 	/// The current visible drop down. There can be only one visible drop down at a time.
@@ -569,7 +575,7 @@ extension DropDown {
 		widthConstraint.constant = layout.width
 		heightConstraint.constant = layout.visibleHeight
 
-		tableView.isScrollEnabled = layout.offscreenHeight > 0
+		tableView.isScrollEnabled = true
 
 		DispatchQueue.main.async { [weak self] in
 			self?.tableView.flashScrollIndicators()
@@ -1019,7 +1025,11 @@ extension DropDown {
 
 	/// Returns the height needed to display all cells.
 	fileprivate var tableHeight: CGFloat {
-		return tableView.rowHeight * CGFloat(dataSource.count)
+        if dropDownHeight == 0.0 {
+            return tableView.rowHeight * CGFloat(dataSource.count)
+        } else {
+            return dropDownHeight
+        }
 	}
 
     //MARK: Objective-C methods for converting the Swift type Index
