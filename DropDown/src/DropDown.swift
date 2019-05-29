@@ -72,7 +72,7 @@ public final class DropDown: UIView {
 		case bottom
 
 	}
-    
+
 	//MARK: - Properties
 
 	/// The current visible drop down. There can be only one visible drop down at a time.
