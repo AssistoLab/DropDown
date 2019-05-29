@@ -90,6 +90,9 @@ dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
 
 // Will set a custom width instead of the anchor view width
 dropDownLeft.width = 200
+
+// Will set a custom height to drop down
+dropDownLeft.height = 160
 ```
 
 Display actions:
@@ -253,7 +256,6 @@ You can customize these properties of the drop down:
 - `backgroundColor`: the background color of the drop down.
 - `selectionBackgroundColor`: the background color of the selected cell in the drop down.
 - `cellHeight`: the height of the drop down cells.
-- `height`: the height of the drop down.
 - `dimmedBackgroundColor`: the color of the background (behind the drop down, covering the entire screen).
 - `cornerRadius`: the corner radius of the drop down (see [info](#Issues) below if you encounter any issue)
 - `setupMaskedCorners`: the masked corners of the dropdown. Use this along with `cornerRadius` to set the corner radius only on certain corners.
