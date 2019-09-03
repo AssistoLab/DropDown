@@ -151,6 +151,13 @@ public final class DropDown: UIView {
 	public var width: CGFloat? {
 		didSet { setNeedsUpdateConstraints() }
 	}
+    
+    /**
+     The frame of the drop down in relation to your view.
+     */
+    public var relativeFrame: CGRect {
+        get { return tableViewContainer.frame }
+    }
 
 	/**
 	arrowIndication.x
