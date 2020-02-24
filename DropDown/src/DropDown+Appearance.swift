@@ -6,6 +6,8 @@
 //  Copyright © 2016 Kevin Hirsch. All rights reserved.
 //
 
+#if os(iOS)
+
 import UIKit
 
 extension DropDown {
@@ -29,3 +31,5 @@ extension DropDown {
 	}
 
 }
+
+#endif

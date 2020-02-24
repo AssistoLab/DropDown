@@ -36,3 +36,9 @@ Carthage/Build
 # Mac OS X
 .DS_Store
 
+# SwiftPackageManager #
+Packages
+.build/
+xcuserdata
+DerivedData/
+#*.xcodeproj Keeping this here so we maintain Carthage support
