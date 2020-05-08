@@ -100,6 +100,17 @@ public final class DropDown: UIView {
         return imgv
     }()
 
+    public var borderColor: UIColor = .clear {
+        didSet {
+            tableView.layer.borderColor = borderColor.cgColor
+        }
+    }
+    
+    public var borderWidth: CGFloat = 0.0 {
+        didSet {
+            tableView.layer.borderWidth = borderWidth
+        }
+    }
 
 	/// The view to which the drop down will displayed onto.
 	public weak var anchorView: AnchorView? {
@@ -123,7 +134,7 @@ public final class DropDown: UIView {
 	public var topOffset: CGPoint = .zero {
 		didSet { setNeedsUpdateConstraints() }
 	}
-
+    
 	/**
 	The offset point relative to `anchorView` when the drop down is shown below the anchor view.
 
