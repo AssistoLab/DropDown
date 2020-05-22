@@ -14,6 +14,7 @@ public typealias SelectionClosure = (Index, String) -> Void
 public typealias MultiSelectionClosure = ([Index], [String]) -> Void
 public typealias ConfigurationClosure = (Index, String) -> String
 public typealias CellConfigurationClosure = (Index, String, DropDownCell) -> Void
+public typealias MoreCellConfigurationClosure = (MoreDropDownCell) -> Void
 private typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
 
 /// Can be `UIView` or `UIBarButtonItem`.
@@ -426,6 +427,10 @@ public final class DropDown: UIView {
      Changing `customCellConfiguration` automatically reloads the drop down.
      */
     public var customCellConfiguration: CellConfigurationClosure? {
+        didSet { reloadAllComponents() }
+    }
+    
+    public var customMoreCellConfiguration: MoreCellConfigurationClosure? {
         didSet { reloadAllComponents() }
     }
 
@@ -1118,6 +1123,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
             cell.optionLabel.text = "dropdown_more"
         }
         
+        customMoreCellConfiguration?(cell)
     }
     
     fileprivate func configureCell(_ cell: DropDownCell, at index: Int) {
