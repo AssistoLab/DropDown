@@ -80,7 +80,7 @@ public final class DropDown: UIView {
     public static weak var VisibleDropDown: DropDown?
     
     private var shortListEnabled: Bool = false
-    public var sortList_maxentries: Int = -1
+    public var sortListMaxEntries: Int = -1
 
     //MARK: UI
     fileprivate let dismissableView = UIView()
@@ -384,7 +384,7 @@ public final class DropDown: UIView {
     public var dataSource = [String]() {
         didSet {
             
-            if sortList_maxentries > 0,
+            if sortListMaxEntries > 0,
                 dataSource.count > sortList_maxentries {
                 shortListEnabled = true
             } else {
@@ -1045,7 +1045,7 @@ extension DropDown {
     fileprivate var tableHeight: CGFloat {
         
         if shortListEnabled {
-           return tableView.rowHeight * CGFloat(sortList_maxentries + 1)
+           return tableView.rowHeight * CGFloat(sortListMaxEntries + 1)
         }else {
            return tableView.rowHeight * CGFloat(dataSource.count)
         }
@@ -1076,9 +1076,9 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
         if shortListEnabled,
-            sortList_maxentries > 0,
-            dataSource.count > sortList_maxentries {
-            return sortList_maxentries + 1
+            sortListMaxEntries > 0,
+            dataSource.count > sortListMaxEntries {
+            return sortListMaxEntries + 1
         } else {
             return dataSource.count
         }
@@ -1088,7 +1088,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
         
         let index = (indexPath as NSIndexPath).row
         
-        if shortListEnabled && index >= sortList_maxentries {
+        if shortListEnabled && index >= sortListMaxEntries {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: DPDConstant.ReusableIdentifier.MoreDropDownCell, for: indexPath) as! MoreDropDownCell
             
@@ -1153,7 +1153,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedRowIndex = (indexPath as NSIndexPath).row
         
-        if shortListEnabled, selectedRowIndex == sortList_maxentries {
+        if shortListEnabled, selectedRowIndex == sortListMaxEntries {
             shortListEnabled = false
             reloadAllComponents()
             return
