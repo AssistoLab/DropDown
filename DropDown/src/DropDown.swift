@@ -385,7 +385,7 @@ public final class DropDown: UIView {
         didSet {
             
             if sortListMaxEntries > 0,
-                dataSource.count > sortList_maxentries {
+                dataSource.count > sortListMaxEntries {
                 shortListEnabled = true
             } else {
                 shortListEnabled = false
