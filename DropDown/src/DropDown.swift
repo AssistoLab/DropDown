@@ -588,7 +588,12 @@ extension DropDown {
             return
         }
 
-        xConstraint.constant = layout.x
+        if UIView.appearance().semanticContentAttribute == .forceLeftToRight {
+            xConstraint.constant = layout.x
+        }else {
+            xConstraint.constant = (UIWindow.visibleWindow()?.frame.width ?? 0) - (layout.x + layout.width)
+        }
+        
         yConstraint.constant = layout.y
         widthConstraint.constant = layout.width
         heightConstraint.constant = layout.visibleHeight
