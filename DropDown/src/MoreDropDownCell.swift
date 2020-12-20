@@ -1,0 +1,73 @@
+//
+//  MoreDropDownCell.swift
+//  DropDown
+//
+//  Created by Ignazio Altomare on 22/05/2020.
+//
+
+import UIKit
+
+open class MoreDropDownCell: UITableViewCell {
+        
+    //UI
+    @IBOutlet open weak var optionLabel: UILabel!
+    
+    open var selectedBackgroundColor: UIColor?
+    open var highlightTextColor: UIColor?
+    open var normalTextColor: UIColor?
+
+}
+
+//MARK: - UI
+
+extension MoreDropDownCell {
+    
+    override open func awakeFromNib() {
+        super.awakeFromNib()
+        
+        backgroundColor = .clear
+    }
+    
+    override open var isSelected: Bool {
+        willSet {
+            setSelected(newValue, animated: false)
+        }
+    }
+    
+    override open var isHighlighted: Bool {
+        willSet {
+            setSelected(newValue, animated: false)
+        }
+    }
+    
+    override open func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        setSelected(highlighted, animated: animated)
+    }
+    
+    override open func setSelected(_ selected: Bool, animated: Bool) {
+        let executeSelection: () -> Void = { [weak self] in
+            guard let `self` = self else { return }
+
+            if let selectedBackgroundColor = self.selectedBackgroundColor {
+                if selected {
+                    self.backgroundColor = selectedBackgroundColor
+                    self.optionLabel.textColor = self.highlightTextColor
+                } else {
+                    self.backgroundColor = .clear
+                    self.optionLabel.textColor = self.normalTextColor
+                }
+            }
+        }
+        
+        if animated {
+            UIView.animate(withDuration: 0.3, animations: {
+                executeSelection()
+            })
+        } else {
+            executeSelection()
+        }
+
+        accessibilityTraits = selected ? .selected : .none
+    }
+    
+}
