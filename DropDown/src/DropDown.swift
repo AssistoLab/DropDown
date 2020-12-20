@@ -161,15 +161,21 @@ public final class DropDown: UIView {
 	*/
 	public var arrowIndicationX: CGFloat? {
 		didSet {
-			if let arrowIndicationX = arrowIndicationX {
-				tableViewContainer.addSubview(arrowIndication)
-				arrowIndication.tintColor = tableViewBackgroundColor
-				arrowIndication.frame.origin.x = arrowIndicationX
-			} else {
-				arrowIndication.removeFromSuperview()
-			}
+			guard let x = arrowIndicationX else { return }
+            arrowIndication.frame.origin.x = x
+            showArrowIndicator = true
 		}
 	}
+    public var showArrowIndicator: Bool = false {
+        didSet {
+            if showArrowIndicator {
+                tableViewContainer.addSubview(arrowIndication)
+                arrowIndication.tintColor = tableViewBackgroundColor
+            } else {
+                arrowIndication.removeFromSuperview()
+            }
+        }
+    }
 
 	//MARK: Constraints
 	fileprivate var heightConstraint: NSLayoutConstraint!
@@ -186,7 +192,7 @@ public final class DropDown: UIView {
 	@objc fileprivate dynamic var tableViewBackgroundColor = DPDConstant.UI.BackgroundColor {
 		willSet {
             tableView.backgroundColor = newValue
-            if arrowIndicationX != nil { arrowIndication.tintColor = newValue }
+            if showArrowIndicator { arrowIndication.tintColor = newValue }
         }
 	}
 
@@ -218,6 +224,16 @@ public final class DropDown: UIView {
 		willSet { tableView.separatorColor = newValue }
 		didSet { reloadAllComponents() }
 	}
+    
+    /**
+     The separator inset
+     
+     Changing the separator inset automatically reloads the drop down.
+     */
+    @objc public dynamic var separatorInset = DPDConstant.UI.SeparatorInset {
+        willSet { tableView.separatorInset = newValue }
+        didSet { reloadAllComponents() }
+    }
 
 	/**
 	The corner radius of DropDown.
@@ -364,6 +380,14 @@ public final class DropDown: UIView {
 			reloadAllComponents()
 		}
 	}
+    
+    public var cellClass: DropDownCustomCell.Type = DropDownCustomCell.self {
+        didSet {
+            tableView.register(cellClass, forCellReuseIdentifier: DPDConstant.ReusableIdentifier.DropDownCell)
+            templateCell = nil
+            reloadAllComponents()
+        }
+    }
 	
 	//MARK: Content
 
@@ -540,6 +564,7 @@ private extension DropDown {
 
 		tableView.backgroundColor = tableViewBackgroundColor
 		tableView.separatorColor = separatorColor
+        tableView.separatorInset = separatorInset
 		tableView.layer.cornerRadius = cornerRadius
 		tableView.layer.masksToBounds = true
 	}
@@ -695,20 +720,25 @@ extension DropDown {
 				direction = .top
 			}
 		}
-		
+        
 		constraintWidthToFittingSizeIfNecessary(layout: &layout)
 		constraintWidthToBoundsIfNecessary(layout: &layout, in: window)
 		
 		let visibleHeight = tableHeight - layout.offscreenHeight
 		let canBeDisplayed = visibleHeight >= minHeight
 
+        if showArrowIndicator {
+            arrowIndication.frame.origin.x = computeArrowIndicator(window: window,
+                                                                   layout: layout)
+        }
+        
 		return (layout.x, layout.y, layout.width, layout.offscreenHeight, visibleHeight, canBeDisplayed, direction)
 	}
 
 	fileprivate func computeLayoutBottomDisplay(window: UIWindow) -> ComputeLayoutTuple {
 		var offscreenHeight: CGFloat = 0
 		
-		let width = self.width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - bottomOffset.x
+		let width = self.width ?? fittingWidth() - bottomOffset.x
 		
 		let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? window.frame.midX - (width / 2)
 		let anchorViewY = anchorView?.plainView.windowFrame?.minY ?? window.frame.midY - (tableHeight / 2)
@@ -751,16 +781,27 @@ extension DropDown {
 		
 		return (x, y, width, offscreenHeight)
 	}
+    
+    fileprivate func computeArrowIndicator(window: UIWindow, layout: ComputeLayoutTuple) -> CGFloat {
+        if let x = arrowIndicationX { return x }
+        guard let anchorViewX = anchorView?.plainView.windowFrame?.minX else {
+            return layout.width / 2
+        }
+        let anchorViewWidth = anchorView?.plainView.bounds.width ?? 0
+        let leftSpacing = max(anchorViewX - layout.x, 0)
+        return leftSpacing + anchorViewWidth/2
+    }
 	
 	fileprivate func fittingWidth() -> CGFloat {
 		if templateCell == nil {
-			templateCell = (cellNib.instantiate(withOwner: nil, options: nil)[0] as! DropDownCell)
+            templateCell = (tableView.dequeueReusableCell(withIdentifier: DPDConstant.ReusableIdentifier.DropDownCell) as! DropDownCell)
 		}
 		
 		var maxWidth: CGFloat = 0
 		
 		for index in 0..<dataSource.count {
 			configureCell(templateCell, at: index)
+            templateCell.setSelected(true, animated: false)
 			templateCell.bounds.size.height = cellHeight
 			let width = templateCell.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).width
 			

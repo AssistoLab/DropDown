@@ -21,6 +21,20 @@ open class DropDownCell: UITableViewCell {
 
 }
 
+open class DropDownCustomCell: DropDownCell {
+    var strongOptionLabel = UILabel(frame: .zero)
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        optionLabel = strongOptionLabel
+        contentView.addSubview(strongOptionLabel)
+    }
+}
+
 //MARK: - UI
 
 extension DropDownCell {
