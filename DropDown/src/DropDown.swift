@@ -48,7 +48,7 @@ public final class DropDown: UIView {
 	//TODO: handle iOS 7 landscape mode
 
 	/// The dismiss mode for a drop down.
-	public enum DismissMode {
+	@objc public enum DismissMode: Int {
 
 		/// A tap outside the drop down is required to dismiss.
 		case onTap
@@ -62,7 +62,7 @@ public final class DropDown: UIView {
 	}
 
 	/// The direction where the drop down will show from the `anchorView`.
-	public enum Direction {
+	@objc public enum Direction: Int {
 
 		/// The drop down will show below the anchor view when possible, otherwise above if there is more place than below.
 		case any
