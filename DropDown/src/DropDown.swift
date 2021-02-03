@@ -154,6 +154,12 @@ public final class DropDown: UIView {
 		didSet { setNeedsUpdateConstraints() }
 	}
 
+    /**
+    The visible amout of cells.
+    */
+    public var visibleCellCount: Int? {
+        didSet { setNeedsUpdateConstraints() }
+    }
 	/**
 	arrowIndication.x
 
@@ -580,7 +586,7 @@ extension DropDown {
 		widthConstraint.constant = layout.width
 		heightConstraint.constant = layout.visibleHeight
 
-		tableView.isScrollEnabled = layout.offscreenHeight > 0
+		tableView.isScrollEnabled = true
 
 		DispatchQueue.main.async { [weak self] in
 			self?.tableView.flashScrollIndicators()
@@ -708,7 +714,10 @@ extension DropDown {
 		constraintWidthToFittingSizeIfNecessary(layout: &layout)
 		constraintWidthToBoundsIfNecessary(layout: &layout, in: window)
 		
-		let visibleHeight = tableHeight - layout.offscreenHeight
+		var visibleHeight = tableHeight - layout.offscreenHeight
+        if let visibleCellCount = self.visibleCellCount, CGFloat(visibleCellCount) * cellHeight <= visibleHeight, visibleCellCount != 0 {
+            visibleHeight = CGFloat(visibleCellCount) * cellHeight
+        }
 		let canBeDisplayed = visibleHeight >= minHeight
 
 		return (layout.x, layout.y, layout.width, layout.offscreenHeight, visibleHeight, canBeDisplayed, direction)
