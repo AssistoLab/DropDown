@@ -90,6 +90,9 @@ dropDown.selectionAction = { [unowned self] (index: Int, item: String) in
 
 // Will set a custom width instead of the anchor view width
 dropDownLeft.width = 200
+
+// Will set a custom height to drop down
+dropDownLeft.height = 160
 ```
 
 Display actions:
