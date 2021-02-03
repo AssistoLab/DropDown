@@ -104,7 +104,7 @@ public final class DropDown: UIView {
 
 
 	/// The view to which the drop down will displayed onto.
-	public weak var anchorView: AnchorView? {
+	@objc public weak var anchorView: AnchorView? {
 		didSet { setNeedsUpdateConstraints() }
 	}
 
@@ -122,7 +122,7 @@ public final class DropDown: UIView {
 	left corner for its origin, so an offset equal to (0, 0).
 	You can change here the default drop down origin.
 	*/
-	public var topOffset: CGPoint = .zero {
+	@objc public var topOffset: CGPoint = .zero {
 		didSet { setNeedsUpdateConstraints() }
 	}
 
@@ -133,7 +133,7 @@ public final class DropDown: UIView {
 	left corner for its origin, so an offset equal to (0, 0).
 	You can change here the default drop down origin.
 	*/
-	public var bottomOffset: CGPoint = .zero {
+	@objc public var bottomOffset: CGPoint = .zero {
 		didSet { setNeedsUpdateConstraints() }
 	}
 
@@ -381,7 +381,7 @@ public final class DropDown: UIView {
 
 	Changing the data source automatically reloads the drop down.
 	*/
-	public var dataSource = [String]() {
+	@objc public var dataSource = [String]() {
 		didSet {
             deselectRows(at: selectedRowIndices)
 			reloadAllComponents()
@@ -423,7 +423,7 @@ public final class DropDown: UIView {
     }
 
 	/// The action to execute when the user selects a cell.
-	public var selectionAction: SelectionClosure?
+	@objc public var selectionAction: SelectionClosure?
     
     /**
     The action to execute when the user selects multiple cells.
