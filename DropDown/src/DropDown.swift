@@ -218,7 +218,7 @@ public final class DropDown: UIView {
 		willSet { tableView.separatorColor = newValue }
 		didSet { reloadAllComponents() }
 	}
-
+    
 	/**
 	The corner radius of DropDown.
 
@@ -333,6 +333,15 @@ public final class DropDown: UIView {
 	@objc public dynamic var textColor = DPDConstant.UI.TextColor {
 		didSet { reloadAllComponents() }
 	}
+    
+    /**
+     The direction of the text for each cells of the drop down.
+     
+     Changing the direction automatically reloads the drop down.
+     */
+    @objc public dynamic var directionCellLabel:NSTextAlignment = DPDConstant.UI.Direction {
+        didSet { reloadAllComponents() }
+    }
 
     /**
      The color of the text for selected cells of the drop down.
@@ -1075,6 +1084,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		
 		cell.optionLabel.textColor = textColor
 		cell.optionLabel.font = textFont
+        cell.optionLabel.textAlignment = directionCellLabel
 		cell.selectedBackgroundColor = selectionBackgroundColor
         cell.highlightTextColor = selectedTextColor
         cell.normalTextColor = textColor
