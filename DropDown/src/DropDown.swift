@@ -153,6 +153,15 @@ public final class DropDown: UIView {
 	public var width: CGFloat? {
 		didSet { setNeedsUpdateConstraints() }
 	}
+    
+    /**
+     The height of the drop down.
+     
+     Defaults to `tableHeight - offscreenHeight`.
+     */
+    public var height: CGFloat? {
+        didSet { setNeedsUpdateConstraints() }
+    }
 
 	/**
 	arrowIndication.x
@@ -578,9 +587,16 @@ extension DropDown {
 		xConstraint.constant = layout.x
 		yConstraint.constant = layout.y
 		widthConstraint.constant = layout.width
-		heightConstraint.constant = layout.visibleHeight
-
-		tableView.isScrollEnabled = layout.offscreenHeight > 0
+        
+        // Change height of dropdown
+        if height != nil && (height ?? 0) <= layout.visibleHeight {
+            heightConstraint.constant = height!
+        } else {
+            heightConstraint.constant = layout.visibleHeight
+        }
+        
+        // Enable scrolling if offscreen content or height is set
+        tableView.isScrollEnabled = layout.offscreenHeight > 0 || (height ?? 0) > 0
 
 		DispatchQueue.main.async { [weak self] in
 			self?.tableView.flashScrollIndicators()
@@ -708,7 +724,7 @@ extension DropDown {
 		constraintWidthToFittingSizeIfNecessary(layout: &layout)
 		constraintWidthToBoundsIfNecessary(layout: &layout, in: window)
 		
-		let visibleHeight = tableHeight - layout.offscreenHeight
+        let visibleHeight = height ?? (tableHeight - layout.offscreenHeight)
 		let canBeDisplayed = visibleHeight >= minHeight
 
 		return (layout.x, layout.y, layout.width, layout.offscreenHeight, visibleHeight, canBeDisplayed, direction)
@@ -718,14 +734,15 @@ extension DropDown {
 		var offscreenHeight: CGFloat = 0
 		
 		let width = self.width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - bottomOffset.x
+        let height = self.height ?? tableHeight
 		
 		let anchorViewX = anchorView?.plainView.windowFrame?.minX ?? window.frame.midX - (width / 2)
-		let anchorViewY = anchorView?.plainView.windowFrame?.minY ?? window.frame.midY - (tableHeight / 2)
+        let anchorViewY = anchorView?.plainView.windowFrame?.minY ?? window.frame.midY - (height / 2)
 		
 		let x = anchorViewX + bottomOffset.x
 		let y = anchorViewY + bottomOffset.y
 		
-		let maxY = y + tableHeight
+        let maxY = y + height
 		let windowMaxY = window.bounds.maxY - DPDConstant.UI.HeightPadding - offsetFromWindowBottom
 		
 		let keyboardListener = KeyboardListener.sharedInstance
@@ -747,7 +764,7 @@ extension DropDown {
 		let anchorViewMaxY = anchorView?.plainView.windowFrame?.maxY ?? 0
 
 		let x = anchorViewX + topOffset.x
-		var y = (anchorViewMaxY + topOffset.y) - tableHeight
+        var y = (anchorViewMaxY + topOffset.y) - (height ?? tableHeight)
 
 		let windowY = window.bounds.minY + DPDConstant.UI.HeightPadding
 
