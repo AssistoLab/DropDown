@@ -13,7 +13,7 @@ import UIKit
 public typealias Index = Int
 public typealias Closure = () -> Void
 public typealias SelectionClosure = (Index, String) -> Void
-public typealias MultiSelectionClosure = ([Index], [String]) -> Void
+public typealias MultiSelectionClosure = (Int,[Index], [String]) -> Void
 public typealias ConfigurationClosure = (Index, String) -> String
 public typealias CellConfigurationClosure = (Index, String, DropDownCell) -> Void
 private typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, offscreenHeight: CGFloat)
@@ -1104,7 +1104,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 
 				let selectedRowIndicesArray = Array(selectedRowIndices)
                 let selectedRows = selectedRowIndicesArray.map { dataSource[$0] }
-                multiSelectionCallback(selectedRowIndicesArray, selectedRows)
+                multiSelectionCallback(selectedRowIndex,selectedRowIndicesArray, selectedRows)
                 return
             }
             else {
@@ -1114,7 +1114,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 				let selectedRows = selectedRowIndicesArray.map { dataSource[$0] }
                 
                 selectionAction?(selectedRowIndex, dataSource[selectedRowIndex])
-                multiSelectionCallback(selectedRowIndicesArray, selectedRows)
+                multiSelectionCallback(selectedRowIndex,selectedRowIndicesArray, selectedRows)
                 tableView.reloadData()
                 return
             }

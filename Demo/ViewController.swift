@@ -182,8 +182,8 @@ class ViewController: UIViewController {
 			self?.chooseArticleButton.setTitle(item, for: .normal)
 		}
         
-        chooseArticleDropDown.multiSelectionAction = { [weak self] (indices, items) in
-            print("Muti selection action called with: \(items)")
+        chooseArticleDropDown.multiSelectionAction = { [weak self] (lastClickedIndex,indices, items) in
+            print("Muti selection action called with: \(items) & last clicked index : \(lastClickedIndex)")
             if items.isEmpty {
                 self?.chooseArticleButton.setTitle("", for: .normal)
             }
