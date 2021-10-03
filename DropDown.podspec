@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.author = { "kevin-hirsch" => "kevin.hirsch.be@gmail.com" }
   s.social_media_url = "http://twitter.com/kevinh6113"
 
-  s.platform = :ios, '8.0'
+  s.platform = :ios, '11.0'
   s.source = {
     :git => "https://github.com/AssistoLab/DropDown.git",
     :tag => "v#{s.version.to_s}"
