@@ -207,6 +207,7 @@ class ViewController: UIViewController {
 		// So it will come over the anchor view and hide it completely
 		// If you want to have the dropdown underneath your anchor view, you can do this:
 		amountDropDown.bottomOffset = CGPoint(x: 0, y: amountButton.bounds.height)
+        amountDropDown.dropDownHeight = 200
 		
 		// You can also use localizationKeysDataSource instead. Check the docs.
 		amountDropDown.dataSource = [
