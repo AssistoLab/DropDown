@@ -170,6 +170,8 @@ public final class DropDown: UIView {
 			}
 		}
 	}
+    
+    public var onTapDismissViewAction : (()->())!
 
 	//MARK: Constraints
 	fileprivate var heightConstraint: NSLayoutConstraint!
@@ -442,7 +444,7 @@ public final class DropDown: UIView {
 	/// The dismiss mode of the drop down. Default is `OnTap`.
 	public var dismissMode = DismissMode.onTap {
 		willSet {
-			if newValue == .onTap {
+            if newValue == .onTap {
 				let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissableViewTapped))
 				dismissableView.addGestureRecognizer(gestureRecognizer)
 			} else if let gestureRecognizer = dismissableView.gestureRecognizers?.first {
@@ -1154,6 +1156,7 @@ extension DropDown {
 	@objc
 	fileprivate func dismissableViewTapped() {
 		cancel()
+        onTapDismissViewAction()
 	}
 
 }
@@ -1193,7 +1196,11 @@ extension DropDown {
 	fileprivate func keyboardUpdate() {
 		self.setNeedsUpdateConstraints()
 	}
-
+    
+    func setOnTapAction(_ completion: @escaping (()->())) {
+        self.onTapDismissViewAction = completion
+        self.dismissMode = .onTap
+    }
 }
 
 private extension DispatchQueue {
