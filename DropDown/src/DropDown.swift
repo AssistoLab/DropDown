@@ -1197,7 +1197,7 @@ extension DropDown {
 		self.setNeedsUpdateConstraints()
 	}
     
-    func setOnTapAction(_ completion: @escaping (()->())) {
+    public func setOnTapAction(_ completion: @escaping (()->())) {
         self.onTapDismissViewAction = completion
         self.dismissMode = .onTap
     }
