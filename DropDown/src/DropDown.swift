@@ -153,7 +153,16 @@ public final class DropDown: UIView {
 	public var width: CGFloat? {
 		didSet { setNeedsUpdateConstraints() }
 	}
-
+    
+    /* changes for custom height */
+    /**
+    The height of the drop down.
+    */
+    public var height: CGFloat? {
+        didSet { setNeedsUpdateConstraints() }
+    }
+    /* end changes */
+    
 	/**
 	arrowIndication.x
 
@@ -578,8 +587,20 @@ extension DropDown {
 		xConstraint.constant = layout.x
 		yConstraint.constant = layout.y
 		widthConstraint.constant = layout.width
-		heightConstraint.constant = layout.visibleHeight
-
+        
+        /* changes for custom height */
+        // heightConstraint.constant = layout.visibleHeight
+        if let height = self.height {
+            if layout.visibleHeight >= height {
+                heightConstraint.constant = self.height ?? layout.visibleHeight
+            } else {
+                heightConstraint.constant = layout.visibleHeight
+            }
+        } else {
+            heightConstraint.constant = layout.visibleHeight
+        }
+        /* end changes */
+        
 		tableView.isScrollEnabled = layout.offscreenHeight > 0
 
 		DispatchQueue.main.async { [weak self] in
@@ -750,12 +771,24 @@ extension DropDown {
 		var y = (anchorViewMaxY + topOffset.y) - tableHeight
 
 		let windowY = window.bounds.minY + DPDConstant.UI.HeightPadding
-
-		if y < windowY {
-			offscreenHeight = abs(y - windowY)
-			y = windowY
-		}
-		
+        
+        /* changes for custom height */
+        /*
+         if y < windowY {
+         offscreenHeight = abs(y - windowY)
+         y = windowY
+         }
+         */
+        if y < windowY {
+            offscreenHeight = abs(y - windowY)
+            if let height = self.height {
+                y = anchorViewMaxY + topOffset.y - height
+            } else {
+                y = windowY
+            }
+        }
+        /* end changes */
+        
 		let width = self.width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - topOffset.x
 		
 		return (x, y, width, offscreenHeight)
