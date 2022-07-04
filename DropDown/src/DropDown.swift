@@ -1156,7 +1156,9 @@ extension DropDown {
 	@objc
 	fileprivate func dismissableViewTapped() {
 		cancel()
+        if onTapDismissViewAction != nil {
         onTapDismissViewAction()
+        }
 	}
 
 }
