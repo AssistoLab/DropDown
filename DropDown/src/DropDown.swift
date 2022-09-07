@@ -324,6 +324,15 @@ public final class DropDown: UIView {
 	public var downScaleTransform = DPDConstant.Animation.DownScaleTransform {
 		willSet { tableViewContainer.transform = newValue }
 	}
+    
+    /**
+    The text alignment of the optionLabel for each cells of the drop down.
+
+    Changing the alignment color automatically reloads the drop down.
+    */
+    @objc public dynamic var textAlignment = DPDConstant.UI.TextAlignment {
+        didSet { reloadAllComponents() }
+    }
 
 	/**
 	The color of the text for each cells of the drop down.
@@ -1078,6 +1087,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		cell.selectedBackgroundColor = selectionBackgroundColor
         cell.highlightTextColor = selectedTextColor
         cell.normalTextColor = textColor
+        cell.optionLabel.textAlignment = textAlignment
 		
 		if let cellConfiguration = cellConfiguration {
 			cell.optionLabel.text = cellConfiguration(index, dataSource[index])
