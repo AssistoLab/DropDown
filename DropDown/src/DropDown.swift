@@ -1132,12 +1132,19 @@ extension DropDown {
 	public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
 		let view = super.hitTest(point, with: event)
 
-		if dismissMode == .automatic && view === dismissableView {
-			cancel()
-			return nil
-		} else {
-			return view
-		}
+        if #available(macCatalyst 13.4, *) {
+            guard let event = event, event.type != .hover else {
+                return view
+            }
+        }
+
+        if dismissMode == .automatic && view === dismissableView {
+            cancel()
+            return nil
+            //            return view
+        } else {
+            return view
+        }
 	}
 
 	@objc
