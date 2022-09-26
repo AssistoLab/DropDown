@@ -749,13 +749,36 @@ extension DropDown {
 		let x = anchorViewX + topOffset.x
 		var y = (anchorViewMaxY + topOffset.y) - tableHeight
 
-		let windowY = window.bounds.minY + DPDConstant.UI.HeightPadding
-
-		if y < windowY {
-			offscreenHeight = abs(y - windowY)
-			y = windowY
+		var windowY = window.bounds.minY
+		if #available(iOS 11.0, *) {
+		    windowY += window.safeAreaInsets.top
+		} else {
+		    windowY +=  DPDConstant.UI.HeightPadding
 		}
-		
+
+			if y < windowY {
+				offscreenHeight = abs(y - windowY)
+				y = windowY
+		} else {
+		    let maxY = y + tableHeight
+
+		    var windowMaxY = window.bounds.maxY - offsetFromWindowBottom
+		    if #available(iOS 11.0, *) {
+			windowMaxY -= window.safeAreaInsets.bottom
+		    } else {
+			windowMaxY -=  DPDConstant.UI.HeightPadding
+		    }
+
+		    let keyboardListener = KeyboardListener.sharedInstance
+		    let keyboardMinY = keyboardListener.keyboardFrame.minY - DPDConstant.UI.HeightPadding
+
+		    if keyboardListener.isVisible && maxY > keyboardMinY {
+			offscreenHeight = abs(maxY - keyboardMinY)
+		    } else if maxY > windowMaxY {
+			offscreenHeight = abs(maxY - windowMaxY)
+		    }
+		}
+        
 		let width = self.width ?? (anchorView?.plainView.bounds.width ?? fittingWidth()) - topOffset.x
 		
 		return (x, y, width, offscreenHeight)
