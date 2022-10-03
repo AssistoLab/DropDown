@@ -20,7 +20,7 @@ private typealias ComputeLayoutTuple = (x: CGFloat, y: CGFloat, width: CGFloat, 
 
 /// Can be `UIView` or `UIBarButtonItem`.
 @objc
-public protocol AnchorView: class {
+public protocol AnchorView: AnyObject {
 
 	var plainView: UIView { get }
 
