@@ -30,7 +30,6 @@ extension DropDown {
         appearance.selectedTextColor = DPDConstant.UI.SelectedTextColor
 		appearance.textFont = DPDConstant.UI.TextFont
 	}
-
 }
 
 #endif

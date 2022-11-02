@@ -15,13 +15,11 @@ internal struct DPDConstant {
 	internal struct KeyPath {
 
 		static let Frame = "frame"
-
 	}
 
 	internal struct ReusableIdentifier {
 
 		static let DropDownCell = "DropDownCell"
-
 	}
 
 	internal struct UI {
@@ -43,9 +41,7 @@ internal struct DPDConstant {
 			static let Offset = CGSize.zero
 			static let Opacity: Float = 0.4
 			static let Radius: CGFloat = 8
-
 		}
-
 	}
 
 	internal struct Animation {
@@ -54,9 +50,7 @@ internal struct DPDConstant {
 		static let EntranceOptions: UIView.AnimationOptions = [.allowUserInteraction, .curveEaseOut]
 		static let ExitOptions: UIView.AnimationOptions = [.allowUserInteraction, .curveEaseIn]
 		static let DownScaleTransform = CGAffineTransform(scaleX: 0.9, y: 0.9)
-
 	}
-
 }
 
 #endif
