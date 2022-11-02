@@ -218,6 +218,11 @@ public final class DropDown: UIView {
 		willSet { tableView.separatorColor = newValue }
 		didSet { reloadAllComponents() }
 	}
+    
+    @objc public dynamic var separatorInset = DPDConstant.UI.SepratorInset {
+        willSet { tableView.separatorInset = newValue }
+        didSet { reloadAllComponents() }
+    }
 
 	/**
 	The corner radius of DropDown.

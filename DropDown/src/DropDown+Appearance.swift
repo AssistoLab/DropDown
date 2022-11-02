@@ -26,6 +26,7 @@ extension DropDown {
 		appearance.shadowRadius = DPDConstant.UI.Shadow.Radius
 		appearance.animationduration = DPDConstant.Animation.Duration
 		appearance.textColor = DPDConstant.UI.TextColor
+        appearance.separatorInset = DPDConstant.UI.SepratorInset
         appearance.selectedTextColor = DPDConstant.UI.SelectedTextColor
 		appearance.textFont = DPDConstant.UI.TextFont
 	}

@@ -111,12 +111,14 @@ class ViewController: UIViewController {
 //		appearance.separatorColor = UIColor(white: 0.7, alpha: 0.8)
 		appearance.cornerRadius = 10
 		appearance.shadowColor = UIColor(white: 0.6, alpha: 1)
-		appearance.shadowOpacity = 0.9
+		appearance.shadowOpacity = 0.2
 		appearance.shadowRadius = 25
 		appearance.animationduration = 0.25
 		appearance.textColor = .darkGray
 //		appearance.textFont = UIFont(name: "Georgia", size: 14)
-
+        appearance.separatorInset = .zero
+        appearance.separatorColor = .black
+        
 		if #available(iOS 11.0, *) {
 			appearance.setupMaskedCorners([.layerMaxXMaxYCorner, .layerMinXMaxYCorner])
 		}
