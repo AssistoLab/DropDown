@@ -353,6 +353,15 @@ public final class DropDown: UIView {
 	}
     
     /**
+     Changing the text lines automatically reloads the drop down.
+
+     Default - 1
+     */
+    @objc public dynamic var numberOfLines = DPDConstant.UI.NumblerOfLines {
+        didSet { reloadAllComponents() }
+    }
+
+    /**
      The NIB to use for DropDownCells
      
      Changing the cell nib automatically reloads the drop down.
@@ -1075,6 +1084,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		
 		cell.optionLabel.textColor = textColor
 		cell.optionLabel.font = textFont
+        cell.optionLabel.numberOfLines = numberOfLines
 		cell.selectedBackgroundColor = selectionBackgroundColor
         cell.highlightTextColor = selectedTextColor
         cell.normalTextColor = textColor
@@ -1087,6 +1097,14 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
 		
 		customCellConfiguration?(index, dataSource[index], cell)
 	}
+
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
+    public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cellHeight
+    }
 
 	public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.isSelected = selectedRowIndices.first{ $0 == (indexPath as NSIndexPath).row } != nil
