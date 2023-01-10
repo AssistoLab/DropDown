@@ -189,6 +189,10 @@ public final class DropDown: UIView {
             if arrowIndicationX != nil { arrowIndication.tintColor = newValue }
         }
 	}
+    
+    public var indicatorStyle: UIScrollView.IndicatorStyle = .white {
+        willSet { tableView.indicatorStyle = newValue }
+    }
 
 	public override var backgroundColor: UIColor? {
 		get { return tableViewBackgroundColor }
@@ -524,6 +528,7 @@ private extension DropDown {
 		}
 
 		tableView.rowHeight = cellHeight
+        tableView.indicatorStyle = indicatorStyle
 		setHiddentState()
 		isHidden = true
 
