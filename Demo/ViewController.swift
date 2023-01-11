@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import DropDown
+import DropDownML
 
 class ViewController: UIViewController {
 
@@ -261,12 +261,34 @@ class ViewController: UIViewController {
 			"Is centered on",
 			"the view because",
 			"it has no anchor view defined.",
-			"Click anywhere to dismiss."
+			"Click anywhere to dismiss.",
+            "Is centered on",
+            "the view because",
+            "it has no anchor view defined.",
+            "Click anywhere to dismiss.",
+            "Is centered on",
+            "the view because",
+            "it has no anchor view defined.",
+            "Click anywhere to dismiss.",
+            "Is centered on",
+            "the view because",
+            "it has no anchor view defined.",
+            "Click anywhere to dismiss.",
+            "Is centered on",
+            "the view because",
+            "it has no anchor view defined.",
+            "Click anywhere to dismiss."
 		]
         
         centeredDropDown.selectionAction = { [weak self] (index, item) in
             self?.centeredDropDownButton.setTitle(item, for: .normal)
         }
+        
+        centeredDropDown.indicatorStyle = .white
+        centeredDropDown.backgroundColor = .black
+        centeredDropDown.setupCornerRadius(8)
+        centeredDropDown.textColor = .white
+        centeredDropDown.selectionBackgroundColor = .lightGray
 	}
 	
 	func setupRightBarDropDown() {

@@ -15,8 +15,10 @@ Pod::Spec.new do |s|
 
   s.author = { "annguyen98" => "theannguyen98@gmail.com" }
   s.social_media_url = ""
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
-  s.platform = :ios, '8.0'
+  s.platform = :ios, '11.0'
   s.source = {
     :git => "https://github.com/AnNguyen98/DropDown.git",
     :tag => "v#{s.version.to_s}"
