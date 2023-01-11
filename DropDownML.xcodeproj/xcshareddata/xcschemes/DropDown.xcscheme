@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0AB5D8701D0EEECD002D3A17"
-               BuildableName = "DropDown.framework"
-               BlueprintName = "DropDown"
-               ReferencedContainer = "container:DropDown.xcodeproj">
+               BuildableName = "DropDownML.framework"
+               BlueprintName = "DropDownML"
+               ReferencedContainer = "container:DropDownML.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,8 +29,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -46,13 +44,11 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0AB5D8701D0EEECD002D3A17"
-            BuildableName = "DropDown.framework"
-            BlueprintName = "DropDown"
-            ReferencedContainer = "container:DropDown.xcodeproj">
+            BuildableName = "DropDownML.framework"
+            BlueprintName = "DropDownML"
+            ReferencedContainer = "container:DropDownML.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -64,9 +60,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0AB5D8701D0EEECD002D3A17"
-            BuildableName = "DropDown.framework"
-            BlueprintName = "DropDown"
-            ReferencedContainer = "container:DropDown.xcodeproj">
+            BuildableName = "DropDownML.framework"
+            BlueprintName = "DropDownML"
+            ReferencedContainer = "container:DropDownML.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
