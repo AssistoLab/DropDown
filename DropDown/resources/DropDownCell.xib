@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -14,7 +14,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhL-pA-i6q">
-                    <rect key="frame" x="8" y="8" width="304" height="28"/>
+                    <rect key="frame" x="13" y="8" width="294" height="28"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
@@ -22,8 +22,8 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="dhL-pA-i6q" secondAttribute="trailing" constant="8" id="Phk-No-PFh"/>
-                <constraint firstItem="dhL-pA-i6q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="QIg-6Z-lbJ"/>
+                <constraint firstItem="dhL-pA-i6q" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="13" id="QIg-6Z-lbJ"/>
+                <constraint firstItem="dhL-pA-i6q" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="cOZ-cQ-bab"/>
                 <constraint firstItem="dhL-pA-i6q" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="qo1-5r-HsS"/>
                 <constraint firstAttribute="bottom" secondItem="dhL-pA-i6q" secondAttribute="bottom" constant="8" id="wRT-h8-gtn"/>
             </constraints>

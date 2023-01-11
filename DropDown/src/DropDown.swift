@@ -528,7 +528,6 @@ private extension DropDown {
 		}
 
 		tableView.rowHeight = cellHeight
-        tableView.indicatorStyle = indicatorStyle
 		setHiddentState()
 		isHidden = true
 
@@ -556,6 +555,7 @@ private extension DropDown {
 		tableView.separatorColor = separatorColor
 		tableView.layer.cornerRadius = cornerRadius
 		tableView.layer.masksToBounds = true
+        tableView.indicatorStyle = indicatorStyle
 	}
 
 }
@@ -914,6 +914,8 @@ extension DropDown {
 
 	/// Hides the drop down.
 	public func hide() {
+        tableView.setContentOffset(.zero, animated: false)
+        
 		if self == DropDown.VisibleDropDown {
 			/*
 			If one drop down is showed and another one is not
@@ -1129,11 +1131,7 @@ extension DropDown: UITableViewDataSource, UITableViewDelegate {
         selectedRowIndices.removeAll()
         selectedRowIndices.insert(selectedRowIndex)
         selectionAction?(selectedRowIndex, dataSource[selectedRowIndex])
-        
-        if let _ = anchorView as? UIBarButtonItem {
-            // DropDown's from UIBarButtonItem are menus so we deselect the selected menu right after selection
-            deselectRow(at: selectedRowIndex)
-        }
+        deselectRow(at: selectedRowIndex)
         
         hide()
     
