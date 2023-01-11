@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1020"
+   LastUpgradeVersion = "1410"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "0AB5D8701D0EEECD002D3A17"
-               BuildableName = "DropDownML.framework"
-               BlueprintName = "DropDownML"
-               ReferencedContainer = "container:DropDownML.xcodeproj">
+               BuildableName = "DropDown.framework"
+               BlueprintName = "DropDown"
+               ReferencedContainer = "container:DropDown.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0AB5D8701D0EEECD002D3A17"
-            BuildableName = "DropDownML.framework"
-            BlueprintName = "DropDownML"
-            ReferencedContainer = "container:DropDownML.xcodeproj">
+            BuildableName = "DropDown.framework"
+            BlueprintName = "DropDown"
+            ReferencedContainer = "container:DropDown.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </LaunchAction>
@@ -60,9 +60,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "0AB5D8701D0EEECD002D3A17"
-            BuildableName = "DropDownML.framework"
-            BlueprintName = "DropDownML"
-            ReferencedContainer = "container:DropDownML.xcodeproj">
+            BuildableName = "DropDown.framework"
+            BlueprintName = "DropDown"
+            ReferencedContainer = "container:DropDown.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
