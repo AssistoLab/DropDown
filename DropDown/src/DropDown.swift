@@ -1058,7 +1058,7 @@ extension DropDown {
     }
     
     @objc public func scrollToSelection(_ index: Int) {
-        tableView.scrollToRow(at: IndexPath(row: 10, section: 0), at: .none, animated: true)
+        tableView.scrollToRow(at: IndexPath(row: Index(index), section: 0), at: .none, animated: true)
     }
 }
 
