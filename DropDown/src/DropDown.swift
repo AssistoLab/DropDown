@@ -86,17 +86,19 @@ public final class DropDown: UIView {
 	fileprivate let tableView = UITableView()
 	fileprivate var templateCell: DropDownCell!
     fileprivate lazy var arrowIndication: UIImageView = {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: 20, height: 10), false, 0)
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: 10))
-        path.addLine(to: CGPoint(x: 20, y: 10))
-        path.addLine(to: CGPoint(x: 10, y: 0))
-        path.addLine(to: CGPoint(x: 0, y: 10))
-        UIColor.black.setFill()
-        path.fill()
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        let tintImg = img?.withRenderingMode(.alwaysTemplate)
+        
+        let renderer = UIGraphicsImageRenderer(size: CGSize(width: 20, height: 10))
+        let img = renderer.image { _ in
+            let path = UIBezierPath()
+            path.move(to: CGPoint(x: 0, y: 10))
+            path.addLine(to: CGPoint(x: 20, y: 10))
+            path.addLine(to: CGPoint(x: 10, y: 0))
+            path.addLine(to: CGPoint(x: 0, y: 10))
+            UIColor.black.setFill()
+            path.fill()
+        }
+        
+        let tintImg = img.withRenderingMode(.alwaysTemplate)
         let imgv = UIImageView(image: tintImg)
         imgv.frame = CGRect(x: 0, y: -10, width: 15, height: 10)
         return imgv
