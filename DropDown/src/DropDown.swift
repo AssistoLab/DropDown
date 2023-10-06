@@ -551,6 +551,7 @@ private extension DropDown {
 		tableView.separatorColor = separatorColor
 		tableView.layer.cornerRadius = cornerRadius
 		tableView.layer.masksToBounds = true
+        tableView.separatorInset.left = 0
 	}
 
 }
