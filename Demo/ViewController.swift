@@ -176,7 +176,7 @@ class ViewController: UIViewController {
 			"Asus Zenfone Max 4G",
 			"Apple Watwh | Sport Edition"
 		]
-		
+        chooseArticleDropDown.heightofDropdown = 150
 		// Action triggered on selection
 		chooseArticleDropDown.selectionAction = { [weak self] (index, item) in
 			self?.chooseArticleButton.setTitle(item, for: .normal)

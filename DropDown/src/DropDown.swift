@@ -153,6 +153,10 @@ public final class DropDown: UIView {
 	public var width: CGFloat? {
 		didSet { setNeedsUpdateConstraints() }
 	}
+    
+    public var heightofDropdown: CGFloat? {
+        didSet { setNeedsUpdateConstraints() }
+    }
 
 	/**
 	arrowIndication.x
@@ -578,9 +582,19 @@ extension DropDown {
 		xConstraint.constant = layout.x
 		yConstraint.constant = layout.y
 		widthConstraint.constant = layout.width
-		heightConstraint.constant = layout.visibleHeight
+        
+        // this is for the custom height of dropdown
+        if let height = self.heightofDropdown {
+            if layout.visibleHeight >= height {
+                 heightConstraint.constant = self.heightofDropdown ?? layout.visibleHeight
+             } else {
+                 heightConstraint.constant = layout.visibleHeight
+             }
+        } else {
+             heightConstraint.constant = layout.visibleHeight
+        }
 
-		tableView.isScrollEnabled = layout.offscreenHeight > 0
+		tableView.isScrollEnabled = true
 
 		DispatchQueue.main.async { [weak self] in
 			self?.tableView.flashScrollIndicators()
