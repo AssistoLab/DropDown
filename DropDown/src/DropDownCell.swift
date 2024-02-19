@@ -54,10 +54,10 @@ extension DropDownCell {
 			if let selectedBackgroundColor = self.selectedBackgroundColor {
 				if selected {
 					self.backgroundColor = selectedBackgroundColor
-                    self.optionLabel.textColor = self.highlightTextColor
+                    // self.optionLabel.textColor = self.highlightTextColor
 				} else {
 					self.backgroundColor = .clear
-                    self.optionLabel.textColor = self.normalTextColor
+                    // self.optionLabel.textColor = self.normalTextColor
 				}
 			}
 		}
